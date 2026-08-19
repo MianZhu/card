@@ -3,3 +3,39 @@
 
 # Large local-only reference package (exceeds GitHub's 100 MB limit)
 /代号童话（策划资料）/wdhysj11_252915.apk
+
+# Godot 4 import cache and exports
+**/.godot/
+**/.import/
+*.tmp
+**/export_credentials.cfg
+/代号童话项目/builds/
+
+# Node.js / TypeScript
+**/node_modules/
+**/dist/
+**/coverage/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Runtime data and logs
+*.log
+*.pid
+/代号童话项目/server/storage/
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
