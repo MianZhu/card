@@ -1,6 +1,9 @@
 # Claude Code local state
 .claude/
 
+# WorkBuddy local memory
+.workbuddy/
+
 # Large local-only reference package (exceeds GitHub's 100 MB limit)
 /代号童话（策划资料）/wdhysj11_252915.apk
 
