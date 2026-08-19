@@ -1,0 +1,507 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0051)https://appimg2.qq.com/card/rank_v3.html?t=20120315 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 
+ <meta http-equiv="X-UA-Compatible" content="IE=7">
+ <meta name="Keywords" content="魔法卡片,免费QQ秀,QQ秀,QQ空间,App,QQ游戏,Qzone,游戏,卡片,魔法,card,magic,腾讯,QQ,Tencent">
+ <meta name="Description" content="魔法卡片是一个集卡游戏。在游戏里面，您是一位万能的魔法师，和您的好友一起交换、炼制卡片，最后集成套卡，留作永久纪念！游戏中，魔法学院还会给您免费发放精美QQ秀，作为集卡的奖励~">
+ 
+ <meta http-equiv="Content-Language" content="gb2312">
+ <meta name="robots" content="all">
+ <meta name="author" content="Tencent-ISRD">
+ <meta name="Copyright" content="Tencent">
+ <title>魔法卡片 - QQ秀</title>
+ <link rel="stylesheet" rev="stylesheet" href="./魔法卡片 - QQ秀_files/style_v3.css" type="text/css" media="screen">
+ <link rel="stylesheet" rev="stylesheet" href="./魔法卡片 - QQ秀_files/dialog.css" type="text/css" media="screen">
+ <link rel="Shortcut Icon" href="https://show.qq.com/favicon.ico" type="image/x-icon">
+ <script type="text/javascript">
+ document.domain = "qq.com";var top=window;
+ var oElem = top.document.getElementById("sideFrame");
+ if(oElem){
+  oElem.parentNode.cols="0,*";
+ }
+ </script>
+<script type="text/javascript" charset="gb2312" src="./魔法卡片 - QQ秀_files/tcss.ping.js.下载"></script></head>
+<body class=""><div id="blackworks-tooltip"></div>
+<script language="javascript">
+ var _bQzone = location.hash.indexOf("qz_ver")>-1  ? 1 : 0;
+ var _bQplus = false;
+ var reg    = /qplus/i;
+ _bQplus = reg.test(navigator.userAgent.toLowerCase());
+ if( 1 == _bQzone || _bQplus)
+ {
+  window.document.body.className = "body_qzone";
+ }
+</script>
+<!--登陆条 开始-->
+<div class="live_header_v3">
+ <div class="live_header_main_v3">
+  <ul class="path_link">
+   <li class="qqshow"><a target="_blank" href="https://show.qq.com/">QQ秀首页</a></li>
+   <li>魔法卡片</li>
+  </ul>
+  <!--未登录状态 开始-->
+  <p id="P_LOGIN" class="loginStr" style="">
+   <!-- 欢迎光临，请先 -->
+   <strong style="" id="STR_NOLOGIN">[<a href="javascript:CARD.showLogin();">登录</a>]</strong>
+   <a style="display: none;" href="https://appimg2.qq.com/card/rank_v3.html?t=20120315#" class="application">开通红钻</a>
+  </p>
+
+  <!--未登录状态 结束-->
+  
+  <!--普通用户已登录状态 开始-->
+  <p id="P_UNLOGIN" class="loginStr" style="display: none;">
+   欢迎光临 <span id="SPAN_NICK"></span>
+   <strong style="display: none;" id="STR_LOGIN">[<a href="javascript:CARD.myLogout();" class="exit">退出</a>]</strong>
+   <a style="display: none;" href="https://appimg2.qq.com/card/rank_v3.html?t=20120315#" class="application">开通红钻</a>
+  </p>
+
+  <!--普通用户已登录状态 结束--> 
+ </div>
+</div>
+<!--登陆条 结束-->
+<div class="wrapper_secondaryContent wrapper_secondaryContent_v2">
+<div class="wrapper">
+<div class="container">
+<div class="header_v2">
+		<div id="sns_toolbar" style="padding-left:15px;background-color:#fff;"></div>
+		<div class="map">
+			<h1><a href="https://appimg2.qq.com/card/rank_v3.html?t=20120315#" title="">魔法卡片</a></h1>
+			<ul>
+				<li class="map_home"><a href="https://appimg2.qq.com/card/index_v3.html?t=20120315">魔法屋</a></li>
+				<li class="map_museum"><a href="https://appimg2.qq.com/card/museum_v4.html?t=20120315">卡片博物馆</a></li>
+				<li class="map_honor"><a href="https://appimg2.qq.com/card/honor.html?t=20120315">荣誉薄</a></li>
+				<li class="map_ranking_active"><a href="https://appimg2.qq.com/card/rank_v3.html?t=20120315">排行榜</a></li>
+				<!-- <li class="map_vip"><a href="/card/redvip.html">红钻特权</a></li> -->
+			</ul>
+			<p class="important_tips">
+				<span id="SPAN_NOTE"></span>
+				<span id="SPAN_TIPS" class="important_tips_txt"></span>
+				<span class="important_tips_page" id="SPAN_PAGE" style="display:none">
+				<span id="SPAN_TIPS_NUM"></span>
+				<a href="https://appimg2.qq.com/card/rank_v3.html?t=20120315#" class="prev" onclick="CARD.showTips(1);">上一个消息</a><a href="https://appimg2.qq.com/card/rank_v3.html?t=20120315#" class="next" onclick="CARD.showTips(2);">下一个消息</a></span>
+				<span class="links"><span id="A_FLASH_V3" style="display:none;"><a href="javascript:goV3()">返回旧版</a></span><span id="A_FLASH_V4" style="display:none;"><a href="javascript:CARD.flashCalls.goToV4();">进入新版</a></span>|<a href="https://sobar.soso.com/d/magiccard" target="_blank">论坛</a>|<a target="_blank" href="https://service.qq.com/category/magiccard.html">帮助</a>|<a href="https://appimg2.qq.com/card/clinic.html"><span class="ico_clinic"></span>小诊所</a></span>
+			</p>
+		</div>
+	</div>
+<div class="menu">
+ <ul>
+  <li class="active" id="ID_SCORE_MENU"><a href="javascript:void%20RANK.switchRank(0);">好友经验排行</a></li>
+  <li id="ID_GOLD_MENU"><a href="javascript:void%20RANK.switchRank(1);">好友金币排行</a></li>
+ </ul>
+</div>
+<!--main 开始-->
+<div class="main page_card_rank">
+ <!-- 排行列表 开始 -->
+ <div class="sort_list">
+  <!-- 好友积分排行 开始 -->
+  <div class="sort_content" style="display:block;" id="ID_DIV_SCORE_RANK">
+   <ol id="ID_OL_SCORE_RANK">
+    <li class="level_a" style="VISIBILITY: hidden">
+    </li>
+    <li class="level_a" style="VISIBILITY: hidden">
+    </li>
+    <li class="level_a" style="VISIBILITY: hidden">
+    </li>
+   </ol>
+   <!-- 分页 开始 -->
+   <div class="mod_pagenav" id="ID_DIV_SCORE_PAGE">
+
+   </div>
+   <!-- 分页 结束 -->
+  </div>
+  <!-- 好友积分排行 结束 -->
+  <!-- 好友金币排行 开始 -->
+  <div class="sort_content" style="display:none" id="ID_DIV_GOLD_RANK">
+   <ol id="ID_OL_GOLD_RANK">
+   </ol>
+   <!-- 分页 开始 -->
+   <div class="mod_pagenav" id="ID_DIV_GOLD_PAGE">
+   </div>
+   <!-- 分页 结束 -->
+  </div>
+  <!-- 好友金币排行 结束 -->
+ </div>
+ <!-- 排行列表 结束 -->
+</div>
+<!--main 结束-->
+<!-- 页脚 开始 --> 
+   <script type="text/javascript">
+    var _bQzone = location.hash.indexOf("qz_ver")>-1  ? 1 : 0; 
+    if( _bQzone == 0)
+    {
+     document.write('\<script type="text/javascript" src="https://appimg.qq.com/card/copyright.js" charset="gb2312"\>\</script\>');
+    }
+   </script><script type="text/javascript" src="./魔法卡片 - QQ秀_files/copyright.js.下载" charset="gb2312"></script><div class="footer" id="copyright"><p class="qqshowlink">欢迎来到QQ魔法卡片<a target="_blank"> </a></p></div>
+<!-- 页脚 结束 -->
+</div>
+</div>
+</div>
+<div id="ID_TEMPLETE">
+
+<!--TPL.QZONE_RANK
+<%--HD--%>
+<%--LB--%>
+<%--EB--%>
+
+<li class="<%lv_class%>">
+<div class="rank_cont">
+ <span class="sort_num"><%i%></span>
+ <div class="item_main" onmouseover="this.className='item_main item_main_sel'" onmouseout="this.className='item_main'" >
+  <img src="https://qqshow-user.tencent.com/<%uin%>/10/00" title="<%nick%>"/>
+  <a href="https://show.qq.com/show.html?MUrl=/my/inc/friend_item.html&opuin=<%uin%>" class="details" target="_blank">物品详情</a>
+ </div>
+ <div class="user_card_info">
+  <ul>
+   <li class="nick">
+   <a class="username" href="index_v3.html#opuin=<%uin%>"><%nick%> (<%uin%>)</a>
+   <a target="_blank" href="https://user.qzone.qq.com/<%uin%>" title="QQ空间" class="icon_qzone"></a>
+   <span class="qqshow_vip" style="display:none">
+    <strong class="gb_vip_icon"><span class="gb_vip_none">红钻贵族</span></strong>     
+     <strong class="gb_vip_icon" ><span class="lv1"><span class="gb_vip_none">lv1</span></span></strong>
+           
+    <strong class="gb_vip_n_icon"><span class="gb_vip_none">过期红钻贵族</span></strong>  
+     <strong class="gb_vip_n_icon"><span class="lvn0"><span class="gb_vip_none">lv0</span></span></strong>
+   </span>
+   <span class="qzone_vip" style="display:none">
+    <strong class="gb_vip_icon"><span class="gb_vip_none">黄钻贵族</span></strong> 
+     <strong class="gb_vip_icon"><span class="lv1"><span class="gb_vip_none">lv1</span></span></strong>
+           
+    <strong class="gb_vip_n_icon"><span class="gb_vip_none">过期黄钻贵族</span></strong>     
+     <strong class="gb_vip_n_icon"><span class="lvn0"><span class="gb_vip_none">lv0</span></span></strong>
+   </span>   
+   </li>
+   <li class="level">魔法等级 <%lv%></li>
+   <li class="point">魔法经验 <%score%></li>
+   <li class="moeny">魔法金币 <%cash%></li>
+   <li class="card_ico_num" style="display:none"><span>已集齐：<%num%>套普通卡</span>
+    <div class="<%card_class%>" style="display:none">
+     <a href="javascript:void(0);" onclick="this.parentNode.className='<%class_expan%>'; var oElem=this.parentNode.getElementsByTagName('A');for(var i=12,len=oElem.length;i<len;i++)oElem[i].style.display='';oElem[0].style.display='none';oElem[1].style.display='';return false;" class="icon_play_dn" title="展开" style="display:<%icon%>" >展开</a>
+     <a href="javascript:void(0);" onclick="this.parentNode.className='<%card_class%>'; var oElem=this.parentNode.getElementsByTagName('A');for(var i=12,len=oElem.length;i<len;i++)oElem[i].style.display='none';oElem[0].style.display='';oElem[1].style.display='none';return false;" class="icon_play_up" title="收起" style="display:none" >收起</a>
+     <div class="cont">
+     <%theme%>
+     </div>
+    </div>
+   </li>
+   <li class="card_ico_num" style="display:none"><span><%flash_num%>套闪卡</span>
+  </ul>
+ </div>
+ <div class="other_link"><a href="index_v3.html#opuin=<%uin%>">查看游戏界面</a> <br> <a href="javascript:void%20RANK.showCollec(<%uin%>,'<%url_nick%>')" style="">查看集卡册</a></div>
+</div>
+</li>
+
+<%--EE--%>
+<%--LE--%>
+<%--TL--%>
+TPL.QZONE_RANK-->
+
+
+<!--TPL.RANK
+<%--HD--%>
+<%--LB--%>
+<%--EB--%>
+
+<li class="<%lv_class%>">
+<div class="rank_cont">
+ <span class="sort_num"><%i%></span>
+ <div class="item_main" onmouseover="this.className='item_main item_main_sel'" onmouseout="this.className='item_main'" >
+  <img src="https://qqshow-user.tencent.com/<%uin%>/10/00" title="<%nick%>"/>
+  <a href="https://show.qq.com/show.html?MUrl=/my/inc/friend_item.html&opuin=<%uin%>" class="details" target="_blank">物品详情</a>
+ </div>
+ <div class="user_card_info">
+  <ul>
+   <li class="nick"><a class="username" href="index_v3.html#opuin=<%uin%>"><%nick%> (<%uin%>)</a></li>
+   <li class="level">魔法等级 <%lv%></li>
+   <li class="point">魔法经验 <%score%></li>
+   <li class="moeny">魔法金币 <%cash%></li>
+   <li class="card_ico_num" style="display:none"><span>已集齐：<%num%>套普通卡</span>
+    <div class="<%card_class%>" style="display:none">
+     <a href="javascript:void(0);" onclick="this.parentNode.className='<%class_expan%>'; var oElem=this.parentNode.getElementsByTagName('A');for(var i=12,len=oElem.length;i<len;i++)oElem[i].style.display='';oElem[0].style.display='none';oElem[1].style.display='';return false;" class="icon_play_dn" title="展开" style="display:<%icon%>" >展开</a>
+     <a href="javascript:void(0);" onclick="this.parentNode.className='<%card_class%>'; var oElem=this.parentNode.getElementsByTagName('A');for(var i=12,len=oElem.length;i<len;i++)oElem[i].style.display='none';oElem[0].style.display='';oElem[1].style.display='none';return false;" class="icon_play_up" title="收起" style="display:none" >收起</a>
+     <div class="cont">
+     <%theme%>
+     </div>
+    </div>
+   </li>
+   <li class="card_ico_num" style="display:none"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%flash_num%>套闪卡</span>
+  </ul>
+ </div>
+ <div class="other_link"><a href="index_v3.html#opuin=<%uin%>">查看游戏界面</a> <br> <a href="javascript:void%20RANK.showCollec(<%uin%>,'<%url_nick%>')" style="">查看集卡册</a></div>
+</div>
+</li>
+
+<%--EE--%>
+<%--LE--%>
+<%--TL--%>
+TPL.RANK-->
+</div>
+<script type="text/javascript" src="./魔法卡片 - QQ秀_files/core.js.下载" charset="gb2312"></script>
+<script type="text/javascript" src="./魔法卡片 - QQ秀_files/app_sns.js.下载" charset="gb2312"></script>
+<script type="text/javascript" src="./魔法卡片 - QQ秀_files/card_comm_v3.js.下载" charset="utf-8"></script>
+<script type="text/javascript" src="./魔法卡片 - QQ秀_files/card_info_v3.js.下载" charset="utf-8"></script>
+<script type="text/javascript">
+
+var RANK = {
+ _uin : 0,
+ _total_page : 1,
+ _cur_page : 1,
+ _pagenum : 10,
+ _type : 0,
+ _data : undefined,
+ _rank : [],
+ _memo : {},
+ sCurNick : '',
+ _bIsFromQzone : false,
+ init : function(){
+  if( !CARD.checkLogin() ) {
+   CARD.showLogin();
+   return;
+  }
+  CARD.data.init();
+  CARD.setMiniName();
+  if (1 != CARD.getCookie("cardsrc")){
+   RANK._bIsFromQzone = false;
+  }
+  else{
+   RANK._bIsFromQzone = true;
+  }
+  
+  RANK.getMemo();
+ },
+ showCollec: function(uin,nick){
+  RANK.sCurNick = nick;
+  CARD.showFriendCollec(uin,nick,0);
+ },
+ getMemo : function(){
+
+  RANK._uin = qsns.getLoginUin() || RANK._uin;
+  var sUrl = 'https://card.qzone.qq.com/cgi-bin/card_user_memo?src=2&uin='+RANK._uin;
+  CARD.getScript( sUrl, RANK._callBack_ , 'UTF-8', true); 
+  var _bQzone = location.hash.indexOf("qz_ver")>-1  ? 1 : 0;
+  if(_bQzone != 1)
+  {
+   if(RANK._iUin){
+    $("P_LOGIN").style.display = "none";
+    $("STR_NOLOGIN").style.display = "none";
+    $("P_UNLOGIN").style.display = "";
+    $("STR_LOGIN").style.display = "";
+   }
+   else{
+    $("P_LOGIN").style.display = "";
+    $("P_UNLOGIN").style.display = "none";
+    $("STR_NOLOGIN").style.display = "";
+    $("STR_LOGIN").style.display = "none";
+   }
+  }
+ },
+
+ GetMemoCallback :function(iCode,oData){
+  if( iCode != 0 ){
+   if( iCode == -1001 )
+   {
+    CARD.showLogin();
+    return;
+   }
+  }
+  else{
+   var oMemodata = oData.data;
+   var ex = /^ {0,}$/g;
+   for (var i=0, len=oMemodata.length; i<len; i++){
+    //若备注为空字符串，则显示昵称
+    if(!ex.test(oMemodata[i].memo)){
+     RANK._memo[oMemodata[i].ui] = oMemodata[i].memo;
+    }
+   }
+  }
+
+  RANK._uin = qsns.getLoginUin() || RANK._uin;
+  RANK.getRank( 1,0 );
+ },
+
+ _callback_ : function( iCode,oData ){
+
+  if( iCode != 0 ){
+   if( iCode == -1005 )
+   {
+    CARD.showReg();
+   }
+   else if(iCode == -50001)//防雪蹦
+   {
+    CARD.CRASH.crashProof();
+   }
+   return;
+  }
+  this._total_page = Math.ceil( oData.pall/RANK._pagenum );
+  this._data = oData;
+  if( RANK._type == 0 )
+   this.showScoreRank( RANK._cur_page );
+  else
+   this.showGoldRank( RANK._cur_page );
+   
+  //this.showHead( oData.user );
+
+ },
+ getRank : function( page, type ){
+  RANK._type = type;
+  RANK._cur_page = page;
+  var url = "https://card.qzone.qq.com/cgi-bin/card_rank_get?pno=" + page + "&pnum=" + RANK._pagenum + "&type=" + type;
+    
+  //CARD.getScript( url, 'UTF-8', RANK._callBack_ );
+  CARD.getScript( url, RANK._callBack_ , 'UTF-8', true); 
+ },
+ showHead : function( data ){
+  if( data === null )
+   return;
+
+  var arr = [];
+  arr.push([data.ui,data.ni,data.ca,data.sc]);
+
+  var oLv;
+  var mapName = [
+   [0,'<%uin%>'],
+   [1,'<%nick%>',function(v){return v.replace(/\r\n/g,'').replace(/\r/g,'').replace(/\n/g,'').escHtml();}],
+   [2,'<%cash%>'],
+   [3,'<%score%>',function(v){
+    oLv = CARD.LEVEL.getLevel(v);
+    if( oLv.lv >= 50 )
+     return '已满级';
+    return oLv.score+'/'+oLv.need;
+   }],
+   [3,'<%lv%>',function(v){return oLv.lv;}],
+   [3,'<%percent%>',function(v){return oLv.rate;}]
+  ];
+  
+  var tmplt = $('ID_TEMPLETE').innerHTML.between("<!--TPL.USERINFO","TPL.USERINFO-->");
+  showCardData( arr, $("ul_user_info"), tmplt, mapName );
+ },
+
+ //排行榜的map
+ rankMap : [
+   [0,'<%uin%>'],
+   [1,'<%nick%>',function(v){return v.replace(/\r\n/g,'').replace(/\r/g,'').replace(/\n/g,'').escHtml();}],
+   [1,'<%url_nick%>',function(v){return (""+escape(v)).escUrl();}],
+   [2,'<%cash%>'],
+   [3,'<%score%>'],
+   [3,'<%lv%>',function(v){return CARD.LEVEL.getLevel(v).lv;}],
+   [5,'<%i%>'],
+   [5,'<%lv_class%>',function(v){var i=(v%10)==0?(10):(v%10); return v<=3?('level_a zindex'+i):('level_d zindex'+i);}]
+  ],
+
+ showGoldRank : function( page ) {
+  //var beg = new Date();
+  RANK._cur_page = page || 1;
+  var arr = [], d = RANK._data.data;
+  for( var i=0; i<d.length; i++ ){
+   var sName;
+   //自己的备注不显示
+   if (RANK._memo[ d[i].ui] && (RANK._uin != d[i].ui)){
+    sName = RANK._memo[ d[i].ui];
+   }
+   else{
+    sName = d[i].ni;
+   }
+   arr.push( [ d[i].ui, sName, d[i].ca, d[i].sc, d[i].thl, d[i].no ] );
+  }
+  function mySort(a,b){
+   return b[2] - a[2];
+  }
+  arr = arr.sort(mySort);
+  var tmplt;
+  tmplt = $('ID_TEMPLETE').innerHTML.between("<!--TPL.RANK","TPL.RANK-->");
+
+  showCardData( arr, $("ID_OL_GOLD_RANK"), tmplt, RANK.rankMap );
+  
+  var oClasses = {parent:"mod_pagenav",active:"current",input:"textinput",pagemain:"mod_pagenav_main",prev:"mod_pagenav_disable",prevdis:"mod_pagenav_disable desc", next:"mod_pagenav_disable",nextdis:"mod_pagenav_disable desc",random:"mod_pagenav_option",turn:"mod_pagenav_turn"};
+  QSFL.excore.showQQSHOWPage(RANK._cur_page, RANK._total_page, function(n){return "javascript:RANK.getRank("+n+",1);";}, $("ID_DIV_GOLD_PAGE"), null, oClasses);
+
+  try{
+   $("ID_DIV_GOLD_PAGE").getElementsByTagName('BUTTON')[0].className = 'bt_tx2';
+   $("ID_DIV_GOLD_RANK").style.display = "";
+   $("ID_DIV_SCORE_RANK").style.display = "none";
+  }catch(e){}
+  scrollTo(0,0);
+
+  //alert( new Date() - beg );
+ },
+ getThemeName : function( themeid ){
+  for( var i =0; i<theme_card_list.length; i++ ){
+   if( theme_card_list[i][0] == themeid ){
+    return theme_card_list[i][1];
+   }
+  }
+ },
+ getThemeIndex : function( themeid ){
+  var i = 0;
+  for( ; i<theme_card_list.length; i++ ){
+   if( theme_card_list[i][0] == themeid ){
+    return i;
+   }
+  }
+  return -1;
+ },
+ showScoreRank : function( page ){
+
+  RANK._cur_page = page || 1;
+  var arr = [], d = RANK._data.data;
+  for( var i=0; i<d.length; i++ ){
+   var sName;
+   //自己的备注不显示
+   if (RANK._memo[ d[i].ui] && (RANK._uin != d[i].ui)){
+    sName = RANK._memo[ d[i].ui];
+   }
+   else{
+    sName = d[i].ni;
+   }
+   arr.push( [ d[i].ui, sName, d[i].ca, d[i].sc, d[i].thl, d[i].no ] );
+  }
+  
+  function mySort(a,b){
+   return b[3] - a[3];
+  }
+  arr = arr.sort(mySort);
+  
+  var tmplt;
+  tmplt = $('ID_TEMPLETE').innerHTML.between("<!--TPL.RANK","TPL.RANK-->");
+  showCardData( arr, $("ID_OL_SCORE_RANK"), tmplt, RANK.rankMap );  
+  var oClasses = {parent:"mod_pagenav",active:"current",input:"textinput",pagemain:"mod_pagenav_main",prev:"mod_pagenav_disable",prevdis:"mod_pagenav_disable desc", next:"mod_pagenav_disable",nextdis:"mod_pagenav_disable desc",random:"mod_pagenav_option",turn:"mod_pagenav_turn"} ;
+  QSFL.excore.showQQSHOWPage(RANK._cur_page, RANK._total_page, function(n){return "javascript:RANK.getRank("+n+",0);";}, $("ID_DIV_SCORE_PAGE"), null, oClasses);
+  try{
+   $("ID_DIV_SCORE_PAGE").getElementsByTagName('BUTTON')[0].className = 'bt_tx2';
+   $("ID_DIV_GOLD_RANK").style.display = "none";
+   $("ID_DIV_SCORE_RANK").style.display = "";
+  }catch(e){}
+
+  scrollTo(0,0);
+
+ },
+ unique : function(arr) 
+ {
+    var result = [], hash = {};
+    for (var i = 0, elem;(elem = arr[i])!= null; i++) 
+    {
+      if (!hash[elem]) 
+      {
+    　　result.push(elem);
+    　　hash[elem] = true;
+      }
+    };
+    return result;
+  },
+ switchRank : function( type ){
+  //score
+  if( type == 0 ){
+   $("ID_SCORE_MENU").className = "active";
+   $("ID_GOLD_MENU").className = "";
+   RANK.getRank(1,0); 
+
+  }else{//gold
+   $("ID_SCORE_MENU").className = "";
+   $("ID_GOLD_MENU").className = "active";
+   RANK.getRank(1,1); 
+  }
+ }
+};
+RANK.init();
+</script>
+
+</body></html>

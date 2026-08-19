@@ -1,0 +1,36 @@
+
+document.domain="qq.com";var $=function(v){return document.getElementById(v);};var ua=QSFL.userAgent;var removeNode=QZFL.dom.removeElement;QSFL.sns={};QSFL.sns._qzone_=(function(){var res={};if(window.QZONE&&window.QZONE.FrontPage&&(typeof(QZONE)=="undefined"||typeof(QZONE.FP)=="undefined")){var appJs=new QSFL.JsLoader();}
+res.getLoginUin=function(){return 1125000300;};res.getApplicationWindow=function(){return window.QZONE.FrontPage.getCurrentAppWindow();};res.showModalDialog=function(sURL,vArguments,sFeatures,sTitle,sMode,type){type=type?type:0;if(type==0)
+{var _w=sFeatures?parseInt(sFeatures.w):430;var _h=sFeatures?parseInt(sFeatures.h):300;QZONE.FP.popupDialog(sTitle,{src:sURL},_w,_h,false);}
+else
+{QSFL.sns._qqshow_.showModalDialog(sURL,vArguments,sFeatures,sTitle);}
+return;};res.closeDialog=function(fnClose,type){type=type?type:0;if(type==0)
+{if(typeof(fnClose)=="function"){QZONE.FrontPage.appendPopupFn(fnClose);}
+QZONE.FP.closePopup();}else
+{QSFL.sns._qqshow_.closeDialog(fnClose);}};res.checkLogin=function(){return window.g_iLoginUin||0;};return res;}());QSFL.sns._qqshow_=(function(){var res={};res.getLoginUin=function(){return QSFL.excore.getUin.apply(QSFL.excore,[]);};res.getApplicationWindow=function(){if(res._appWindow)return res._appWindow;var oWin=window;res._appWindow=oWin;return oWin;};res.showModalDialog=function(sURL,vArguments,sFeatures,sTitle,sMode){sFeatures=sFeatures?sFeatures:{};var _w=parseInt(sFeatures.w||1);var _h=parseInt(sFeatures.h||1);var _l=parseInt(sFeatures.l||1)+(QSFL.dom.getClientWidth()-_w)/2+QSFL.dom.getScrollLeft();var _t=parseInt(sFeatures.t||1)
++Math.max((QSFL.dom.getClientHeight()-_h)/2
++QSFL.dom.getScrollTop(),0);var maskWin=sMode?[]:(window.topfra?[window.topfra,window.mainfra]:[window]);QSFL.dialog.messageBox(sURL,{width:_w,height:_h,left:_l,top:_t,maskWindow:maskWin},{},0);return;};res.closeDialog=function(fnClose){var oWin=QSFL.dialog.messageBox.getFrameWindow();try{if(!oWin||!oWin.name)
+return;}catch(e){return;}
+if(typeof(fnClose)=="function"){try{fnClose();}catch(e){}}
+QSFL.dialog.messageBox.onClose(oWin);QSFL.dialog.mask.end(oWin);};res.checkLogin=function(){var iUin=QSFL.excore.getUin();if(QSFL.excore.checkUin(iUin))
+return iUin;else
+return 0;};return res;}());(function(){var _model=window.QZONE&&window.QZONE.FrontPage?1:0;var _inner=_model?QSFL.sns._qzone_:QSFL.sns._qqshow_;QSFL.sns.getLoginUin=_inner.getLoginUin,QSFL.sns.checkLogin=_inner.checkLogin,QSFL.sns.getApplicationMode=function(){return _model;},QSFL.sns.getApplicationWindow=_inner.getApplicationWindow,QSFL.sns.showModalDialog=_inner.showModalDialog,QSFL.sns.closeDialog=_inner.closeDialog,QSFL.sns.showVerify=_inner.showVerify;QSFL.sns.getXml=function(sUrl,fnSucc,fnError,sMethod,isAsync){QSFL.xhr.getXml.apply(QSFL.xhr,[sUrl,fnSucc,fnError,sMethod,isAsync]);};QSFL.sns.XHR=function(sUrl,fnSucc,fnFail,fnError,sMethod,isAsync){function _hash(str)
+{var hash=5381;for(var i=0,len=str.length;i<len;++i){hash+=(hash<<5)+str.charCodeAt(i);}
+return hash&0x7fffffff;}
+function getToken()
+{return _hash(QSFL.cookie.get("skey"));}
+var _arrData=sUrl.split("?");var _win=typeof(QSFL)=="undefined"?QSFL.sns.getApplicationWindow():window;var _method=(!sMethod||sMethod.toUpperCase()!="GET")?"POST":(sMethod="GET");var _data=_method=="POST"?_arrData[1]||"":"";this._oSender=_method=="POST"?new _win.QSFL.xhr.XHR(_arrData[0]+"?g_tk="+getToken(),null,_method,_data,isAsync):new _win.QSFL.xhr.XHR(sUrl+(sUrl.indexOf("?")<0?"?":"&")+"g_tk="+getToken(),null,_method,_data,isAsync);this._oSender.onSuccess=fnSucc;this._oSender.onError=fnError;};QSFL.sns.XHR.prototype.send=function(){this._oSender.send();};QSFL.sns.showQQSHOWPage=function(iPno,iPall,fnUrl,oParent,oView,oClass){QSFL.excore.showQQSHOWPage.apply(QSFL.excore,[iPno,iPall,fnUrl,oParent,oView,oClass]);};}());QSFL.sns.tools={fixPNG:function(oImg){if(ua.isIE6()&&oImg){oImg.onload=null;oImg.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"
++oImg.src+"', sizingMethod='scale')";oImg.src=" http://imgcache.qq.com/ac/b.gif";}},fixWinMove:function(){return;}};QSFL.sns.crash={redirectTo:function(sUrl,vArguments,sFeatures,sTitle){}};QSFL.sns.msg={};QSFL.sns.debug={};QSFL.sns.msgbox={_timer:null,show:function(msgHtml,leftPosition,topPosition,timeout)
+{var _mBox=QSFL.dom.get("q_Msgbox")||QSFL.dom.createElementIn("div",document.body,false,{style:"height:0px;"});_mBox.id="q_Msgbox";QSFL.dom.setStyle(_mBox,"display","");_mBox.innerHTML=msgHtml;var _fc=_mBox.firstChild;if(QSFL.userAgent.ie&&QSFL.userAgent.ie<7)
+{QSFL.dom.setStyle(_fc,"position","absolute");if(typeof topPosition!="number")
+QSFL.dom.setStyle(_fc,"top",(QSFL.dom.getClientHeight()/2+QSFL.dom.getScrollTop()-40)+"px");else
+QSFL.dom.setStyle(_fc,"top",topPosition+"px");if(typeof(leftPosition)!='number')
+QSFL.dom.setStyle(_fc,"left","100px");else
+QSFL.dom.setStyle(_fc,"left",topPosition+"px");}
+else
+{QSFL.dom.setStyle(_fc,"position","fixed");if(typeof(topPosition)!='number')
+QSFL.dom.setStyle(_fc,"top","100px");else
+QSFL.dom.setStyle(_fc,"top",topPosition+"px");if(typeof(leftPosition)!='number')
+QSFL.dom.setStyle(_fc,"left","100px");else
+QSFL.dom.setStyle(_fc,"left",leftPosition+"px");}
+QSFL.dom.setStyle(_fc,"zIndex","9999");clearTimeout(QSFL.sns.msgbox._timer);if(timeout){QSFL.sns.msgbox._timer=setTimeout(QSFL.sns.msgbox.hide,timeout);}},hide:function(timeout){if(timeout){clearTimeout(QSFL.sns.msgbox._timer);QSFL.sns.msgbox._timer=setTimeout(QSFL.sns.msgbox._hide,timeout);}else{QSFL.sns.msgbox._hide();}},_hide:function(){var _mBox=QSFL.dom.get("q_Msgbox");clearTimeout(QSFL.sns.msgbox._timer);if(_mBox){var _tips=_mBox.firstChild;QSFL.dom.setStyle(_mBox,"display","none");}}}/*  |xGv00|63480ac9104dc3ac75b6ae75de40bb01 */

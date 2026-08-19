@@ -1,0 +1,32 @@
+!function()
+{
+    String.prototype.escNone=function()
+    {
+        return this.toString()
+    };
+    var e=
+    '<p class="qqshowlink">»¶Ó­À´µ½QQÄ§·¨¿¨Æ¬<a target="_blank"> </a></p>';
+    
+    
+    
+    
+    var a,t,o,
+    i=function(e)
+    {
+        if(!document.all) return document.getElementById(e);
+        for(var a=document.getElementsByTagName("div"), t=0, o=a.length;t<o;t++)
+        if(a[t].id==e)return a[t];
+        return null
+    }
+    ("copyright");
+    if(i)i.innerHTML=e.escNone();
+    else
+    {
+        var n='<div class="footer" id="copyright">'+e+"</div>";
+        document.write(n.escNone())
+    }
+    function r()
+    {
+        var e="";
+        if(window.QSFL?e=QSFL.userdata.get("PGVRefURL")||"":"function"==typeof getUserData&&(e=getUserData("PGVRefURL")||""),e||(e="/blank"),-1!=location.href.indexOf("mall/inc/item.html?"))pgvMain("",{statIframe:!0,senseParam:"mallno",virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(-1!=location.href.indexOf("mall/inc/item_clothes.html?"))pgvMain("",{statIframe:!0,senseParam:"mallno",virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(-1!=location.href.indexOf("mall/inc/sys_suc.html?"))pgvMain("",{statIframe:!0,senseParam:"type",virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(-1!=location.href.indexOf("mall/inc/sys_fail.html?"))pgvMain("",{statIframe:!0,senseParam:"type",virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(-1!=location.href.indexOf("mall/inc/particular.html?"))pgvMain("pathtrace",{keyPathTag:"main.ztdp.more|main.jpdp.more|main.rqdp.more|hyzb.ztdp.more|ztdp.jpdp.more|vipmag.jpdp.more",nodeIndex:"3|3|3|3|3|3",statIframe:!0,senseParam:"mallno",virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(-1!=location.href.indexOf("live/vip_mag/index"))pgvMain("pathtrace",{keyPathTag:"vipmag.jpdp.more",nodeIndex:"1",statIframe:!0,senseParam:"id",virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(-1!=location.href.indexOf("live/fashion/index"))pgvMain("pathtrace",{keyPathTag:"vipmag.jpdp.more",nodeIndex:"1",statIframe:!0,senseParam:"id",virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(window.location.pathname.match(/^\/qqshow_v3\/htdocs\/live\/fashion\/fashion(_extra|_mnlz|_bzzt){0,1}\.html$/)){var a=window.location.pathname;function t(e){for(var a=window.location.search.toString().replace(/^\?/,"").split("&"),t=0;t<a.length;++t)if(0==a[t].indexOf(e+"="))return unescape(a[t].substr(e.length+1));return""}pgvMain("pathtrace",{virtualURL:a+"_"+t("type")+"_"+t("id"),keyPathTag:"vipmag.jpdp.more",nodeIndex:"1",statIframe:!0,virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"})}else if(window.location.pathname.match(/^\/live\/view\.html$/)){a=window.location.pathname;function t(e){for(var a=window.location.search.toString().replace(/^\?/,"").split("&"),t=0;t<a.length;++t)if(0==a[t].indexOf(e+"="))return unescape(a[t].substr(e.length+1));return""}pgvMain("pathtrace",{virtualURL:a+"_"+t("name"),keyPathTag:"vipmag.jpdp.more",nodeIndex:"1",statIframe:!0,virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"})}else if(-1!=location.href.indexOf("mall/inc/commend_set.html?"))pgvMain("pathtrace",{keyPathTag:"main.rqdp.more",nodeIndex:"2",statIframe:!0,virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(-1!=location.href.indexOf("mall/inc/commend_house.html?"))pgvMain("pathtrace",{keyPathTag:"main.jpdp.more|ztdp.jpdp.more|vipmag.jpdp.more",nodeIndex:"2|2|2",statIframe:!0,senseParam:"mallno",virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(-1!=location.href.indexOf("my/inc/friend_item.html?"))pgvMain("pathtrace",{keyPathTag:"hyzb.ztdp.more",nodeIndex:"1",statIframe:!0,virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(-1!=location.href.indexOf("photo/inc/photo_client_detail.html?"))pgvMain("pathtrace",{keyPathTag:"hyzb.ztdp.more",nodeIndex:"1",statIframe:!0,virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(-1!=location.href.indexOf("mall/inc/theme_main.html?"))pgvMain("pathtrace",{keyPathTag:"main.ztdp.more|hyzb.ztdp.more|ztdp.jpdp.more",nodeIndex:"2|2|1",statIframe:!0,virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if(-1!=location.href.indexOf("appimg2.qq.com/card/")||-1!=location.href.indexOf("qqhome_v2/card/"))pgvMain("",{statIframe:!0,virtualDomain:"card.show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"});else if("number"==typeof QQShow_Live_Stat_CampaignID){function o(e){var a=e.indexOf("?");return-1!=a?e.substr(0,a):e}pgvMain("",{statIframe:!0,virtualDomain:"click.show.qq.com",virtualRefDomain:"click.show.qq.com",virtualRefURL:e,useCookie:"false"});a="https://t.l.qq.com/ping?t=m&cpid="+QQShow_Live_Stat_CampaignID+"&url="+escape(o(window.location.href).toString()).replace(/\+/g,"%2B")+"&ref="+escape(o(document.referrer).toString()).replace(/\+/g,"%2B");new Image(1,1).src=a}else pgvMain("",{statIframe:!0,virtualDomain:"show.qq.com",virtualRefDomain:"show.qq.com",virtualRefURL:e,useCookie:"false"})}function l(){window.setTimeout(r,2e3)}"function"!=typeof pgvMain?(a="https://appimg2.qq.com/card/script/tcss.ping.js",t=l,(o=document.createElement("SCRIPT")).onload=function(){t()},o.onreadystatechange=function(){"loaded"!=o.readyState&&"complete"!=o.readyState||(o.onreadystatechange=null,t())},o.setAttribute("TYPE","text/javascript"),o.setAttribute("charset","gb2312"),o.src=a,document.getElementsByTagName("HEAD")[0].appendChild(o)):l()
+}();

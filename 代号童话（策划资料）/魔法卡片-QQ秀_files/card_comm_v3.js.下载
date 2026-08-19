@@ -1,0 +1,877 @@
+
+var qsns = QSFL.sns; var $ = function (v) { return document.getElementById(v); }; var ua = QSFL.userAgent; var removeNode = QZFL.dom.removeElement; var CARD = {
+    _iUin: 0, _iOpUin: 0, _env: "", _objFlash: null, _feed_load_pos: 860, _feedjs_bLoad: false, _feedjs_handle: 0, _bQzone: 0, _toolBarDalta: 0, initIndex: function (page, env) {
+        CARD._bQzone = top.QZONE && top.QZONE.FrontPage ? 1 : 0; if (CARD._bQzone == 1) {
+            var flaVersion = QSFL.cookie.get("flaversion", "appimg2.qq.com") || 3; if (4 == flaVersion) { CARD.sendPGV("ISD.QQshow.Card.playAtV4Qzone"); }
+            else { top.g_iLoginUin = QSFL.excore.getUin.apply(QSFL.excore, []); CARD.sendPGV("ISD.QQshow.Card.playAtQzone"); }
+        }
+        else {
+            if (4 == flaVersion) { CARD.sendPGV("ISD.QQshow.Card.playAtV4"); }
+            else { CARD.sendPGV("ISD.QQshow.Card.playAtQQshow"); }
+        }
+        if (CARD._bQzone) {
+            var type = CARD.getHashParam("type"); if (type) { setTimeout(function () { CARD.sendPGV("ISD.QQshow.Card.shareof" + type) }, 1000); }
+            var collect = CARD.getHashParam("collect"); if (collect) { setTimeout(function () { CARD.sendPGV("ISD.QQshow.Card.collectShare" + collect) }, 1000); }
+            var fatherShareType = CARD.getHashParam("sharetype"); if ("fatherdayact" == fatherShareType) { setTimeout(function () { CARD.sendPGV("ISD.QQshow.Card.fatherdayact") }, 1000); } else if ("fatherdaytopic" == fatherShareType) { setTimeout(function () { CARD.sendPGV("ISD.QQshow.Card.fatherdaytopic") }, 1000); }
+            var activepgv = CARD.getHashParam("activepgv"); if (activepgv) {
+                if ("Freegifts" == activepgv) { setTimeout(function () { CARD.flashCalls.showFreeGiftPage(1); }, 2000); }
+                setTimeout(function () { CARD.sendPGV("ISD.QQshow.Card." + activepgv) }, 1000);
+            }
+            var app_custom_pgv = CARD.getHashParam("app_custom"); if (app_custom_pgv && app_custom_pgv.indexOf("activepgv_") != -1) { setTimeout(function () { CARD.sendPGV("ISD.QQshow.Card." + app_custom_pgv.substr(10)) }, 1000); }
+        }
+        CARD.initEnvironment(env); CARD.checkFlashVersion(); if (CARD.getHashParam("reg") == 1) { CARD.setHashParam("reg", 0); CARD.flashCalls.showMission(0, 0); }
+        CARD._iUin = qsns.getLoginUin(); if (CARD.getURLParam("park") == 2) { CARD.showParkerReg(CARD._iUin); }
+        try {
+            CARD.data.init(); try { CARD.data.initTipsData(); } catch (e) { }; CARD._bQzone = top.QZONE && top.QZONE.FrontPage ? 1 : 0; if (CARD._bQzone != 1) {
+                if (CARD._iUin) { $("P_LOGIN").style.display = "none"; $("STR_NOLOGIN").style.display = "none"; $("P_UNLOGIN").style.display = ""; $("STR_LOGIN").style.display = ""; }
+                else { $("P_LOGIN").style.display = ""; $("P_UNLOGIN").style.display = "none"; $("STR_NOLOGIN").style.display = ""; $("STR_LOGIN").style.display = "none"; }
+            }
+            CARD.addScrollEven(); if (CARD.getHashParam("page") != "") { CARD.setHashParam("page", ""); }
+            if (CARD.getHashParam("opuin") != "") { CARD.setHashParam("opuin", ""); }
+            CARD.data.arrTipsInfo[2] = setTimeout(CARD.showTips, 5000); CARD._feedjs_handle = setTimeout(CARD.loadFeedJs, 5000); setTimeout(CARD.ptp.check, 5000); setTimeout(CARD.user.init, 100); setTimeout(CARD.showPresent, 5000);
+        } catch (e) { }
+    }, addScrollEven: function () {
+        if (ua.isIE()) { QSFL.event.addEvent(ua.isIE6() ? window : document.body, "scroll", CARD._ScrollFn); QSFL.event.addEvent(document.body, "resize", CARD._ScrollFn); }
+        else { QSFL.event.addEvent(window, "scroll", CARD._ScrollFn); window.onresize = CARD._ScrollFn; }
+    }, _ScrollFn: function () {
+        var y = QSFL.dom.getClientHeight() + QSFL.dom.getScrollTop(); if (y < CARD._feed_load_pos) { return; }
+        else if (typeof (CARD.FEED) == 'undefined') { CARD.loadFeedJs(); } else if (!CARD.FEED._bLoad) { CARD.FEED.getMsg(CARD.FEED._uin); }
+    }, loadFeedJs: function (type) {
+        clearTimeout(CARD._feedjs_handle); if (CARD._feedjs_bLoad) { return; }
+        CARD._feedjs_bLoad = true; var sUrl = "http://appimg2.qq.com/card/js/feed.js?t=20120608"; CARD.getScript(sUrl, null, "UTF-8", true);
+    }, checkFlashVersion: function () {
+        if (!QSFL.media.SWFlash.compare("10.0.12")) {
+            var oElem = document.getElementById("ID_CARD_FLASH"); if (!oElem) { return; }
+            var arrData = []; arrData[arrData.length] = '<div class="none_flash"><p class="flash_info">flash 版本过低，正在为您升级</p>\
+     <p class="load_gif" style="margin:8px;"><img src="http://imgcache.qq.com/qqshow_v3/ac/popup/loading_icon.gif" title="加载中" />请稍候</p>'; if (ua.isIE()) { arrData[arrData.length] = '<p>您也可以选择<a class="em" target="_blank" href="http://fpdownload.macromedia.com/get/flashplayer/current/licensing/win/install_flash_player_10_active_x.exe">手动下载更新</a></p>'; }
+            else if (ua.isFireFox()) { arrData[arrData.length] = '<p>您也可以选择<a class="em" target="_blank" href="http://fpdownload.macromedia.com/get/flashplayer/current/licensing/win/install_flash_player_10.exe">手动下载更新</a></p>'; }
+            else { arrData[arrData.length] = '<p>您也可以选择<a class="em" target="_blank" href="http://get.adobe.com/flashplayer">手动下载更新</a></p>'; }
+            arrData[arrData.length] = '<p>安装成功后,请刷新页面</p></div>'; oElem.innerHTML = arrData.join('').escNone();
+        }
+    }, getEnv: function () {
+        if (CARD._env != "")
+            return CARD._env; return CARD.getCookie("cardsrc", "appimg2.qq.com") == 1 ? "qzone" : "qqshow";
+    }, getScript: function (sUrl, fnLoad, charset, bCache, fnError) {
+        function _hash(str) {
+            var hash = 5381; for (var i = 0, len = str.length; i < len; ++i) { hash += (hash << 5) + str.charCodeAt(i); }
+            return hash & 0x7fffffff;
+        }
+        sUrl += (sUrl.indexOf("?") < 0 ? "?" : "&") + "g_tk=" + _hash(CARD.getCookie("skey")); var oJson = new QSFL.JsLoader(fnLoad, fnError); if (!bCache) { var iTimeStamp = Date.parse(new Date()); iTimeStamp += "_" + Math.random(iTimeStamp); sUrl = CARD.setURLParam(sUrl, "timestamp", iTimeStamp); }
+        oJson.load(sUrl, null, charset || "UTF-8");
+    }, showModalDialog: function (sUrl, oFeatures, sMode) { CARD.moduleDialogQueue.setDialogOpened(); CARD._bQzone = top.QZONE && top.QZONE.FrontPage ? 1 : 0; oFeatures.mode = oFeatures.mode || 0; if (oFeatures.mode == 1) { var maskWin = []; var _w = parseInt(oFeatures.w || 1000); var _h = parseInt(oFeatures.h || 1000); var _t = parseInt(oFeatures.t || 205); var _l = parseInt(oFeatures.l || 40); QSFL.dialog.messageBox(sUrl, { width: _w, height: _h, left: _l, top: _t, maskWindow: maskWin }, {}, 0); } else { QSFL.sns.getApplicationWindow().QSFL.sns.showModalDialog(sUrl, [], oFeatures, "", sMode, CARD._bQzone); } }, getCookie: function (sName, sDomain) { return QSFL.cookie.get.apply(QSFL.cookie, arguments); }, setCookie: function (sName, sValue, nExpireSec, sDomain, sPath) { return QSFL.cookie.set.apply(QSFL.cookie, arguments); }, checkLogin: function () { return QSFL.sns.checkLogin(); }, showLogin: function () { QSFL.sns.getApplicationWindow().QSFL.dialog.mask.end([window]); return QSFL.sns.getApplicationWindow().QSFL.sns.showLogin.apply(QSFL.sns, arguments); }, closeDialog: function (iCheckTime) { iCheckTime = iCheckTime || 500; CARD._bQzone = top.QZONE && top.QZONE.FrontPage ? 1 : 0; QSFL.sns.getApplicationWindow().QSFL.sns.closeDialog(null, CARD._bQzone); QSFL.sns.getApplicationWindow().CARD.moduleDialogQueue.setDialogClosed(); QSFL.sns.getApplicationWindow().CARD.moduleDialogQueue.closeCheckDialogQueue(iCheckTime); }, showReg: function () { window.location.href = "./register_v3.html?ad_theme=" + CARD.getURLParam("ad_theme"); }, getURLParam: function (sName, sUrl, rCharSet) { return QSFL.excore.getURLParam(sName, sUrl, rCharSet); }, setURLParam: function (sUrl, sName, sVal) { return QSFL.excore.setURLParam(sUrl, sName, sVal); }, getHashParam: function (sName, oLocation, rCharSet) { return QSFL.excore.getHashParam(sName, oLocation, rCharSet); }, setHashParam: function (sName, sValue, oLocation) { return QSFL.excore.setHashParam(sName, sValue, oLocation); }, initQQShow: function () { }, initQzone: function () { }, initEnvironment: function (env) {
+        env = env + ""; if (env == "qqshow") { CARD._env = "qqshow"; CARD.initQQShow(); }
+        else if (env == "qzone") { CARD._env = "qzone"; CARD.initQzone(); }
+    }, initToolBarDalta: function (haveToolBar) {
+        if (haveToolBar) { CARD._toolBarDalta = 0; }
+        else { CARD._toolBarDalta = -70; }
+    }, initFlashObj: function (id) { id = id || "swf1"; CARD._objFlash = QSFL.sns.getApplicationWindow().$(id) || null; return CARD._objFlash; }, getNickAtUin: function () {
+        if (typeof CARD.getFlashObj().getNickAtUin == "function") {
+            var sNick = CARD.getFlashObj().getNickAtUin(CARD._iUin); if (typeof sNick == 'string') {
+                sNick = unescape(sNick); if (sNick.length == 0) { sNick = '' + CARD._iUin; }
+            }
+            return sNick;
+        }
+    }, saveShareObject: function (sTodayEnd) { CARD.getFlashObj().saveSharedObject(CARD._iUin, "_red_dailygift_time_", sTodayEnd); }, refresh: function () { CARD.getFlashObj().refresh(); }, setTopfraName: function () {
+        if (typeof CARD.getFlashObj().getNickAtUin == "function") {
+            var sNick = CARD.getFlashObj().getNickAtUin(CARD._iUin); if (typeof sNick == 'string') {
+                sNick = unescape(sNick); if (sNick.length == 0) { sNick = '' + CARD._iUin; }
+                CARD.setCookie("cardnick", sNick, 0, "appimg2.qq.com"); CARD.setMiniName();
+            }
+        }
+        else { setTimeout(CARD.setTopfraName, 1000); }
+    }, setMiniName: function () { var sNick = CARD.getCookie("cardnick", "appimg2.qq.com"); try { $("SPAN_NICK").innerHTML = unescape(sNick).replace(/\r\n/g, '').replace(/\r/g, '').replace(/\n/g, '').escHtml(); } catch (e) { }; }, myLogout: function () { CARD.initIndex(); var iPlatform = CARD.getCookie("cardsrc"); CARD.setCookie("uin", "", -1, "qq.com"); CARD.setCookie("skey", "", -1, "qq.com"); CARD.setCookie("cardsrc", "", -1); CARD.setCookie("cardsrc", "", -1, "appimg2.qq.com"); CARD.setCookie("cardnick", "", -1, "appimg2.qq.com"); CARD.setCookie("cardlv", "", -1, "appimg2.qq.com"); CARD.setCookie("yearvip", "", 0, "appimg2.qq.com"); CARD.setCookie("flaversion", "", 0, "appimg2.qq.com"); CARD.setCookie("versionuin", "", 0, "appimg2.qq.com"); CARD.setCookie("QSUSRINF", "", -1); CARD.setCookie("viprank", "", -1); if (1 == iPlatform) { window.location.href = "http://appimg2.qq.com/card/index_v3.html?qzone=1"; } else { window.location.href = "http://appimg2.qq.com/card/index_v3.html"; } }, initNetHelp: function () { if ($("p_other_link").className == "other_link") { $("p_other_link").className = "other_link active"; } else { $("p_other_link").className = "other_link"; } }, getFlashObj: function () { return CARD._objFlash || CARD.initFlashObj(); }, getQQShowPassport: function () {
+        if (typeof CARD.getFlashObj().loadSharedObject == "function") {
+            var iTime = CARD.getFlashObj().loadSharedObject(CARD._iUin, "_mcard_qqshow_pass_time"); var oFlashTime = CARD.getFlashObj().getServerTime()
+            var iCurTime = oFlashTime["now"]; if (iTime && iCurTime) { if (iTime > iCurTime) { var iDays = Math.ceil((iTime - iCurTime) / (3600 * 24)); $("SPAN_QQSHOW_PASS").innerHTML = ('' + iDays).escNone(); $("P_QQSHOW_PASS").style.display = "block"; } }
+        } else { setTimeout(CARD.getQQShowPassport, 1000); return; }
+    }, showIndex: function (uin) {
+        try {
+            if (uin) { CARD.getFlashObj().gotoPage(0, uin); }
+            else { CARD.getFlashObj().gotoPage(0); }
+            var obj = $("p_nav").getElementsByTagName("A"); obj[0].className = 'nav_home_sel'; obj[1].className = 'nav_exercise';
+        }
+        catch (e) { }
+    }, showTips: function (type) {
+        type = type || 0; if (!type) {
+            try {
+                var _flash_obj = CARD.getFlashObj(); if (!_flash_obj || typeof _flash_obj.getFinishTheme != 'function') { return; }
+                var iTheme = _flash_obj.getFinishTheme(); if (iTheme != CARD.props.PROPS_THEME_ID && CARD.data.mapTheme[iTheme]) {
+                    $('SPAN_PAGE').style.display = 'none'; $('SPAN_NOTE').className = 'ico_note'; $('SPAN_TIPS').innerHTML = '<a href="#2" onclick="CARD.flashCalls.showThemeComplete('
+                        + iTheme + ')">您已经成功收集《' + CARD.data.mapTheme[iTheme][1] + '》套卡，点击查看';
+                } else {
+                    var index = (++CARD.data.arrTipsInfo[1]) % CARD.data.arrTipsInfo[0]; CARD.data.arrTipsInfo[1] = index; $('SPAN_NOTE').className = 'ico_horn'; $('SPAN_TIPS').innerHTML = '<a target="_blank" href="' + CARD.data.arrTips[index][0]
+                        + '">' + CARD.data.arrTips[index][1] + '</a>'; $('SPAN_PAGE').style.display = ''; $('SPAN_TIPS_NUM').innerHTML = '<em>' + (index + 1) + '/' + CARD.data.arrTipsInfo[0] + '</em>';
+                }
+                CARD.data.arrTipsInfo[2] = setTimeout(CARD.showTips, 5000);
+            } catch (e) { CARD.data.arrTipsInfo[2] = setTimeout(CARD.showTips, 5000); }
+        } else if (1 == type) {
+            CARD.data.arrTipsInfo[1] -= 2; while (CARD.data.arrTipsInfo[1] < 0) { CARD.data.arrTipsInfo[1] += CARD.data.arrTipsInfo[0]; }
+            clearTimeout(CARD.data.arrTipsInfo[2]); CARD.showTips();
+        } else { clearTimeout(CARD.data.arrTipsInfo[2]); CARD.showTips(); }
+    }, showStove: function () {
+        try { CARD.getFlashObj().gotoPage(1); var obj = $("p_nav").getElementsByTagName("A"); obj[0].className = 'nav_home'; obj[1].className = 'nav_exercise_sel'; }
+        catch (e) { }
+    }, gotoMarket: function () {
+        try { var info = CARD.getFlashObj().getSceneInfo(); var param = "?xBox=" + info.changeCardBoxEmpty + "&cofferBox=" + info.storeCardBoxEmpty + "&coin=" + info.money + "&mid=" + info.mission_id + "&mstep=" + info.mission_cmd_id; window.location.href = "./market.html" + param; }
+        catch (e) { window.location.href = "./market.html"; }
+    }, RegisterCallback: function (code, oDate) {
+        if (code != 0) {
+            if (code == -1001) { CARD.showLogin(); }
+            else if (code == -1005) { window.location.href = "/card/index_v3.html"; }
+            else {
+                if (CARD.getURLParam("park") == 1) { window.location.href = "/card/register_v3.html?park=1"; }
+                else if (("qzone" == CARD.getEnv()) && (!CARD.getURLParam("regtype"))) { window.location.href = "/card/register_v3.html?regtype=1"; }
+                else {
+                    try { window.location.href = "/card/register_v3.html?regtype=1"; }
+                    catch (e) { alert("系统繁忙,请稍候再试"); };
+                }
+            }
+            return;
+        }
+        else { window.location.href = "/card/index_v3.html"; return; }
+    }, initPGV: function () {
+        try {
+            var js = new QSFL.JsLoader(function () {
+                if (typeof (pgvMain) == 'function') { pgvMain("", { statIframe: true, virtualDomain: "card.show.qq.com" }); }
+            }, function () { }); js.load("http://pingjs.qq.com/ping.js?v=1");
+        }
+        catch (e) { };
+    }, getPGVJs: function (fn) {
+        if (CARD.getPGVJs._b === true) {
+            try { fn() }
+            catch (e) { }
+            return;
+        }
+        CARD.getPGVJs._b = true; var sUrl = "http://pingjs.qq.com/ping.js?v=1"; var js = new QSFL.JsLoader(fn, function () { }); js.load(sUrl);
+    }, sendPGV: function (CORD) {
+        try {
+            if (typeof (pgvSendClick) == "function")
+                pgvSendClick({ statIframe: true, virtualDomain: "card.show.qq.com", hottag: CORD }); else
+                CARD.getPGVJs(function () { pgvSendClick({ statIframe: true, virtualDomain: "card.show.qq.com", hottag: CORD }); });
+        }
+        catch (e) { }
+    }, getGiftInfo: function (themeid) {
+        if (!CARD._data_theme || !gift_list)
+            return; var id; var str = CARD._data_theme[themeid][9]; str = str.split('|'); if (str.length == 2) {
+                var sex = CARD._sex == 1 ? 'M' : 'F', tmp = ''; if (str[0].charAt(0) == sex) { tmp = str[0].split('_'); }
+                else { tmp = str[1].split('_'); }
+                id = tmp[1] * 1;
+            }
+        else { id = str[0] * 1; }
+        for (var i = 0, len = gift_list.length; i < len; i++) {
+            if (gift_list[i][0] == id)
+                return gift_list[i];
+        }
+        return null;
+    }, checkCssReady: function (sTagName) {
+        if (!document.styleSheets)
+            return false; if (ua.isFireFox()) { return false; }
+        var oSheet, arrCss = document.styleSheets, iCssCount = arrCss.length; while (iCssCount) {
+            var oSheet = arrCss[--iCssCount]; var oRules = (oSheet.rules) ? oSheet.rules : oSheet.cssRules; if (oRules[oRules.length - 1].selectorText == sTagName) { return true; }
+        }
+        var bRet = confirm("魔法世界加载失败，是否去小诊所诊断下？"); if (bRet == true) { window.location.href = "/card/clinic.html"; }
+        return false;
+    }, showCardData: function (xData, oParent, sHtml, mapName, bi, ei, ne) { QSFL.jsontools.showJsonData(xData, oParent, sHtml, mapName, bi, ei, ne); }, getTimeString: function (timestamp) { var time = new Date(timestamp * 1000); var month = time.getMonth() + 1; return time.getFullYear() + "-" + month + "-" + time.getDate(); }, scrollToFlash: function () { if (ua.isIE()) { $('swf1').scrollIntoView(); } else { scrollTo(0, 50); } }, showFriendCollec: function (uin, nick, main, tid) { CARD.showModalDialog('https://appimg2.qq.com/card/collect.html?uin=' + uin + '&main=' + main + '&tid=' + tid, { w: 890, h: 950, l: 0, t: (145 + CARD._toolBarDalta), mode: 1 }); }, showWorldCollec: function (uin, nick, main, tid) { CARD.showModalDialog('https://appimg2.qq.com/card/collectWorld.html?uin=' + uin + '&main=' + main + '&tid=' + tid, { w: 890, h: 950, l: 0, t: (145 + CARD._toolBarDalta), mode: 1 }); }, handleVerifyPage: function (code, oElem, o, iEndTime) { if (code == -1103 || code == -1104 || code == -1105) { CARD.ui.showVerifyDlg(code, oElem, o); return 0; } else if (code == -1107) { CARD.flashCalls.denyNaughtyUser(iEndTime); return 0; } else { return -1; } }, showParkerReg: function (uin) { CARD.showModalDialog('./parkreg.html?uin=' + uin, { w: 700, h: 560, mode: 1 }); }, backOldVersion: function () { CARD.sendPGV('ISD.QQshow.Card.backOldVer'); if (1 == CARD.getCookie("cardsrc")) { window.location.href = 'http://show.qq.com/show2.html?MUrl=http://appimg2.qq.com/card/index.html%3Fqzone%3D1%3Fg_secFrame%3D2' } else { window.location.href = 'http://show.qq.com/show2.html?MUrl=http://appimg2.qq.com/card/index.html%3Fg_secFrame%3D2' } }, getRedVipCss: function (redlv, yearvip) {
+        var strRedUser = (yearvip == 1) ? '年费红钻' : '红钻'; var strYear = (CARD.user.oMyData.yearvip == 1) ? ' <span class="ico_year"></span>' : ''; var str = '您是' + strRedUser + '<span class="ico_lv"><span>lv</span><span class="lv">' + redlv
+            + '</span></span>' + strYear; return str;
+    }, getLevelUpBonus: function (uin) {
+        if (CARD.user.oMyData != null && CARD.user.oMyData.lvupbonus == 1) {
+            function onSucc(oXml) {
+                oXml = oXml.xmlDom; var obj = oXml.getElementsByTagName("QQHOME")[0]; var iCode = obj.getAttribute("code"); var gifttype = obj.getAttribute("gifttype") * 1; if (iCode == 0) { CARD.flashCalls.showLevelUp(CARD.user.oMyData.lv, gifttype); }
+            }
+            function onFail() { }; function onErr() { }; var sUrl = 'http://card.show.qq.com/cgi-bin/card_user_levelup_bonus?uin=' + uin; var xhr = new CARD.XHR(sUrl, onSucc, onFail, onErr); xhr.send();
+        }
+    }, showPresent: function () {
+        var present = parseInt(CARD.getURLParam("present"))
+        if (present == 1) {
+            CARD.moduleDialogQueue.pushOpenPage('./present.html?fr=' + CARD.getURLParam("fr")
+                + '&bt=' + CARD.getURLParam("bt"), { w: 560, h: 400 });
+        }
+        if (CARD.getURLParam("qqtips") == 1) { CARD.sendPGV("ISD.QQshow.Card.getinFromQQTips"); CARD.moduleDialogQueue.pushOpenPage("./live/treeplanting_gift_list.html?t=20120229", { w: 1000, h: 1000, l: 100, mode: 1 }); }
+        else if (CARD.getURLParam("shareweibo") == 1) { CARD.sendPGV("ISD.QQshow.Card.getinFromWeibo"); }
+    }, getType: function (obj) { return obj === null ? 'null' : (obj === undefined ? 'undefined' : Object.prototype.toString.call(obj).slice(8, -1).toLowerCase()); }, checkFlashCard: function (bitmap) {
+        if (bitmap & 0x08)
+            return true; else
+            return false;
+    }, checkJbCard: function (bitmap) {
+        if (bitmap & 0x01)
+            return true; else
+            return false;
+    }, obj2str: function (obj) {
+        var t, sw; if ((typeof obj) == 'object') {
+            if (obj === null) { return 'null'; }
+            sw = CARD.getType(obj) == 'array' ? true : false; t = []; for (var i in obj) { t.push((sw ? "" : ("\"" + (i + '').escScript() + "\":")) + CARD.obj2str(obj[i])); }
+            t = t.join(); return sw ? ("[" + t + "]") : ("{" + t + "}");
+        } else if ((typeof obj) == 'function') { return ''; } else if ((typeof obj) == 'undefined') { return 'undefined'; } else if ((typeof obj) == 'number') { return '"' + obj.toString() + '"'; }
+        return !obj ? "\"\"" : ("\"" + (obj + '').escScript() + "\"");
+    }
+}; CARD.data = {
+    _bInit: false, mapCard: null, mapTheme: null, mapFlashTheme: null, mapCompose: null, mapGift: null, mapProps: null, arrTips: [], arrTipsInfo: [], mapMyMiniCol: {}, bGotMiniCol: 0, init: function () {
+        if (CARD.data._bInit)
+            return; CARD.data.initCardData(); CARD.data.initComposeData(); CARD.data.initThemeData(); CARD.data.initGiftData(); CARD.data._bInit = true;
+    }, initCardData: function () {
+        if (!card_list)
+            return; CARD.data.mapCard = {}; for (var i = 0, len = card_list.length; i < len; i++) { CARD.data.mapCard[card_list[i][0]] = card_list[i]; }
+    }, initThemeData: function () {
+        if (!theme_card_list)
+            return; CARD.data.mapTheme = {}; CARD.data.mapFlashTheme = {}; for (var i = 0, len = theme_card_list.length; i < len; i++) {
+                CARD.data.mapTheme[theme_card_list[i][0]] = theme_card_list[i]; if (CARD.checkFlashCard(theme_card_list[i][12]))
+                    CARD.data.mapFlashTheme[theme_card_list[i][16]] = theme_card_list[i][0];
+            }
+    }, initGiftData: function () {
+        if (!gift_list)
+            return; CARD.data.mapGift = {}; for (var i = 0, len = gift_list.length; i < len; i++) { CARD.data.mapGift[gift_list[i][0]] = gift_list[i]; }
+    }, initComposeData: function () {
+        if (!theme_compose_list)
+            return; CARD.data.mapCompose = {}; for (var i = 0, len = theme_compose_list.length; i < len; i++) { CARD.data.mapCompose[theme_compose_list[i][2]] = theme_compose_list[i]; }
+    }, initPropsData: function () {
+        if (!g_props_data) { return; }
+        for (var i = 0, len = g_props_data.length; i < len; i++) { CARD.data.mapProps[g_props_data[i][0]] = g_props_data[i]; }
+    }, initBadgeData: function () {
+        if (!badge_list)
+            return; CARD.data.mapBadge = {}; for (var i = 0, len = badge_list.length; i < len; i++) { CARD.data.mapBadge[badge_list[i][0]] = badge_list[i]; }
+    }, initTipsData: function () {
+        function fnSucc(xmlReq) {
+            var xmlDoc = xmlReq.xmlDom; var elem = xmlDoc.getElementsByTagName('a'); if (!elem)
+                return; var len = elem.length; for (var i = 0; i < len; i++) { CARD.data.arrTips[i] = []; CARD.data.arrTips[i][0] = elem[i].getAttribute('href'); CARD.data.arrTips[i][1] = elem[i].textContent || elem[i].text; }
+            CARD.data.arrTipsInfo[0] = i; CARD.data.arrTipsInfo[1] = -1;
+        }
+        var sUrl = "/card/mk/tips.xml"; QSFL.xhr.getXml(sUrl, fnSucc, null, "GET", true);
+    }, getCardName: function (iCardID) {
+        if (!CARD.data.mapCard)
+            CARD.data.initCardData(); return CARD.data.mapCard[iCardID][2];
+    }, getCard: function (iCardID) {
+        if (!CARD.data.mapCard)
+            CARD.data.initCardData(); return CARD.data.mapCard[iCardID];
+    }, getTheme: function (iThemeID) {
+        if (!CARD.data.mapTheme)
+            CARD.data.initThemeData(); return CARD.data.mapTheme[iThemeID];
+    }, getCardImgUrl: function (iCardID, type) {
+        type = type || 0; var card = CARD.data.getCard(iCardID); if (!card) { return ''; }
+        if (type == 0)
+            return '/card/img/card/' + iCardID + '_56?ver=' + card[7]; else
+            return '/card/img/card/' + iCardID + '?ver=' + card[7];
+    }, getThemeBgUrl: function (iThemeID, type) {
+        var theme = CARD.data.getTheme(iThemeID);
+        if (!theme) return '';
+        return '/card/img/theme/' + theme[0] + '?ver=' + theme[13];
+    },
+    getBadgeName: function (iID, iRecord, live, liveEx, liveEx2, liveEx3) 
+    {
+        var oBadge = {};
+        var festival = {};
+        var nLive = parseInt(live, 10) || 0;
+        var nLiveEx = parseInt(liveEx, 10) || 0;
+        var nLiveEx2 = parseInt(liveEx2, 10) || 0;
+        var nLiveEx3 = parseInt(liveEx3, 10) || 0;
+
+        if (iID == 0)
+            return "";
+
+        // 统一解析节日勋章(3/5/6/7)状态位，避免类型遗漏导致默认走金色图
+        var parsed = {};
+        for (var i = 0, len = badge_list.length; i < len; i++) {
+            var cur = badge_list[i];
+            var bid = cur[0];
+            var btype = cur[2];
+            if (bid == 948) { continue; }
+            if (!(btype == 3 || btype == 5 || btype == 6 || btype == 7)) { continue; }
+            if (parsed[bid]) { continue; }
+            parsed[bid] = 1;
+
+            if (festival[bid] == undefined) { festival[bid] = []; }
+            festival[bid][1] = cur;
+            festival[bid][2] = 0;
+
+            if (btype == 7) {
+                var pos = parseInt(cur[4], 10);
+                festival[bid][2] = (!isNaN(pos) && pos >= 0) ? ((nLiveEx3 >> (pos * 2)) & 0x03) : 0;
+            } else if (bid >= 1409) {
+                festival[bid][2] = nLiveEx2 & 0x03;
+                nLiveEx2 = nLiveEx2 >> 2;
+            } else if (bid >= 948) {
+                festival[bid][2] = nLiveEx & 0x03;
+                nLiveEx = nLiveEx >> 2;
+            } else {
+                festival[bid][2] = nLive & 0x03;
+                nLive = nLive >> 2;
+            }
+        }
+
+        var sUrlFront = 'http://appimg2.qq.com/card/img/badge/';
+        for (var i = 0, len = badge_list.length; i < len; i++) {
+            if (iID == badge_list[i][0]) {
+                if (4 == badge_list[i][2]) {
+                    var str = ""; switch (iRecord) { case 1: str = "金*"; oBadge.sUrl = sUrlFront + iID; break; case 2: str = "银*"; oBadge.sUrl = sUrlFront + iID + '_2'; break; case 3: str = "铜*"; oBadge.sUrl = sUrlFront + iID + '_3'; break; default: break; }
+                    for (var j = 0, len = theme_card_list.length; j < len; j++) { if (theme_card_list[j][0] == badge_list[i][4]) { oBadge.sName = (str + theme_card_list[j][1]); return oBadge; } }
+                    return "";
+                } else if (3 == badge_list[i][2] || 5 == badge_list[i][2] || 6 == badge_list[i][2] || 7 == badge_list[i][2]) {
+                    var festRecord = (festival[iID] && festival[iID][2]) ? festival[iID][2] : 0;
+                    var str = ""; switch (festRecord) { case 1: str = "金*"; oBadge.sUrl = sUrlFront + iID; break; case 2: str = "银*"; oBadge.sUrl = sUrlFront + iID + '_2'; break; case 3: str = "铜*"; oBadge.sUrl = sUrlFront + iID + '_3'; break; default: break; }
+                    for (var j = 0, len = theme_card_list.length; j < len; j++) { if (theme_card_list[j][0] == badge_list[i][7]) { oBadge.sName = (str + theme_card_list[j][1]); return oBadge; } }
+                    return "";
+                }
+                else { oBadge.sName = badge_list[i][1]; oBadge.sUrl = sUrlFront + iID; return oBadge; }
+            }
+        }
+        return oBadge;
+    }, uniqueArray: function (arr) {
+        var flag = {}; var index = 0; while (index < arr.length) {
+            if (flag[arr[index]] == typeof (arr[index])) { arr.splice(index, 1); continue; }
+            flag[arr[index].toString()] = typeof (arr[index]); ++index;
+        }
+        return arr;
+    }, loadShareObj: function (iUin, sName) { return CARD.getFlashObj().loadSharedObject(iUin, sName); }, saveShareObj: function (iUin, sName, data) { CARD.getFlashObj().saveSharedObject(iUin, sName, data); }
+}
+CARD.user = {
+    mapCoffer: {}, mapExchange: {}, mapStove: {}, oMyData: {}, _bInit: false, init: function (bReLoad) {
+        bReLoad = bReLoad || false; if (!bReLoad && CARD.user._bInit) { return true; }
+        try { CARD.user.initUser(); CARD.user.initChangeBox(); CARD.user.initCofferBox(); CARD.user.initStove(); } catch (e) { setTimeout(CARD.user.init, 500); return false; }
+        CARD.user._bInit = true; return true;
+    }, initUser: function (type) {
+        if (typeof (type) == 'undefined') { type = 1; }
+        var _flash_obj = CARD.getFlashObj(); if (!_flash_obj || typeof (_flash_obj.getMyUserInfo) == 'undefined' || typeof (_flash_obj.getCurrentUserInfo) == 'undefined') { setTimeout("CARD.user.initUser(" + type + ")", 200); return false; }
+        if (type == 1) { CARD.user.oMyData = _flash_obj.getMyUserInfo(); } else { CARD.user.oMyData = _flash_obj.getCurrentUserInfo(); }
+        CARD.setCookie("versionuin", QSFL.sns.getLoginUin(), 0, "appimg2.qq.com");
+    }, initChangeBox: function (type) {
+        if (typeof (type) == 'undefined') { type = 1; }
+        var _flash_obj = CARD.getFlashObj(); if (!_flash_obj || typeof (_flash_obj.getChangeBoxInfo) == 'undefined') { setTimeout("CARD.user.initChangeBox(" + type + ")", 200); return false; }
+        var arrExchange = _flash_obj.getChangeBoxInfo(-1, type); for (var i = 0, len = arrExchange.length; i < len; i++) {
+            CARD.user.mapExchange[i] = arrExchange[i]; if (arrExchange[i].id > 0) {
+                var c = CARD.data.mapCard[arrExchange[i].id]; if (!c) { continue; }
+                var p = CARD.user.mapExchange[i]; p.themeid = c[1]; p.name = c[2]
+                p.cardpri = c[3]; p.type = c[4];
+            }
+        }
+    }, initCofferBox: function (type) {
+        if (typeof (type) == 'undefined') { type = 1; }
+        var _flash_obj = CARD.getFlashObj(); if (!_flash_obj || typeof (_flash_obj.getStoreBoxInfo) == 'undefined') { setTimeout("CARD.user.initCofferBox(" + type + ")", 200); return false; }
+        var arrCoffer = _flash_obj.getStoreBoxInfo(-1, type); for (var i = 0, len = arrCoffer.length; i < len; i++) {
+            CARD.user.mapCoffer[i] = arrCoffer[i]; if (arrCoffer[i].id > 0) {
+                var c = CARD.data.mapCard[arrCoffer[i].id]; if (!c) { continue; }
+                var p = CARD.user.mapCoffer[i]; p.themeid = c[1]; p.name = c[2]
+                p.cardpri = c[3]; p.type = c[4];
+            }
+        }
+    }, initStove: function (type) {
+        if (typeof (type) == 'undefined') { type = 1; }
+        var _flash_obj = CARD.getFlashObj(); if (!_flash_obj || typeof (_flash_obj.getStoveBoxInfo) == 'undefined') { setTimeout(CARD.user.initStove, 200); return false; }
+        var arrStove = _flash_obj.getStoveBoxInfo(-1, type); for (var i = 0, len = arrStove.length; i < len; i++) { CARD.user.mapStove[i] = arrStove[i]; }
+    }, getAvExSlots: function () {
+        var arr = []; for (var o in CARD.user.mapExchange) { if (CARD.user.mapExchange[o].id > 0) { arr.push(o); } }
+        return arr;
+    }, getAvCofSlots: function () {
+        var arr = []; for (var o in CARD.user.mapCoffer) { if (CARD.user.mapCoffer[o].id > 0) { arr.push(o); } }
+        return arr;
+    }, update: function () { CARD.getFlashObj().refresh(); CARD.user._bInit = false; CARD.user.init(); }, reload: function () { CARD.user._bInit = false; CARD.user.init(); }, getEmptySlot: function (slottype) {
+        var t; slottype = slottype || 0; if (slottype == 0)
+            t = CARD.user.mapExchange; else
+            t = CARD.user.mapCoffer; for (var o in t) { if (t[o].id == 0) { return t[o].slot; } }
+        return -1;
+    }, getEmptySlotNum: function (slottype) {
+        var t, num = 0; slottype = slottype || 0; if (0 == slottype) { t = CARD.user.mapExchange; }
+        else { t = CARD.user.mapCoffer; }
+        for (var o in t) {
+            if (t[o].id == 0) { num++; }
+        }
+        return num;
+    }, clearSlot: function (slotid, slottype, type) {
+        if (typeof type == 'undefined') { type = 1; }
+        var t; if (slottype == 0)
+            t = CARD.user.mapExchange[slotid]; else
+            t = CARD.user.mapCoffer[slotid]; t.cardpri = 0; t.id = 0; t.lv = 0; t.name = ''; t.status = 4; t.themeid = 0; t.type = 0; t.unlock = 0; try { if (QSFL.userAgent.isSafari()) { CARD.getFlashObj().updateCardWith(CARD.obj2str(t), type); } else { CARD.getFlashObj().updateCardWith(t, type); } } catch (e) { }
+    }, setCardToSlot: function (cardid, slotid, slottype, type, needLock) {
+        var t; if (typeof type == 'undefined') { type = 1; }
+        if (typeof needLock == 'undefined') { needLock = true; }
+        if (slottype == 0)
+            t = CARD.user.mapExchange[slotid]; else
+            t = CARD.user.mapCoffer[slotid]; var c = CARD.data.mapCard[cardid]; t.cardpri = c[3]; t.name = c[2]; t.themeid = c[1]; t.type = c[4]; t.enabled = true; t.id = cardid; t.status = 0; t.unlock = needLock ? (CARD.getFlashObj().getServerTime().now + 300) : 0; try { if (QSFL.userAgent.isSafari()) { CARD.getFlashObj().updateCardWith(CARD.obj2str(t), type); } else { CARD.getFlashObj().updateCardWith(t, type); } } catch (e) { }
+    }, getOpenSlotNum: function () {
+        var arr = [], cnt = 0; for (var i in CARD.user.mapExchange) { if (CARD.user.mapExchange[i].id != -1) cnt++; }
+        arr.push(cnt); cnt = 0; for (var i in CARD.user.mapCoffer) { if (CARD.user.mapCoffer[i].id != -1) cnt++; }
+        arr.push(cnt); return arr;
+    }, sortSlots: function (arrSlot, fieldName, sortType) {
+        sortType = sortType || 0; function fieldSortAsc(a, b) { return a[fieldName] - b[fieldName]; }
+        function fieldSortDec(a, b) { return b[fieldName] - a[fieldName]; }
+        return sortType == 0 ? arrSlot.sort(fieldSortDec) : arrSlot.sort(fieldSortAsc);
+    }, updateInfo: function (oData) { if (QSFL.userAgent.isSafari()) { CARD.getFlashObj().updateInfo(CARD.obj2str(oData)); } else { CARD.getFlashObj().updateInfo(oData); } }
+}
+CARD.elf = {
+    oSkillInfo: { "1": [1, [0, 0], 0], "2": [1, [1, 100], 0], "3": [2, [1, 100], 0], "4": [2, [2, 500], 0], "5": [2, [2, 500], 3], "6": [3, [3, 1200], 3] }, getSkillInfo: function (lv) { return CARD.elf.oSkillInfo[lv]; }, getLvInfo: function (iExp) {
+        var obj = {}; if (iExp < 350) { obj.lv = 1; obj.range = 350; obj.begin = 0; }
+        else if (iExp < 1050) { obj.lv = 2; obj.range = 700; obj.begin = 350; }
+        else if (iExp < 2150) { obj.lv = 3; obj.range = 1100; obj.begin = 1050; }
+        else if (iExp < 3600) { obj.lv = 4; obj.range = 1450; obj.begin = 2150; }
+        else if (iExp < 5400) { obj.lv = 5; obj.range = 1800; obj.begin = 3600; }
+        else
+            obj.lv = 6; return obj;
+    }, showElfLvUp: function (elem, arg) {
+        if (CARD.moduleDialogQueue) { CARD.moduleDialogQueue.setDialogOpened(); }
+        var o = document.createElement('DIV'); o.style.width = '410px'; o.style.left = (arg.left || 170) + 'px'; o.style.top = (arg.top || 220) + 'px'; o.style.position = 'absolute'; o.style.zIndex = 999; var d = []; if (arg.lv == 2 || arg.lv == 5) { d[d.length] = '<div class="popup_promotion"><div class="popup_promotion_bg">'; } else { d[d.length] = '<div class="popup_promotion_msg"><div class="popup_promotion_msg_bg">'; }
+        d[d.length] = '</div><h1>魔法卡片精灵</h1><div class="content"><p class="msg tx2">精灵升级！<br/>'; if (arg.lv == 2) { d[d.length] = '恭喜您的精灵升级到2级，精灵学会了雷电技能！</p>'; } else if (arg.lv == 3) { d[d.length] = '恭喜您的精灵升级到3级，精灵的迅捷技能提升到了2级！</p>'; } else if (arg.lv == 4) { d[d.length] = '恭喜您的精灵升级到4级，精灵的雷电技能提升到了2级！</p>'; } else if (arg.lv == 5) { d[d.length] = '恭喜您的精灵升级到5级，精灵学会了据守技能！</p>'; } else if (arg.lv == 6) { d[d.length] = '恭喜您的精灵升级到6级，精灵迅捷技能提升到了3级，雷电技能提升到了3级！</p>'; }
+        if (arg.lv == 2 || arg.lv == 5) {
+            d[d.length] = '<div class="promotion_pic"><div class="craftsmanship_item">'; if (arg.lv == 2)
+                d[d.length] = '<div class="border_red"></div><img width="71" height="71" alt="雷电" src="http://appimg2.qq.com/card/images/craftsmanship_03.png"></div></div>'; else
+                d[d.length] = '<div class="border_yellow"></div><img width="71" height="71" alt="据守" src="http://appimg2.qq.com/card/images/craftsmanship_04.png"></div></div>';
+        }
+        d[d.length] = '</div><div class="btns"><button class="btn_em" type="button"><span>确定</span></button></div>'; d[d.length] = '<button type="button" class="close"><span>关闭</span></button></div>'; o.innerHTML = d.join('').escNone(); elem.appendChild(o); var elems = o.getElementsByTagName('BUTTON'); elems[0].onclick = function () { QSFL.dom.removeElement(o); if (CARD.moduleDialogQueue) { CARD.moduleDialogQueue.setDialogClosed(); CARD.moduleDialogQueue.closeCheckDialogQueue(500); } }; elems[1].onclick = function () { QSFL.dom.removeElement(o); if (CARD.moduleDialogQueue) { CARD.moduleDialogQueue.setDialogClosed(); CARD.moduleDialogQueue.closeCheckDialogQueue(500); } };
+    }
+}
+CARD.ui = {
+    init: function () { CARD.data.init(); }, waitStart: function () { QSFL.dialog.mask.show(window); QSFL.dialog.process.show(window); }, waitEnd: function () { QSFL.dialog.process.hide(window); QSFL.dialog.mask.hide(window) }, getCardMiniImg: function (cardid, attrib) {
+        var card = CARD.data.mapCard[cardid]; if (!card)
+            return '<img/>'; return '<img title="' + card[2].escHtml() + '" src="/card/img/card/' + card[0] + '_56?ver=' + card[7] + '" />';
+    }, getCardBigImg: function (cardid, attrib) {
+        var card = CARD.data.mapCard[cardid]; if (!card)
+            return '<img/>'; return '<img title="' + card[2].escHtml() + '" src="/card/img/card/' + card[0] + '?ver=' + card[7] + '" />';
+    }, getThemeBigLogo: function (themeid, attrib) {
+        var theme = CARD.data.mapTheme[themeid]; if (!theme)
+            return '<img/>'; return '<img src="/card/img/theme/' + themeid + '_big_logo?ver=' + theme[13] + '" title="' + theme[1] + '"/>';
+    }, getThemeMiniLogo: function (themeid, attrib) {
+        var theme = CARD.data.mapTheme[themeid]; if (!theme)
+            return '<img/>'; return '<img src="/card/img/theme/' + themeid + '_logo?ver=' + theme[13] + '" title="' + theme[1] + '"/>';
+    }, getImgItemWithBg: function (cardid) {
+        var card = CARD.data.mapCard[cardid]; if (!card)
+            return ''; var theme = CARD.data.mapTheme[card[1]]; if (!theme)
+            return ''; return '<p style="background: transparent url(/card/img/theme/' + theme[0] + '?ver=' + theme[13] + ') repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;" class="cont">\
+    <strong>'+ card[2] + '</strong>\
+    <img title="'+ card[2] + '" src="/card/img/card/' + card[0] + '?ver=' + card[7] + '">\
+    <span>'+ card[3] + '</span></p>';
+    }, getThemeFontColor: function (iThemeID) {
+        var theme = CARD.data.mapTheme[iThemeID]; if (!theme)
+            return '#000'; return theme[8] == 0 ? '#000' : ('#' + theme[8].toString(16));
+    }, showErrDlg: function (elem, arg) {
+        if (elem._bErrShow) { _callbackClose(); }
+        var o = document.createElement('DIV'); o.className = 'popup_module1'; o.style.width = (arg.width || 400) + 'px'; o.style.left = (arg.left || 70) + 'px'; o.style.top = (arg.top || 70) + 'px'; o.style.position = arg.position || 'absolute'; o.style.zIndex = 999; arg.msg = arg.msg || '系统繁忙,请稍候再试'; arg.title = arg.title || '温馨提示'; arg.onOkDescribe = arg.onOkDescribe || '确定'; arg.cancel = arg.cancel || false; arg.btnstyle = arg.btnstyle || 'bt2_tx6'; arg.cancelBtnName = arg.cancelBtnName || '取消'; arg.onBtn2Class = arg.onBtn2Class || "bt2_tx4"; if (typeof arg.height != 'undefined') { o.style.height = arg.height + 'px'; }
+        if (arg.mask) { QSFL.dialog.mask.show(window); }
+        function _callbackClose() {
+            if (arg.mask) { QSFL.dialog.mask.hide(window) }
+            if (typeof (arg.onClose) == 'function') { arg.onClose(); }
+            QSFL.dom.removeElement(elem._oErrDlg); elem._bErrShow = false; elem._oErrDlg = null;
+        }
+        function _callbackOK() {
+            if (typeof (arg.onOK) == 'function') { arg.onOK(); }
+            if (arg.bClose != false) {
+                if (arg.mask) { QSFL.dialog.mask.hide(window); }
+                QSFL.dom.removeElement(elem._oErrDlg); elem._bErrShow = false; elem._oErrDlg = null;
+            }
+        }
+        var d = []; d[d.length] = '<div class="title"><h2>' + arg.title + '</h2></div>'; d[d.length] = '<div class="mdl_c_c"><div class="content_text"><p><strong>' + arg.msg + '</strong></p></div>'; d[d.length] = '<div class="btns"><a btnOk=1 href="#2" class="' + arg.btnstyle + '">' + arg.onOkDescribe + '</a>'
+            + (arg.cancel ? ('<button type="button" class=' + arg.onBtn2Class + '>' + arg.cancelBtnName + '</button>') : '') + '</div>'; d[d.length] = '</div><button class="close" type="button" title="关闭"></button>'; d[d.length] = '<div class="mdl_t_l"></div><div class="mdl_t_c"><span></span>\
+     </div><div class="mdl_t_r"></div><div class="mdl_c_l"><span></span></div>\
+     <div class="mdl_c_r"><span></span></div><div class="mdl_b_l"></div>\
+     <div class="mdl_b_c"><span></span></div><div class="mdl_b_r"></div>'; o.innerHTML = d.join('').escNone(); var btns = o.getElementsByTagName('A'); for (var i = 0; i < btns.length; i++) {
+            if (btns[i].getAttribute("btnOk") == 1) { btns[i].onclick = _callbackOK; }
+        }
+        var elems = o.getElementsByTagName('BUTTON'); elems[0].onclick = arg && arg.onBtn2 ? function () { arg.onBtn2(); _callbackClose(); } : _callbackClose; elems.length == 2 ? (elems[1].onclick = _callbackClose) : ''; elem.appendChild(o); elem._oErrDlg = o; elem._bErrShow = true;
+    }, showVerifyDlg: function (code, elem, arg) {
+        var o = document.createElement('DIV'); o.style.position = arg.position || 'absolute'; o.style.zIndex = 999; o.style.left = (arg.left || 140) + 'px'; o.style.top = (arg.top || 90) + 'px'; if (arg.mask) { QSFL.dialog.mask.show(window); }
+        function _callbackClose() {
+            if (arg.mask) { QSFL.dialog.mask.hide(window) }
+            if (typeof (arg.onClose) == 'function') { arg.onClose(); QSFL.dom.removeElement(o); }
+        }
+        function _callbackOK() {
+            if ($("INPUT_VERY_CODE").value.asclen() != 4) { alert("您输入的验证码不正确，请重新输入"); return; }
+            if (arg.mask) { QSFL.dialog.mask.hide(window) }
+            var iVeryCode = $("INPUT_VERY_CODE").value.escUrl(); if (typeof (arg.onOK) == 'function') { arg.onOK(iVeryCode); QSFL.dom.removeElement(o); }
+        }
+        var d = []; d[d.length] = '<div class="card_alert confirmation_code_popup" ><div class="title move"><h1>输入验证码</h1></div>'; d[d.length] = '<div class="conter"><form><p class="tips">游戏累了吧?停下来玩个输入验证码游戏吧~</p>'; d[d.length] = '<p class="confirmation_code_input">验证码：<input style="height:23px;width:131px;" type="text" name="name" id="INPUT_VERY_CODE" /></p>'; d[d.length] = '<p class="number_info">输入下图中的字符，不区分大小写<br/>'; d[d.length] = '<img id="IMG_VERIFY" width="130" height="53" alt="验证码" src="http://ptlogin2.qq.com/getimage?aid=10000101&' + Math.random() + '" />'; d[d.length] = '<a href="javascript:void(0);" onclick="CARD.ui.changePic();return false;">看不清楚，换一张</a></p>'; d[d.length] = '<p class="button"><button type="button">确认</button></p></form></div>'; d[d.length] = '<button type="button" class="close">关闭</button></div>'; o.innerHTML = d.join('').escNone(); var elems = o.getElementsByTagName('BUTTON'); elems[0].onclick = _callbackOK; elems[1].onclick = _callbackClose; var elemform = o.getElementsByTagName('FORM'); elemform[0].onsubmit = function () { _callbackOK(); return false }; elem.appendChild(o); if (-1104 == code) { alert('验证码出错，请重开浏览器后再试'); } else if (-1105 == code) { alert("您输入的验证码不正确，请重新输入"); }
+    }, changePic: function () { var o = $("IMG_VERIFY"); if (o) { o.src = "http://www.baidu.com"; } }, showSelectTheme: function (elem, arg) {
+        arg.FlashNum = 0; arg.NorNum = 0; arg.JbNum = 0; arg.FlashTotal = 0; arg.NorTotal = 0; arg.JbTotal = 0; for (var i = 0; i < theme_card_list.length; i++) {
+            var bitmap = theme_card_list[i][12]
+            if (CARD.checkFlashCard(bitmap)) { arg.FlashTotal++; } else if (CARD.checkJbCard(bitmap)) { arg.JbTotal++; } else { arg.NorTotal++; }
+        }
+        if (0 != CARD.data.bGotMiniCol) { CARD.ui.showSelectThemeDetail(elem, arg); }
+        else {
+            function fnSucc(oXml) {
+                oXml = oXml.xmlDom; var obj = oXml.getElementsByTagName("QQHOME")[0]; var iCode = obj.getAttribute("code") * 1; if (0 == iCode) {
+                    var nodes = obj.getElementsByTagName("Node"); for (var i = 0; i < nodes.length; i++) { var cur = nodes[i]; var themeid = cur.getAttribute("theme_id") * 1; var num = cur.getAttribute("num"); CARD.data.mapMyMiniCol[themeid] = num; var bitmap = CARD.data.mapTheme[themeid][12]; if (num > 0) { if (CARD.checkFlashCard(bitmap)) { arg.FlashNum++; } else if (CARD.checkJbCard(bitmap)) { arg.JbNum++; } else { arg.NorNum++; } } }
+                    CARD.data.bGotMiniCol = 1;
+                }
+                CARD.ui.showSelectThemeDetail(elem, arg);
+            }; var url = "http://card.show.qq.com/cgi-bin/card_mini_get?uin=" + QSFL.sns.getLoginUin(); var xhr = new CARD.XHR(url, fnSucc, null, null); xhr.send();
+        }
+    }, showSelectThemeDetail: function (elem, arg) {
+        var o; if ($('_DIV_UI_SELECT_MAIN_') && !arg.creat) { $('_DIV_UI_SELECT_MAIN_').style.display = ''; return; } else {
+            if ($('_DIV_UI_SELECT_MAIN_'))
+                o = $('_DIV_UI_SELECT_MAIN_'); else
+                o = document.createElement('DIV'); o.id = '_DIV_UI_SELECT_MAIN_'; elem.appendChild(o);
+        }
+        $('_DIV_UI_SELECT_MAIN_').style.display = ''; o.className = 'popup_module1 popup_module4 popup_choose_card'; o.style.left = (arg.left || 405) + 'px'; o.style.top = (arg.top || 70) + 'px'; o.style.position = arg.position || 'absolute'; o.style.zIndex = 999; arg.handleTheme = arg.handleTheme || function () { return alert("需要设置选择主题后的回调") }; arg.type = arg.type || 0; function handleTheme(themeid) {
+            var oA = $('_DIV_UI_UL_THEME_').getElementsByTagName('a'); if (1 != arg.type && 3 != arg.type && 4 != arg.type) { CARD.ui.changeThemeType(0, oA[0]); }
+            $('_DIV_UI_SELECT_MAIN_').style.display = 'none'; arg.handleTheme(themeid);
+        }
+        var d = []; if (3 == arg.type) {
+            d[d.length] = '<ul class="mod_tab" id="_DIV_UI_UL_THEME_"><li style="display:none"><a href="#2" onclick="CARD.ui.changeThemeType(0,this);" class="tab2"><span class="tab2_bg">发行套卡 ' + arg.NorNum + '/' + arg.NorTotal + '</span></a></li>'; d[d.length] = '<li style="display:none"><a href="#2" onclick="CARD.ui.changeThemeType(1, this);" class="tab2_sel"><span class="tab2_bg_sel">绝版套卡 ' + arg.JbNum + '/' + (arg.JbTotal - 1) + '</span></a></li>'; d[d.length] = '<li><a href="#2" onclick="CARD.ui.changeThemeType(2, this);" class="tab2"><span class="tab2_bg">闪卡 ' + arg.FlashNum + '/' + arg.FlashTotal + '</span></a></li></ul>'; d[d.length] = '<div class="mdl_c_c">'; d[d.length] = '<div class="card_list" id="_DIV_UI_SEL_THEME_FLASH_"><div class="flash_card_a" style="top:50px;left:56px;"></div><div class="flash_card_b" style="top:50px;right:64px;"></div>'; for (var i = 1; i <= 5; i++) {
+                flag = false; for (var j = 0, len = theme_card_list.length; j < len; j++) {
+                    if ((theme_card_list[j][2] == i) && (theme_card_list[j][12] & 0x08)) {
+                        if (2 == arg.type && (theme_card_list[j][12] & 0x04)) { continue; }
+                        if (theme_card_list[j][0] == CARD.props.PROPS_THEME_ID) { continue; }
+                        if (!flag) { d[d.length] = '<h3><span>难度系数</span><strong class="rank"><span class="card_lv' + i + '"></span></strong></h3><ul class="list_spe">'; flag = true; }
+                        var temStr = (CARD.data.mapMyMiniCol[theme_card_list[j][0]] && CARD.data.mapMyMiniCol[theme_card_list[j][0]] > 0 ? '<span class="ico_tick"></span>' : ''); d[d.length] = '<li tid="' + theme_card_list[j][0] + '"><a>' + theme_card_list[j][1] + '</a>' + temStr + '</li>';
+                    }
+                }
+                if (flag)
+                    d[d.length] = '</ul>';
+            }
+            d[d.length] = '</div></div><button class="close" type="button" title="关闭" onclick="CARD.ui.hideSelectTheme();">关闭</button><div class="mdl_t_l"></div><div class="mdl_t_c"><span></span></div><div class="mdl_t_r"></div>\
+    <div class="mdl_c_l"><span></span></div><div class="mdl_c_r"><span></span></div><div class="mdl_b_l">\
+    </div><div class="mdl_b_c"><span></span></div><div class="mdl_b_r"></div></div>'; o.innerHTML = d.join('').escNone(); CARD.ui.handleTheme = handleTheme; var oLiJB = $('_DIV_UI_SEL_THEME_FLASH_').getElementsByTagName('li'); for (k = 0, len = oLiJB.length; k < len; k++) { var tid = oLiJB[k].getAttribute('tid'); oLiJB[k].onclick = Function("", "CARD.ui.handleTheme(" + tid + ")"); }
+            return;
+        } else {
+            d[d.length] = '<ul class="mod_tab" id="_DIV_UI_UL_THEME_"><li><a href="#2" onclick="CARD.ui.changeThemeType(0,this);" class="tab2"><span class="tab2_bg">发行套卡' + arg.NorNum + '/' + arg.NorTotal + '</span></a></li>'; d[d.length] = '<li><a href="#2" onclick="CARD.ui.changeThemeType(1, this);" class="tab2_sel"><span class="tab2_bg_sel">绝版套卡' + arg.JbNum + '/' + (arg.JbTotal - 1) + '</span></a></li>'; d[d.length] = '<li><a href="#2" onclick="CARD.ui.changeThemeType(2, this);" class="tab2_sel"><span class="tab2_bg_sel">闪卡' + arg.FlashNum + '/' + arg.FlashTotal + '</span></a></li></ul>'; d[d.length] = '<div class="mdl_c_c"><div class="card_list" id="_DIV_UI_SEL_THEME_"><div class="flash_card_a" style="top:50px;left:56px;"></div><div class="flash_card_b" style="top:50px;right:64px;"></div>'; for (var i = 1; i <= 5; i++) {
+                var flag = false; for (var j = 0, len = theme_card_list.length; j < len; j++) {
+                    if (theme_card_list[j][2] == i && ((theme_card_list[j][12] & 0x01) != 1)) {
+                        if (1 == arg.type && (theme_card_list[j][12] & 0x02)) { continue; }
+                        if (!flag) { d[d.length] = '<h3><span>难度系数</span><strong class="rank"><span class="card_lv' + i + '"></span></strong></h3><ul>'; flag = true; }
+                        var temStr = (CARD.data.mapMyMiniCol[theme_card_list[j][0]] && CARD.data.mapMyMiniCol[theme_card_list[j][0]] > 0 ? '<span class="ico_tick"></span>' : ''); d[d.length] = '<li tid="' + theme_card_list[j][0] + '"><a>' + theme_card_list[j][1] + '</a>' + temStr + '</li>';
+                    }
+                }
+                if (flag)
+                    d[d.length] = '</ul>';
+            }
+            if (1 != arg.type && 4 != arg.type) {
+                d[d.length] = '</div><div class="card_list" style="display:none" id="_DIV_UI_SEL_THEME_JB_"><div class="flash_card_a" style="top:50px;left:56px;"></div><div class="flash_card_b" style="top:50px;right:64px;"></div>'; for (var i = 1; i <= 5; i++) {
+                    flag = false; for (var j = 0, len = theme_card_list.length; j < len; j++) {
+                        if ((theme_card_list[j][2] == i) && (theme_card_list[j][12] & 0x01) && !(theme_card_list[j][12] & 0x08)) {
+                            if (2 == arg.type && (theme_card_list[j][12] & 0x04)) { continue; }
+                            if (theme_card_list[j][0] == CARD.props.PROPS_THEME_ID) { continue; }
+                            if (!flag) { d[d.length] = '<h3><span>难度系数</span><strong class="rank"><span class="card_lv' + i + '"></span></strong></h3><ul>'; flag = true; }
+                            var temStr = (CARD.data.mapMyMiniCol[theme_card_list[j][0]] && CARD.data.mapMyMiniCol[theme_card_list[j][0]] > 0 ? '<span class="ico_tick"></span>' : ''); d[d.length] = '<li tid="' + theme_card_list[j][0] + '"><a>' + theme_card_list[j][1] + '</a>' + temStr + '</li>';
+                        }
+                    }
+                    if (flag)
+                        d[d.length] = '</ul>';
+                }
+            }
+            if (1 != arg.type && 2 != arg.type) {
+                d[d.length] = '</div><div class="card_list" style="display:none" id="_DIV_UI_SEL_THEME_FLASH_"><div class="flash_card_a" style="top:50px;left:56px;"></div><div class="flash_card_b" style="top:50px;right:64px;"></div>'; for (var i = 1; i <= 5; i++) {
+                    flag = false; for (var j = 0, len = theme_card_list.length; j < len; j++) {
+                        if ((theme_card_list[j][2] == i) && (theme_card_list[j][12] & 0x08)) {
+                            if (2 == arg.type && (theme_card_list[j][12] & 0x04)) { continue; }
+                            if (theme_card_list[j][0] == CARD.props.PROPS_THEME_ID) { continue; }
+                            if (!flag) { d[d.length] = '<h3><span>难度系数</span><strong class="rank"><span class="card_lv' + i + '"></span></strong></h3><ul class="list_spe">'; flag = true; }
+                            var temStr = (CARD.data.mapMyMiniCol[theme_card_list[j][0]] && CARD.data.mapMyMiniCol[theme_card_list[j][0]] > 0 ? '<span class="ico_tick"></span>' : ''); d[d.length] = '<li tid="' + theme_card_list[j][0] + '"><a>' + theme_card_list[j][1] + '</a>' + temStr + '</li>';
+                        }
+                    }
+                    if (flag)
+                        d[d.length] = '</ul>';
+                }
+            }
+        }
+        d[d.length] = '</div></div><button class="close" type="button" title="关闭" onclick="CARD.ui.hideSelectTheme();">关闭</button><div class="mdl_t_l"></div><div class="mdl_t_c"><span></span></div><div class="mdl_t_r"></div>\
+    <div class="mdl_c_l"><span></span></div><div class="mdl_c_r"><span></span></div><div class="mdl_b_l">\
+    </div><div class="mdl_b_c"><span></span></div><div class="mdl_b_r"></div></div>'; o.innerHTML = d.join('').escNone(); if (1 == arg.type) { var oTagLi = $('_DIV_UI_UL_THEME_').getElementsByTagName('li'); oTagLi[1].style.display = 'none'; oTagLi[2].style.display = 'none'; }
+        if (2 == arg.type) { var oTagLi = $('_DIV_UI_UL_THEME_').getElementsByTagName('li'); oTagLi[2].style.display = 'none'; }
+        if (4 == arg.type) { var oTagLi = $('_DIV_UI_UL_THEME_').getElementsByTagName('li'); oTagLi[1].style.display = 'none'; }
+        CARD.ui.handleTheme = handleTheme; var oLi = $('_DIV_UI_SEL_THEME_').getElementsByTagName('li'); for (var k = 0, len = oLi.length; k < len; k++) { var tid = oLi[k].getAttribute('tid'); oLi[k].onclick = Function("", "CARD.ui.handleTheme(" + tid + ")"); }
+        if (1 != arg.type) { if ($('_DIV_UI_SEL_THEME_JB_')) { var oLiJB = $('_DIV_UI_SEL_THEME_JB_').getElementsByTagName('li'); for (k = 0, len = oLiJB.length; k < len; k++) { var tid = oLiJB[k].getAttribute('tid'); oLiJB[k].onclick = Function("", "CARD.ui.handleTheme(" + tid + ")"); } } }
+        if (1 != arg.type && 2 != arg.type) { var oLiJB = $('_DIV_UI_SEL_THEME_FLASH_').getElementsByTagName('li'); for (k = 0, len = oLiJB.length; k < len; k++) { var tid = oLiJB[k].getAttribute('tid'); oLiJB[k].onclick = Function("", "CARD.ui.handleTheme(" + tid + ")"); } }
+    }, hideSelectTheme: function () { if ($('_DIV_UI_SELECT_MAIN_')) { $('_DIV_UI_SELECT_MAIN_').style.display = 'none'; } }, changeThemeType: function (type, oElem) {
+        var oA = oElem.parentNode.parentNode.getElementsByTagName('A'); var oSpan = oElem.parentNode.parentNode.getElementsByTagName('span'); if (1 == type) {
+            oA[0].className = 'tab2_sel'; oSpan[0].className = 'tab2_bg_sel'; oA[1].className = 'tab2'; oSpan[1].className = 'tab2_bg'; oA[2].className = 'tab2_sel'; oSpan[2].className = 'tab2_bg_sel'; $('_DIV_UI_SEL_THEME_').style.display = 'none'; if ($('_DIV_UI_SEL_THEME_FLASH_'))
+                $('_DIV_UI_SEL_THEME_FLASH_').style.display = 'none'; $('_DIV_UI_SEL_THEME_JB_').style.display = '';
+        } else if (0 == type) {
+            oA[1].className = 'tab2_sel'; oSpan[1].className = 'tab2_bg_sel'; oA[0].className = 'tab2'; oSpan[0].className = 'tab2_bg'; oA[2].className = 'tab2_sel'; oSpan[2].className = 'tab2_bg_sel'; if ($('_DIV_UI_SEL_THEME_JB_'))
+                $('_DIV_UI_SEL_THEME_JB_').style.display = 'none'; if ($('_DIV_UI_SEL_THEME_FLASH_'))
+                $('_DIV_UI_SEL_THEME_FLASH_').style.display = 'none'; $('_DIV_UI_SEL_THEME_').style.display = '';
+        } else {
+            oA[2].className = 'tab2'; oSpan[2].className = 'tab2_bg'; oA[0].className = 'tab2_sel'; oSpan[0].className = 'tab2_bg_sel'; oA[1].className = 'tab2_sel'; oSpan[1].className = 'tab2_bg_sel'; if ($('_DIV_UI_SEL_THEME_JB_'))
+                $('_DIV_UI_SEL_THEME_JB_').style.display = 'none'; $('_DIV_UI_SEL_THEME_').style.display = 'none'; if ($('_DIV_UI_SEL_THEME_FLASH_'))
+                $('_DIV_UI_SEL_THEME_FLASH_').style.display = '';
+        }
+    }
+}; CARD.XHR = QSFL.sns.XHR; function showCardData(xData, oParent, sHtml, mapName, bi, ei, ne) { QSFL.jsontools.showJsonData(xData, oParent, sHtml, mapName, bi, ei, ne); }; CARD.flashCalls = {
+    getUploadUrl: function (uin) {
+        if (window.PhotoLogic && PhotoLogic.getExternalUploadUrl) { PhotoLogic.getExternalUploadUrl({ "uin": uin, "aid": 10000000, "refer": "farmsnap", "callBack": function (url) { try { CARD.getFlashObj().setUploadUrl(url); } catch (_) { } }, "errBack": function () { try { CARD.getFlashObj().setUploadUrl(''); } catch (_) { } } }); } else {
+            if (!window.ua) { window.ua = QZFL.userAgent; }
+            var loader = new QZFL.JsLoader(); loader.onload = function () { CARD.flashCalls.getUploadUrl(uin); }; loader.load('http://' + (window._iDomain || 'imgcache.qq.com') + '/qzone/client/photo/pages/qzone_v4/script/photo_logic.js', document, 'utf-8');
+        }
+        return 0;
+    }, isCollecLoad: false, refreshMainpage: function () { window.location.href = "http://appimg2.qq.com/card/index_v3.html"; }, showIndex: function (uin) { CARD.showIndex(uin); }, showLogin: function () { CARD.showLogin(); }, SendShareGift: function (obj) {
+        var title; var sMsg; var sUin = obj.receuin; var uinList = new Array(); var sImg; if (1 == obj.type) { var name = ""; title = "套卡撒礼"; var _flash_obj = CARD.getFlashObj(); name = _flash_obj.getThemeNameOfThemeId(obj.record); sMsg = "恭喜您，您的好友成功集成套卡" + name + "。分享给您50金币奖励。"; sImg = "http://appimg2.qq.com/card/img/theme/" + obj.record + "_big_logo"; }
+        else if (2 == obj.type) { title = "升级撒礼"; sMsg = "恭喜您，您的好友升到" + obj.record + "级。分享给您50金币奖励。"; sImg = "http://appimg2.qq.com/card/ac/img/levelup.jpg"; }
+        var ARecvUin = new Array(); ARecvUin = sUin.split(","); ARecvUin.pop(); var temParam = { appid: 365, type: "request", stat: "", receiver: [], title: "", desc: "", msg: "", img: "", button: "", callback: "", context: "", onSuccess: function (opt) { }, onError: function (opt) { } }; temParam.receiver = ARecvUin; temParam.title = title; temParam.msg = sMsg; temParam.img = sImg; fusion2.api.sendRequest(temParam);
+    }, showCollSuc: function (theme, lv, lv_diff, giftid) {
+        CARD.showModalDialog('./collection_dialog.html?re=1&dialog=1&tid=' + theme + '&lv=' + lv + '&lv_diff=' +
+            lv_diff + '&recmd=' + giftid, { w: 700, h: 500 });
+    }, showReg: function () {
+        if ("qzone" == CARD.getEnv()) { var sUrl = "http://card.show.qq.com/cgi-bin/card_user_register?qz_invite=" + CARD.getURLParam("qz_invite"); CARD.getScript(sUrl); }
+        else { var sUrl = "http://card.show.qq.com/cgi-bin/card_user_register"; CARD.getScript(sUrl); }
+    }, showRegStep: function () {
+        CARD.showModalDialog('./register2_v3.html#fromuin=' + CARD.getURLParam("fromuin") + "&cardregkey=" +
+            CARD.getURLParam("cardregkey") + "&qz_invite=" + CARD.getURLParam("qz_invite") + "&ad_theme=" +
+            CARD.getURLParam("ad_theme"), { w: 740, h: 600, l: 200, t: 180, mode: 1 });
+    }, showVerify: function (opuin, ret, type) { CARD.showModalDialog('./verify_v3.html?t=20120618&opuin=' + opuin + '&ret=' + ret + '&type=' + type, { w: 401, h: 300 }); }, showSimpleStrategy: function () { CARD.showModalDialog('./mini_strategy.html', { w: 555, h: 396 }, null, "", true); }, showThemeComplete: function (themeid) {
+        if (themeid == CARD.props.PROPS_THEME_ID) return; try { CARD.closeDialog(); } catch (e) { }; var temTop = 0; CARD._bQzone = top.QZONE && top.QZONE.FrontPage ? 1 : 0; if (CARD._bQzone == 1) { temTop = -200; }
+        CARD.showModalDialog('./collect_submit.html?t=20120621&themeid=' + themeid, { w: 720, h: 580, t: temTop, l: -50 });
+    }, toCardKm: function () { window.open('http://qbar.qq.com/magiccard/613.htm'); }, showGiftPackage: function (giftlv, gifttemp) {
+        var sUrl; var uin = CARD.getFlashObj().getCurrentUin(); if (giftlv > 0) { sUrl = "./gift_v3.html?uin=" + uin + "&type=1&lv=" + giftlv; } else if (gifttemp && gifttemp > 0) { sUrl = "./gift_v3.html?uin=" + uin + "&type=2&lv=" + gifttemp; } else { alert("您没有可以领取的礼包！"); return; }
+        CARD.showModalDialog(sUrl, { w: 537, h: 442 });
+    }, getVerifyCode: function () { return CARD.getCookie("verifycode", "appimg2.qq.com"); }, clearVerifyCode: function () { CARD.setCookie("verifycode", "", -1, "appimg2.qq.com"); }, initUserList: function (uin) { CARD.setTopfraName(); document.title = '魔法卡片 - QQ秀'; CARD.getQQShowPassport(); CARD.user.initUser(); CARD.setCookie("cardlv", CARD.user.oMyData.lv, 0, "appimg2.qq.com"); setTimeout(function () { CARD.getLevelUpBonus(uin); }, 3000); setTimeout("CARD.mission.isFinishMission()", 500); }, statSpeed: function (vTimePoints) { cardTimeReport(vTimePoints); }, crashProof: function () { CARD.CRASH.crashProof(); }, isVip: function () {
+        if (QUSER.getInfo("vip") == 1) { return true; }
+        return false;
+    }, openWindow: function (url) { window.open(url); }, openVip: function () { window.open('http://paycenter.qq.com/qqshow/'); }, showFreeGiftPage: function (num) {
+        num = num * 1 || 0; var temTop = 0; var temLeft = 0; CARD._bQzone = top.QZONE && top.QZONE.FrontPage ? 1 : 0; if (CARD._bQzone == 1) { temTop = -150; temLeft = 0; }
+        if (num) { CARD.showModalDialog("https://appimg2.qq.com/card/index.htm?appid=365&page=receive", { mode: 0, w: 800, h: 600, l: temLeft, t: temTop }) } else { CARD.showModalDialog("https://appimg2.qq.com/card/index.htm?appid=365", { mode: 0, w: 800, h: 600, l: temLeft, t: temTop }) }
+        CARD.sendPGV('ISD.QQshow.Card.clickShowFreeGift');
+    }, showFestivalAct: function () {
+        CARD.showModalDialog("http://appimg2.qq.com/card/live/newyear_badge.html?t=20120131", { mode: 1, w: 700, h: 600, l: 150, t: 150 })
+        CARD.sendPGV('ISD.QQshow.Card.SpringFestival');
+    }, showSpringFreeGift: function () { CARD.showModalDialog("http://appimg2.qq.com/card/live/spring_free_gift.html?t=20120116", { mode: 1, w: 700, h: 600, l: 180, t: 200 }); CARD.sendPGV('ISD.QQshow.Card.springFreeGift'); }, showValentineActive: function () { CARD.sendPGV('ISD.QQshow.Card.ValentineDayIcon'); CARD.showModalDialog('/card/live/valentine.html?t=20120208', { w: 1000, h: 1000, l: 100, t: 240, mode: 1 }); }, showFastBuy1: function (type) {
+        if (231 == type || 232 == type || 233 == type) { var temstr = "ISD.QQshow.Card.april_packet_" + type; CARD.sendPGV(temstr); }
+        CARD.showModalDialog('/card/live/direct_buy_v3.html?type=' + type + '&t=20120606', { w: 1000, h: 1000, l: 200, t: 200, mode: 1 });
+    }, showTreePlantingList: function () { CARD.showModalDialog('/card/live/treeplanting_gift_list.html?t=20120229', { w: 1000, h: 1000, l: 100, mode: 1 }); CARD.sendPGV("ISD.QQshow.Card.clickTreePalnting"); }, shareInQzone: function (type, cardid) { type = type * 1; cardid = cardid * 1; CARD.sendPGV("ISD.QQshow.Card.monthgift"); var temTitle = '点击参加>>【魔法卡片，看民俗风情 集民居绝版卡活动】'; var temUrl = 'http://rc.qzone.qq.com/myhome/365/?t=20120418'; var temPic = 'http://appimg2.qq.com/card/ac/img/mingju_active_page.jpg'; var strSum = "一边走一边看，从黄土高原到水色徽乡，走八闽古街看乔家大院，我们都在玩，你千万别错过哦！"; temTitle = encodeURIComponent(temTitle); temUrl = encodeURIComponent(temUrl); temPic = encodeURIComponent(temPic); strSum = encodeURIComponent(strSum); window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + temUrl + '&title=' + temTitle + '&desc=&pics=' + temPic + '&summary=' + strSum); }, share512InQzone: function () { var temTitle = '点击参加>>【魔法卡片，情系汶川限时抽卡活动】'; var temUrl = 'http://rc.qzone.qq.com/myhome/365/?t=20120418&type=3'; var temPic = 'http://appimg2.qq.com/card/img/theme/215_museum'; var strSum = "手挽手，心连心，人间处处有温情！《守护汶川》与您同温那份真情！"; temTitle = encodeURIComponent(temTitle); temUrl = encodeURIComponent(temUrl); temPic = encodeURIComponent(temPic); strSum = encodeURIComponent(strSum); window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + temUrl + '&title=' + temTitle + '&desc=&pics=' + temPic + '&summary=' + strSum); }, share61InQzone: function () { var temTitle = '点击参加>>【魔法卡片，《梦幻童年》限时抽卡活动】'; var temUrl = 'http://rc.qzone.qq.com/myhome/365/?t=20120418&type=221'; var temPic = 'http://appimg2.qq.com/card/img/theme/221_museum'; var strSum = "一起回忆那些年，我们一起走过的日子——童年时光！ "; temTitle = encodeURIComponent(temTitle); temUrl = encodeURIComponent(temUrl); temPic = encodeURIComponent(temPic); strSum = encodeURIComponent(strSum); window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + temUrl + '&title=' + temTitle + '&desc=&pics=' + temPic + '&summary=' + strSum); }, shareInQzone_v2: function (obj) { var temTitle = obj.title || ""; obj.type = obj.type || 0; var temUrl = 'http://rc.qzone.qq.com/myhome/365/?t=20120418&type=' + obj.type; var temPic = obj.picUrl || ""; var strSum = obj.sum || ""; var temDes = obj.desc || ""; temDes = encodeURIComponent(temDes); temTitle = encodeURIComponent(temTitle); temUrl = encodeURIComponent(temUrl); temPic = encodeURIComponent(temPic); strSum = encodeURIComponent(strSum); window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + temUrl + '&title=' + temTitle + '&desc=&pics=' + temPic + '&summary=' + strSum); }, showQingMingLive: function () {
+        var temTop = 130; CARD._bQzone = top.QZONE && top.QZONE.FrontPage ? 1 : 0; if (CARD._bQzone == 1) { temTop = 95; }
+        CARD.showModalDialog('./live/qingming_live.html', { w: 1010, h: 1000, l: 30, t: temTop, mode: 1 });
+    }, goToV3: function () { }, goToV4: function () { CARD.sendPGV("ISD.QQshow.Card.goToV4"); setTimeout(function () { window.location.href = "http://appimg2.qq.com/card/index_v3.html"; }, 200); }, toCardMarket: function () { CARD.gotoMarket(); }, viewFriend: function (uin) {
+        if (typeof (CARD.FEED) == 'undefined') { CARD.loadFeedJs(); } else { CARD.FEED.getMsg(uin); }
+        try { CARD.getFlashObj().resume(); CARD.closeDialog(); } catch (e) { }
+    }, showLevelUp: function (lv, gifttype) {
+        var t = gifttype * 1; var ih = 632; if (CARD.user.oMyData.redvip == 1 && CARD.user.oMyData.yearvip == 1) { ih = 632; } else if (CARD.user.oMyData.redvip == 1) { ih = 662; }
+        if (t >= 1 && t <= 7) {
+            var temTop = 160; var temLeft = -220; CARD._bQzone = top.QZONE && top.QZONE.FrontPage ? 1 : 0; if (CARD._bQzone == 1) { temTop = -150; temLeft = -150; }
+            CARD.moduleDialogQueue.pushOpenPage('./levelup_random.html?lv=' + lv + '&gtype=' + gifttype, { w: 510, h: ih, t: temTop, l: temLeft });
+        }
+    }, toClinic: function () {
+        function goClinic() { window.location.href = "/card/clinic.html"; }
+        CARD.ui.showErrDlg(document.body, { msg: "对不起，部分文件未成功加载。建议您去小诊所诊断一下。", title: '温馨提示', left: '290', top: '200', cancel: true, onOkDescribe: '去小诊所', onOK: goClinic });
+    }, toMuseumV4: function (target, themeid) {
+        var targetpage; if (target == 'q') { targetpage = 2; }
+        else if (target == 'cartoon') { targetpage = 3; }
+        else if (target == 'animal') { targetpage = 4; }
+        else if (target == 'wenhua') { targetpage = 5; }
+        else if (target == 'sport') { targetpage = 6; }
+        else if (target == 'travel') { targetpage = 7; }
+        else if (target == 'pinpai') { targetpage = 8; }
+        else if (target == 'flashcard') { targetpage = 9; }
+        window.location.href = "/card/museum/museum_" + themeid + ".html?version=4&type=1&mu=" + targetpage;
+    }, toSysBusy: function () {
+        function goClinic() { window.location.href = "/card/index_v3.html"; }
+        CARD.ui.showErrDlg(document.body, { msg: "对不起，目前系统繁忙，请您稍后再来魔法学院。", title: '温馨提示', left: '290', top: '200' });
+    }, denyNaughtyUser: function (imSenconds) {
+        var iEndDay = new Date(imSenconds * 1000).toLocaleDateString(); var iEndTime = new Date(imSenconds * 1000).toLocaleTimeString(); function getOut() { top.window.location.href = "http://qbar.qq.com/magiccard"; }
+        CARD.ui.showErrDlg(document.body, {
+            msg: "尊敬的魔法师：<br/>"
+                + "&nbsp;&nbsp;&nbsp;&nbsp;您的账号已被系统检测出多次使用外挂，系统将关闭您的魔法学院5天。</br>"
+                + "&nbsp;&nbsp;&nbsp;&nbsp;您的帐号可于" + iEndDay + iEndTime + "恢复登录。若再次系统检测出使用外挂，"
+                + "魔法学院将给予您封号甚至永久封号的处理。请您珍惜“魔法师”的荣誉，远离外挂！</br>"
+                + "&nbsp;&nbsp;&nbsp;&nbsp;附：您可以在一个工作日后通过该系统<a href='http://my.qq.com/aq/index.html'>查询处理</a>情况", title: '温馨提示', left: '290', top: '100', onOK: getOut, onClose: getOut
+        });
+    }, showGiftConfirm: function (type, param1, param2, param3) {
+        type == type || 0; if (0 == type) { return; }
+        else if (1 == type) { CARD.showModalDialog("/card/gift_confirm.html?t=20120116&type=1", { mode: 1, w: 450, h: 300, l: 180, t: 220 }); }
+        else if (2 == type) {
+            if (param1 == '') { return; }
+            CARD.showModalDialog("/card/gift_confirm.html?t=20120116&type=2&gift=" + param1 + '&bGotFree=' + param2 + '&iBuyNum=' + param3, { mode: 1, w: 450, h: 300, l: 180, t: 220 });
+        }
+        else if (3 == type) { CARD.showModalDialog("/card/gift_confirm.html?t=20120116&type=3&result=" + param1 + '&lv_diff=' + param2 + '&lv_gift=' + param3, { mode: 1, w: 450, h: 300, l: 180, t: 220 }); }
+        else if (4 == type) { CARD.showModalDialog("/card/gift_confirm.html?t=20120116&type=4", { mode: 1, w: 450, h: 300, l: 180, t: 220 }); }
+    }, toCollectionHelp: function () { window.open("http://service.qq.com/info/33453.html"); }, toGameHelp: function () { window.open("http://service.qq.com/info/37735.html"); }, toPrivilegeIndex: function () { window.location.href = "http://appimg2.qq.com/card/magic_privilege.html"; }, openRVip: function (type) {
+        var aid; switch (type) { case 1: aid = "show.show.card.collection.link1"; break; default: aid = ""; break; }
+        var url = 'http://paycenter.qq.com/qqshow/?pageshow=acct&aid=' + aid; window.open(url);
+    }, sendPGV: function (CORD) {
+        if (!CORD) { return; }
+        switch (CORD) { case "happygift_refresh_value": CORD = "FlaColl_happygift_refresh_value"; break; case "happygift_refresh_theme": CORD = "FlaColl_happygift_refresh_theme"; break; case "happygift_click_ok": CORD = "FlaColl_happygift_click_ok"; break; case "happygift_exchange_offcard": CORD = "FlaColl_happygift_exchange_offcard"; break; case "viewQqShowDetail": CORD = "FlaColl_View_Show_Detail"; break; case "saveQqShow": CORD = "FlaColl_Save_QQShow"; break; case "openRedVip": CORD = "FlaColl_Open_Red_Vip"; break; case "continueRedVip": CORD = "FlaColl_Continue_Red_Vip"; break; case "viewQqShowItemDetail": CORD = "FlaColl_View_Item_Detail"; break; case "clickExchangeLoveGfit": CORD = "clickExchangeLoveGfit"; break; case "viewTreePlantingGiftPage": CORD = 'viewTreePlantingGiftPage'; break; case "viewExchangeLovePage": CORD = 'viewExchangeLovePage'; break; case "openSendLoveShareGift": CORD = 'openSendLoveShareGift'; break; case "clickWomenDayIcon": CORD = 'clickWomenDayIcon'; break; case "clickWomenDayRandom": CORD = 'clickWomenDayRandom'; break; case "clickOpenRedVip": CORD = 'clickOpenRedVip'; break; case "clickRedVipIcon": CORD = 'clickRedVipIcon'; break; case "foolsday": CORD = "FoolsDay"; break; case "qingming": CORD = "qingming"; break; case "clickToStove": CORD = "clickToStove"; break; case "clickReGetPropExchange": CORD = "clickReGetPropExchange"; break; case "clickUseExchage": CORD = "clickUseExchage"; break; case "click_512_icon": CORD = "click_512_icon"; break; case "click_get_random_card": CORD = "click_get_random_card"; break; default: break; }
+        CARD.sendPGV(CORD);
+    }, goToFarm: function () { top.open('http://rc.qzone.qq.com/myhome/353'); }, goFarmExchangePage: function () { top.open('http://appimg2.qq.com/card/live/card_farm.html'); }, showNotice: function () { CARD.moduleDialogQueue.pushOpenPage("/card/msg_v3.html?type=2", { mode: 1, w: 545, h: 450, l: 172, t: 200 }); }, showMsg: function (uin) { CARD.showModalDialog("/card/msg_v3.html", { w: 500, h: 500 }); }, showShop: function () { CARD.showModalDialog("/card/shop.html", { w: 1000, h: 600 }); }, showBox: function () { CARD.getFlashObj().pause(); CARD.showModalDialog("/card/box.html?t=20120524", { w: 700, h: 560, mode: 1 }); }, showPropBox: function () { CARD.getFlashObj().pause(); CARD.showModalDialog("/card/box.html?propcard=1&t=20120524", { w: 700, h: 560, mode: 1 }); }, changeTheme: function () { CARD.getFlashObj().pause(); CARD.showModalDialog("/card/box.html?t=20120524&chgTheme=1", { w: 700, h: 560, mode: 1 }); }, showExchangeBox: function (obj, type) {
+        CARD.getFlashObj().pause(); var str = ''; if (1 == type) { str = '&type=1'; }
+        CARD.showModalDialog("/card/exchange.html#slot=" + obj.slot + str, { w: 700, h: 560, mode: 1 });
+    }, showMarket: function () { CARD.getFlashObj().pause(); CARD.showModalDialog('/card/market_v3.html?t=20120606', { w: 760, h: 580, mode: 1 }); }, viewCollec: function () { CARD.showModalDialog('/card/collect_view.html', { w: 700, h: 520, mode: 1 }); }, showStoveV3: function () { CARD.getFlashObj().pause(); CARD.showModalDialog('/card/stove_v3.html?t=20120301', { w: 850, h: 640, mode: 1 }); }, showStoveUpgrade: function () { CARD.showModalDialog('/card/stove_upgrade_v3.html?t=20120301', { w: 700, h: 620, l: 120, t: 195, mode: 1 }); }, showStealStoveV3: function () { CARD.getFlashObj().pause(); CARD.showModalDialog('./stove_v3.html#steal=1', { w: 850, h: 640, mode: 1 }); }, cancelStoveCard: function (slotid) { CARD.showModalDialog('/card/stove_cancel.html#slotid=' + slotid, { w: 500, h: 300, l: 200, t: 285, mode: 1 }); }, showCollecTheme: function (themeid) { CARD.getFlashObj().pause(); CARD.showModalDialog('./stove_v3.html?t=20120301&themeid=' + themeid, { w: 850, h: 640, mode: 1 }); }, showMissionV3: function () { CARD.showModalDialog('./mission_v3.html', { w: 700, h: 610 }); }, showRedDailyGift: function (uin, obj) {
+        CARD.user.initUser(); var bHaveElf = CARD.user.oMyData.havePet; CARD._bQzone = top.QZONE && top.QZONE.FrontPage ? 1 : 0; var temTop = 100, temLeft = -100; if (CARD._bQzone == 1) { temTop = -200; temLeft = -100; }
+        if (1 == CARD.user.oMyData.yearvip) { CARD.showModalDialog('http://imgcache.qq.com/qqshow_v3/htdocs/card/popup_dailyGift_year.html?t=20120406&yeardaysleft=' + obj.yvleft, { w: 573, h: 600, t: temTop, l: temLeft }); return; }
+        if (1 == CARD.user.oMyData.redvip) { CARD.showModalDialog('http://imgcache.qq.com/qqshow_v3/htdocs/card/popup_dailyGift_vip.html?t=20120406&vipdaysleft=' + obj.vleft, { w: 573, h: 600, t: temTop, l: temLeft }); return; }
+        CARD.showModalDialog('http://imgcache.qq.com/qqshow_v3/htdocs/card/popup_dailyTip_notvip.html?t=20120606', { w: 573, h: 600, t: temTop, l: temLeft });
+    }, setVipGiftNum: function () { }, showYearOpenGift: function (uin) { CARD.showModalDialog('./yearopengift.html?uin=' + uin, { w: 520, h: 432 }); }, checkYearVipOpen: function () { return (CARD.getURLParam("yearopen") == "1") ? true : false; }, showPropMarket: function () { CARD.showModalDialog('./market_v3.html?t=20120606&propcard=1', { w: 700, h: 560, mode: 1 }); }, showBottleMarket: function () { CARD.showModalDialog('./market_v3.html?bottle=1', { w: 700, h: 560, mode: 1 }); }, showElfMarket: function () { CARD.showModalDialog('./market_v3.html?t=20120606&elf=1', { w: 700, h: 560, mode: 1 }); }, showParkNpc: function (uin) { CARD.showModalDialog('./parkgift.html?uin=' + uin, { w: 700, h: 570, mode: 1 }); }, showDailyMission: function (uin) { CARD.sendPGV('ISD.QQshow.Card.DailyMissionIcon'); CARD.showModalDialog('./dailymission.html', { w: 700, h: 570, mode: 1 }); }, showMonthMission: function (uin) { CARD.sendPGV('ISD.QQshow.Card.MonthMissionIcon'); }, showShareList: function (uin) { CARD.showModalDialog('./share.html?t=20120228', { w: 520, h: 500, l: 85, mode: 1 }); }, showTransferCard: function () { CARD.getFlashObj().pause(); CARD.showModalDialog('./trans_card.html?t=20120208', { w: 705, h: 530, mode: 1 }); }, showTransferFlashCard: function () { CARD.getFlashObj().pause(); CARD.showModalDialog("./trans_card.html?flash=1&t=20120208", { w: 705, h: 530, mode: 1 }); }, showMessage: function () { CARD.showModalDialog("/card/dialog_v3.html", { w: 560, h: 470, mode: 1, l: 150 }); }, showFriendBox: function (uin) { CARD.showModalDialog("/card/box.html#type=2&uin=" + uin, { w: 700, h: 560, mode: 1 }); }, showLoginBonus: function (oData) {
+        var days = oData.days || 0; var co5day = oData.co5day || 0; var mn5day = oData.mn5day || 0; var vleft = oData.vleft || 0; var yvleft = oData.yvleft || 0; var iw = 520, ih = 600; var it = 0; CARD._bQzone = top.QZONE && top.QZONE.FrontPage ? 1 : 0; if (CARD._bQzone == 1) { it = -200; }
+        CARD.moduleDialogQueue.pushOpenPage('./loginbonus.html?money=' + oData.money_plus + "&vip=" + oData.vip + "&yearvip=" + oData.yearvip + "&days=" + days + "&co5day=" + co5day + "&mn5day=" + mn5day + "&vleft=" + vleft + "&yvleft=" + yvleft, { w: iw, h: ih, t: it });
+    }, showThemeChange: function (iTheme_0, iTheme_1) { iTheme_0 = iTheme_0 || 0; iTheme_1 = iTheme_1 || 0; var iw = 529, ih = 292; CARD.moduleDialogQueue.pushOpenPage('./login_theme_changed.html?theme_0=' + iTheme_0 + "&theme_1=" + iTheme_1, { w: iw, h: ih }); }, showPopUp: function (sType) { var fMap = { "showMyCards": CARD.flashCalls.showBox, "showCombinCards": CARD.flashCalls.showStoveV3, "stealCardDo": CARD.flashCalls.showStealStoveV3, "showRuneShop": CARD.flashCalls.showShop, "showMarket": CARD.flashCalls.showMarket, "showNoticePanel": CARD.flashCalls.showNotice, "showCardSet": CARD.flashCalls.viewCollec, "showStoveUpgrade": CARD.flashCalls.showStoveUpgrade }; if (typeof (fMap[sType]) == 'function') { fMap[sType](); } }, showElfLost: function () { CARD.ui.showErrDlg(document.body, { msg: "主人，饥饿的我无法为您施展魔法了，只能离开去别人家找吃的。。。商店的召回令可以找回我哦。", title: '温馨提示', left: '190', top: '300', onOkDescribe: '去商店看看', onOK: CARD.flashCalls.showElfMarket }); }, showCashUsage: function () { CARD.showModalDialog('./cashusage.html', { w: 660, h: 468, mode: 1 }); }, showShuangShuang: function (uin) { CARD.showModalDialog('./shuangshuang.html?uin=' + uin, { w: 700, h: 570, l: 110, mode: 1 }); }, showNanGua: function (uin) { CARD.showModalDialog('./nangua.html?uin=' + uin, { w: 530, h: 440, l: 110, mode: 1 }); }, showNPC: function (uin) { CARD.showModalDialog('./live/zongzi.html?uin=' + uin, { w: 630, h: 540, l: 110, mode: 1 }); }, showValentine: function (uin) { CARD.showModalDialog('./live/valentine.html?uin=' + uin, { w: 630, h: 540, l: 110, mode: 1 }); }, showYinSu: function () { CARD.showModalDialog('./live/yinsu.html', { w: 630, h: 540, l: 110, mode: 1 }); }, showElf: function (uin) { CARD.showModalDialog('./elf.html?uin=' + uin, { w: 700, h: 550, l: 50, t: 210, mode: 1 }); }, showElfEgg: function (uin) { CARD.showModalDialog('./elf_egg.html?uin=' + uin, { w: 720, h: 560, l: 110, t: 240, mode: 1 }); }, reportCacheDisable: function () { CARD.sendPGV('ISD.QQshow.Card.CACHE_DISABLE'); }, sendGetRedDailyGift: function () { CARD.sendPGV('ISD.QQshow.Card.Get_ICON'); }, getRandomCardForNational: function () { CARD.sendPGV('ISD.QQshow.Card.Getrandomcard_Nationnpc'); }, buyMagicBottleForNational: function () { CARD.sendPGV('ISD.QQshow.Card.Buymagicbottle_Nationnpc'); }, vipIconClick: function () { window.open('http://show.qq.com/live/appspe/cardspe.html'); }, yearVipIconClick: function () { window.open('http://show.qq.com/show_v3.html?MUrl=/mall/inc/vipportal_vipyear.html&opuin=175179985&ptlang=2052&jump=122&itemno=5000019'); }, resetVipSteal2: function (uin, frienduin) { function onSucc(oXml) { }; function onFail() { }; function onErr() { }; var sUrl = 'http://card.show.qq.com/cgi-bin/card_stove_stealcard_get?opuin=' + frienduin + '&uin=' + uin + '&ver=1&slotid=5&code=&slottype=1'; var xhr = new CARD.XHR(sUrl, onSucc, onFail, onErr); xhr.send(); }, showElfLvUp: function (newlv) { if (CARD.moduleDialogQueue && CARD.moduleDialogQueue.opened) { setTimeout("CARD.flashCalls.showElfLvUp(" + newlv + ")", 2000); } else { CARD.elf.showElfLvUp(document.body, { lv: newlv }); } }, showSelectTheme: function () {
+        try { CARD.closeDialog(); } catch (e) { }
+        CARD.ui.showSelectTheme(document.body, { left: 600, top: 156, type: 4, handleTheme: function (tid) { CARD.getFlashObj().SelectThemeHandle(tid) } });
+    }, showManaNotEnough: function (type, page, mana) {
+        type = type || 1; if (typeof (page) == 'undefine')
+            page = 0; mana = mana || ''; var fire = { 1: "一昧真火", 9: "烈地魔火", 10: "紫天魔火" }; var name = fire[type] || "魔火"; var word; if (page == 1) { word = "您当前的魔力不足以使用" + name + "，请补充" + mana + "魔力后再试。<br/>（魔火有着神奇的力量，可以马上减少炼卡的时间，<a href='http://service.qq.com/info/57117.html' target='_blank'>了解魔火使用攻略</a>）"; } else { word = "您当前的魔力不足，至少需要补充" + mana + "魔力才可使用" + name + "，请补充魔力后再试。<br/>（魔火有着神奇的力量，可以马上减少炼卡的时间，<a href='http://service.qq.com/info/57117.html' target='_blank'>了解魔火使用攻略</a>）";; }
+        CARD.ui.showErrDlg(document.body, { msg: word, title: '温馨提示', left: '150', top: '220', width: '520', cancel: true, onOkDescribe: '兑换魔力', btnstyle: 'bt2_tx4', onOK: CARD.flashCalls.showBottleMarket });
+    }, getThemeOffTime: function (themeid) { var cur = CARD.data.mapTheme[themeid]; return cur[15]; }
+}
+CARD.LEVEL = {
+    LEVEL_SCORE: [0, 200, 500, 900, 1400, 2000, 2800, 3800, 5000, 6400, 8000, 10200, 13200, 17200, 22200, 28200, 35200, 43200, 52200, 62200, 73200, 85200, 98200, 112200, 127200, 143700, 161700, 181200, 202200, 224700, 248700, 274700, 302700, 332700, 364700, 398700, 434700, 472700, 512700, 554700, 598700, 643700, 689700, 736700, 784700, 833700, 883700, 934700, 986700, 1039700, 1093700, 1157700, 1231700, 1315700, 1409700, 1513700, 1637700, 1781700, 1945700, 2129700, 2333700, 2572700, 2846700, 3155700, 3499700, 3878700, 4307700, 4786700, 5315700, 5894700, 6523700], getLevel: function (iScore) {
+        var oRet = { lv: 1, need: 200, score: 0, rate: 0 }; if (iScore <= 0)
+            return oRet; for (var i = 0; i < CARD.LEVEL.LEVEL_SCORE.length; i++) {
+                if (iScore < CARD.LEVEL.LEVEL_SCORE[i]) {
+                    oRet.lv = i; oRet.score = iScore - CARD.LEVEL.LEVEL_SCORE[i - 1]; if (i > 0) { oRet.need = CARD.LEVEL.LEVEL_SCORE[i] - CARD.LEVEL.LEVEL_SCORE[i - 1]; }
+                    else { oRet.need = 200; }
+                    oRet.rate = parseInt((iScore - CARD.LEVEL.LEVEL_SCORE[i - 1]) / (CARD.LEVEL.LEVEL_SCORE[i] - CARD.LEVEL.LEVEL_SCORE[i - 1]) * 100); break;
+                }
+                if (i == CARD.LEVEL.LEVEL_SCORE.length - 1) { oRet.lv = i; oRet.score = CARD.LEVEL.LEVEL_SCORE[CARD.LEVEL.LEVEL_SCORE.length - 1]; oRet.need = 0; oRet.rate = 100; }
+            }
+        return oRet;
+    }
+}
+CARD.CRASH = {
+    crashProof: function () { alert("由于网络不通，魔法学院暂时休学，\n您可以去尝试别的游戏或者去QQ秀商城看看有没有心仪的QQ秀，\n稍后关闭浏览器再试~"); QSFL.sns.getApplicationWindow().location.href = "http://appimg2.qq.com/card/register_v3.html?crashed=1"; }
+}
+CARD.ptp = {
+    sMsg: "", check: function () {
+        var sUrl = "/card/js/snsPtpRead_v3.js"; function callback() {
+            var uin = qsns.getLoginUin() || 0; if (typeof snsPtpRead != 'undefined')
+                snsPtpRead.get(uin, CARD.ptp.callback, 1);
+        }
+        CARD.getScript(sUrl, callback, "UTF-8", true);
+    }, callback: function (msg) {
+        if (msg == "")
+            return; try {
+                var uin = qsns.getLoginUin() || 0; var last = CARD.getFlashObj().loadSharedObject(uin, '_ptp_popup_') * 1; var now = parseInt((new Date()).getTime() / 1000); if (now - last < 4 * 3600) { return; }
+                CARD.getFlashObj().saveSharedObject(uin, '_ptp_popup_', now);
+            } catch (e) { }
+        CARD.ptp.sMsg = msg; CARD.showModalDialog("/card/msg_v3.html?type=1", { w: 700, h: 500 });
+    }
+}; CARD.mission = {
+    GET_RANDOM: 7, BUY_CARD: 8, NPC_EXCHANGE: 9, STOVE_CARD: 10, SUBMIT_COLLEC: 11, GET_RANDOM_1: 13, BUY_AND_CONFINE_1: 14, USE_YIWEI_FIRE_1: 15, GET_AND_CONFINE_CARD_1: 16, USE_ZITIAN_FIRE_1: 17, SUBMIT_COLLECT_1: 18, SELECT_CARD_1: 19, MISSION_LINE_1: 19, M_MARKET_EXCHANGE_1: 20, M_SUBMIT_SELECT_COLL_1: 21, M_USE_RUNE_1: 22, M_OPEN_BOX_1: 23, M_FRIEND_EXCHANGE_1: 24, M_REACH_LV5_1: 25, M_TRANS_CARD_1: 26, M_CARDFRI_EXCHANGE_1: 27, M_STOVE_STEAL_1: 28, M_SUBMIT_STAR2_1: 29, M_GET_TITLE_1: 30, M_REACH_LV10_1: 31, M_OPEN_EXCHBOX_1: 32, M_STOVE_UPGRADE_1: 33, M_FINISH_ALL_1: 34, DEF_STEP_ID: 100, DOING: -1, DONE: -2, ALL_DONE: -3, MISSION_DOING: 0, MISSION_DONE: 1, _need_close: false, _mission_lvup: { lv_diff: 0, lv: 0, lv_gift: -1 }, _total: 0, _bFlag: 0, doMission: function (mission, param) {
+        function fnSucc(oXML) {
+            param = param || {}; oXML = oXML.xmlDom; var oElem = oXML.getElementsByTagName("QQHOME")[0]; var code = parseInt(oElem.getAttribute("code")); if (code == 0) {
+                if (mission <= CARD.mission.MISSION_LINE_1) { CARD.mission.completeMission(mission, param); }
+                else { CARD.getFlashObj().updateMission(mission); if (typeof param.fnSucc == 'function') { param.fnSucc(code); } }
+            } else { if (typeof param.fnFail == 'function') { param.fnFail(code); } }
+        }
+        var missionStep = CARD.user.oMyData.missionStepId; var url = 'http://card.show.qq.com/cgi-bin/card_mission_do?curmiss=' + mission + '&curcmd=' + CARD.mission.DEF_STEP_ID; var xml_sender = new CARD.XHR(url, fnSucc, null, null); xml_sender.send();
+    }, completeMission: function (mission, param) {
+        function fnSucc(oXML) {
+            param = param || {}; oXML = oXML.xmlDom; var oElem = oXML.getElementsByTagName("QQHOME")[0]; var code = parseInt(oElem.getAttribute("code")); if (code != 0) {
+                try { if (mission <= CARD.mission.MISSION_LINE_1) { CARD.user.oMyData.missionStatus = -2; var data = { missionStatus: -2 }; CARD.user.updateInfo(data); } } catch (e) { }
+                if (typeof param.fnFail == 'function') { param.fnFail(code); }
+                return;
+            }
+            try {
+                CARD.user.oMyData.missionid = oElem.getAttribute("nextmiss") * 1; CARD.user.oMyData.mana += oElem.getAttribute("mana") * 1; var data = { cash: oElem.getAttribute("money") * 1, exp: oElem.getAttribute("exp") * 1, mana: CARD.user.oMyData.mana, missionid: oElem.getAttribute("nextmiss") * 1, missionstep: oElem.getAttribute("nextcmd") * 1, missionflag: -1 }
+                CARD.user.updateInfo(data);
+            } catch (e) { }
+            var lv_diff = oElem.getAttribute("lv_diff") * 1; var lv = 0; var lv_gift = -1; if (lv_diff > 0 && mission != CARD.mission.SUBMIT_COLLECT_1) { lv = oElem.getAttribute("lv") * 1; lv_gift = oElem.getAttribute("gifttype") * 1; parent.CARD.flashCalls.showLevelUp(lv, lv_gift); }
+            else if (lv_diff > 0 && mission == CARD.mission.SUBMIT_COLLECT_1) { lv = oElem.getAttribute("lv") * 1; lv_gift = oElem.getAttribute("gifttype") * 1; CARD.mission._mission_lvup.lv_diff = 1; CARD.mission._mission_lvup.lv = lv; CARD.mission._mission_lvup.lv_gift = lv_gift; }
+            CARD.getFlashObj().updateMission(mission); if (typeof param.fnSucc == 'function') { param.fnSucc(code); }
+        }
+        var url = "http://card.show.qq.com/cgi-bin/card_mission_complete?curmiss=" + mission; var xml_sender = new CARD.XHR(url, fnSucc, null, null); xml_sender.send();
+    }, getMissionStatus: function (mission) {
+        try {
+            if (mission > CARD.mission.MISSION_LINE_1 && CARD.user.oMyData.missionid <= CARD.mission.MISSION_LINE_1) { return -1; }
+            if (mission <= CARD.mission.MISSION_LINE_1 && mission >= 13) {
+                if (CARD.user.oMyData.missionid == mission) { return CARD.user.oMyData.missionStatus; }
+                else if (mission == CARD.mission.MISSION_SBUCOL_1) { return -1; }
+                return -4;
+            } else {
+                var status = CARD.getFlashObj().getMission(); for (var i = 0; i < status.length; i++) {
+                    if (status[i].mid == mission) { return status[i].state; }
+                }
+                return -1;
+            }
+        } catch (e) { return -4; }
+    }, checkMission: function (mission, param) {
+        if (typeof param == 'undefined') { param = {}; }
+        var ret = CARD.mission.getMissionStatus(mission); if (CARD.user.oMyData.missionid <= CARD.mission.MISSION_LINE_1 && CARD.user.oMyData.missionid >= CARD.mission.GET_RANDOM_1) { ret = CARD.mission.DONE; if (CARD.mission.DOING == ret) { CARD.mission.doMission(mission, param); } else if (CARD.mission.DONE == ret) { CARD.mission.completeMission(mission, param); } } else {
+            if (CARD.mission.MISSION_DOING == ret) { CARD.mission.doMission(mission, param); }
+            else if (CARD.mission.MISSION_DONE == ret) { CARD.mission.completeMission(mission, param); }
+        }
+    }, isFinishMission: function () {
+        if (CARD.mission.getMissionStatus(CARD.user.oMyData.missionid) == -2) { CARD.mission.checkMission(CARD.user.oMyData.missionid); }
+        var stove = CARD.getFlashObj().seekStoveAt(0); var stovelv = stove.lv; if (stovelv > 1 && CARD.mission.getMissionStatus(CARD.mission.M_STOVE_UPGRADE_1) == 0) { CARD.mission.doMission(CARD.mission.M_STOVE_UPGRADE_1); }
+        if ((CARD.mission.getMissionStatus(CARD.mission.SUBMIT_COLLECT_1) == -1 || CARD.mission.getMissionStatus(CARD.mission.SUBMIT_COLLECT_1) == -2)) { CARD.mission.isCollected(1); }
+        if ((CARD.mission.getMissionStatus(CARD.mission.M_GET_TITLE_1) == 0)) { CARD.mission.isCollected(2); }
+        if (CARD.mission.getMissionStatus(CARD.mission.M_OPEN_BOX_1) == 0 && CARD.user.oMyData.curStoreBoxCardNum > 20) { CARD.mission.checkMission(CARD.mission.M_OPEN_BOX_1); }
+        var iTotalChangeBoxNum = CARD.user.oMyData.curChangeBoxCardNum; var iVipNum = CARD.user.oMyData.curVipChangeBoxNum; var iNormOpenNum = 15 - (iTotalChangeBoxNum - iVipNum); if (CARD.mission.getMissionStatus(CARD.mission.M_OPEN_EXCHBOX_1) == 0 && (iNormOpenNum < 5)) { CARD.mission.checkMission(CARD.mission.M_OPEN_EXCHBOX_1); }
+        if (CARD.mission.getMissionStatus(CARD.mission.M_REACH_LV5_1) == 0 && CARD.user.oMyData.lv >= 5) { CARD.mission.checkMission(CARD.mission.M_REACH_LV5_1); }
+        if (CARD.mission.getMissionStatus(CARD.mission.M_REACH_LV10_1) == 0 && CARD.user.oMyData.lv >= 10) { CARD.mission.checkMission(CARD.mission.M_REACH_LV10_1); }
+    }, isCollected: function (type) {
+        type = type || 0; function fnSucc(oXml) {
+            CARD.mission._bFlag = 1; oXml = oXml.xmlDom; var obj = oXml.getElementsByTagName("QQHOME")[0]; var iCode = obj.getAttribute("code"); if (iCode != 0) { return; }
+            var total = 0; var oColList = obj.getElementsByTagName("Node"); for (var i = 0, len = oColList.length; i < len; i++) { var num = oColList[i].getAttribute("num") * 1; if (num > 0) { total += num; } }
+            CARD.mission._total = total
+            if (1 == type && total > 0) { CARD.mission.checkMission(CARD.mission.SUBMIT_COLLECT_1); }
+            else if (2 == type && total >= 5) { CARD.mission.checkMission(CARD.mission.M_GET_TITLE_1); }
+        }
+        if (!CARD.mission._bFlag) { var sUrl = 'http://card.show.qq.com/cgi-bin/card_mini_get?uin=' + CARD.user.oMyData.uin; var xhr = new CARD.XHR(sUrl, fnSucc, null, null); xhr.send(); }
+        else {
+            if (1 == type && CARD.mission._total > 0) { CARD.mission.checkMission(CARD.mission.SUBMIT_COLLECT_1); }
+            else if (2 == type && CARD.mission._total >= 5) { CARD.mission.checkMission(CARD.mission.M_GET_TITLE_1); }
+        }
+    }
+}; CARD.moduleDialogQueue = {
+    dialogQueue: [], page: {}, opened: false, setDialogOpened: function () { CARD.moduleDialogQueue.opened = true; }, setDialogClosed: function () { CARD.moduleDialogQueue.opened = false; }, pushOpenPage: function (sUrl, oFeatures, sMode) {
+        CARD.moduleDialogQueue.dialogQueue.push({ url: sUrl, feature: oFeatures, mode: sMode }); if (!CARD.moduleDialogQueue.opened) { CARD.moduleDialogQueue.page = CARD.moduleDialogQueue.popOpenPage(); CARD.showModalDialog(CARD.moduleDialogQueue.page.url, CARD.moduleDialogQueue.page.feature, CARD.moduleDialogQueue.page.mode); }
+    }, popOpenPage: function () {
+        if (0 == CARD.moduleDialogQueue.dialogQueue.length) { return null; }
+        else { return CARD.moduleDialogQueue.dialogQueue.pop(); }
+    }, closeCheckDialogQueue: function (iPopTime) {
+        iPopTime = iPopTime || 500; if (0 == CARD.moduleDialogQueue.dialogQueue.length || CARD.moduleDialogQueue.opened == true) { return; }
+        else { CARD.moduleDialogQueue.page = CARD.moduleDialogQueue.popOpenPage(); setTimeout("CARD.showModalDialog(CARD.moduleDialogQueue.page.url, CARD.moduleDialogQueue.page.feature, CARD.moduleDialogQueue.page.mode)", iPopTime); }
+    }
+}; CARD.props = { PROPS_THEME_ID: 111, UNIVERSAL_CARD_ID: 1162 }
+CARD.dialog = {
+    elem: null, showMessage: function (obj) {
+        var _this = CARD.dialog; obj.cnt = obj.cnt || "当前操作用户过多，请稍候重试。"; obj.title = obj.title || "温馨提示"; obj.left = obj.left || 200; obj.top = obj.top || 200; var param = obj; obj.callback = obj.callback || _this.closeMessage; if (!_this.elem) { _this.elem = document.createElement("div"); }
+        _this.elem.style.left = obj.left + 'px'; _this.elem.style.top = obj.top + 'px'; _this.elem.style.position = "absolute"; _this.elem.style.width = "350px"; _this.elem.style.zIndex = 999; _this.elem.className = "popup_module1"; _this.elem.innerHTML = [' <div class="title"><h2>' + obj.title + '</h2></div>', '   <div class="mdl_c_c">', '  <div class="content_text align_center" id="DIV_CONTENT">', obj.cnt, ' </div>', '    <div class="btns">', '  <button type="button" class="bt2_tx6" onclick="void(0);" id="BUT_ALERT_CONFIRM">确定</button>', '  </div>', '   </div>', ' <button class="close" type="button" title="关闭" onclick="CARD.dialog.closeMessage();" id="BUT_ALERT_CLOSE">关闭</button>', ' <!--样式结构 开始-->', '   <div class="mdl_t_l"></div>', '   <div class="mdl_t_c"><span></span></div> ', '   <div class="mdl_t_r"></div>', '   <div class="mdl_c_l"><span></span></div>', '   <div class="mdl_c_r"><span></span></div>', '   <div class="mdl_b_l"></div>', '   <div class="mdl_b_c"><span></span></div>', '   <div class="mdl_b_r"></div>', ' <!--样式结构 结束-->'].join(''); document.body.appendChild(_this.elem); $("BUT_ALERT_CONFIRM").onclick = obj.callback;
+    }, closeMessage: function () { var _this = CARD.dialog; if (_this.elem) { document.body.removeChild(_this.elem); _this.elem = null; } }
+}; CARD.isNewVersion = false; CARD.versionFlag = {
+    setFlag: function (flag, callBack) {
+        function onSucc(args) { callBack(); }; function onErr() { callBack(); }; CARD.isNewVersion = (flag == 1); var sUrl = 'http://card.show.qq.com/cgi-bin/card_set_flash_flag?status=' + flag; var xhr = new CARD.XHR(sUrl, onSucc, onErr, onErr); xhr.send();
+    }
+}; CARD.isReady = function () { return true; }
+var isReady = CARD.isReady; var flashCalls = CARD.flashCalls; QZFL.JSONGetter = function (actionURL, cname, data, charset, junctionMode) {
+    if (QZFL.object.getType(cname) != "string") { cname = "_jsonInstence_" + (QZFL.JSONGetter.counter + 1); }
+    var prot = QZFL.JSONGetter.instance[cname]; if (prot instanceof QZFL.JSONGetter) { } else { QZFL.JSONGetter.instance[cname] = prot = this; QZFL.JSONGetter.counter++; prot._name = cname; prot._sender = null; prot._timer = null; this.onSuccess = QZFL.emptyFn; this.onError = QZFL.emptyFn; this.onTimeout = QZFL.emptyFn; this.timeout = 5000; this.clear = QZFL.emptyFn; this._baseClear = function () { this._waiting = false; this._squeue = []; this._equeue = []; this.onSuccess = this.onError = QZFL.emptyFn; this.clear = null; }; }
+    prot._uri = actionURL; prot._data = (data && (QZFL.object.getType(data) == "object" || QZFL.object.getType(data) == "string")) ? data : null; prot._charset = (QZFL.object.getType(charset) != 'string') ? QZFL.config.defaultDataCharacterSet : charset; prot._jMode = !!junctionMode; return prot;
+}; QZFL.JSONGetter.instance = {}; QZFL.JSONGetter.counter = 0; QZFL.JSONGetter._errCodeMap = { 999: { msg: 'Connection or Server error.' }, 998: { msg: 'Connection to Server timeout.' } }; QZFL.JSONGetter.genHttpParamString = function (o) {
+    var r = []; for (var i in o) { r.push(i + "=" + encodeURIComponent(o[i])); }
+    return r.join("&");
+}; QZFL.JSONGetter.prototype.addOnSuccess = function (f) {
+    if (typeof (f) == "function") {
+        if (this._squeue && this._squeue.push) { } else { this._squeue = []; }
+        this._squeue.push(f);
+    }
+}; QZFL.JSONGetter._runFnQueue = function (q, resultArgs, th) { var f; if (q && q.length) { while (q.length > 0) { f = q.shift(); if (typeof (f) == "function") { f.apply(th ? th : null, resultArgs); } } } }; QZFL.JSONGetter.prototype.addOnError = function (f) {
+    if (typeof (f) == "function") {
+        if (this._equeue && this._equeue.push) { } else { this._equeue = []; }
+        this._equeue.push(f);
+    }
+}; QZFL.JSONGetter.pluginsPool = { "srcStringHandler": [], "onErrorHandler": [] }; QZFL.JSONGetter._pluginsRunner = function (pType, data) {
+    var _s = QZFL.JSONGetter, l = _s.pluginsPool[pType], t = data, len; if (l && (len = l.length)) { for (var i = 0; i < len; ++i) { if (typeof (l[i]) == "function") { t = l[i](t); } } }
+    return t;
+}; QZFL.JSONGetter.prototype.send = function (callbackFnName) {
+    if (this._waiting) { return; }
+    var clear, cfn = (QZFL.object.getType(callbackFnName) != 'string') ? "callback" : callbackFnName, da = this._uri; if (this._data) { da += (da.indexOf("?") < 0 ? "?" : "&") + ((typeof (this._data) == "object") ? QZFL.JSONGetter.genHttpParamString(this._data) : this._data); }
+    da = QZFL.JSONGetter._pluginsRunner("srcStringHandler", da); if (this._jMode) { window[cfn] = this.onSuccess; var _sd = new QZFL.JsLoader(); _sd.onerror = this.onError; _sd.load(da, void (0), this._charset); return; }
+    this._timer = setTimeout((function (th) { return function () { th._waiting = false; th.onTimeout(); }; })(this), this.timeout); if (QZFL.userAgent.ie && (QZFL.userAgent.ie < 10) && !(QZFL.userAgent.beta && navigator.appVersion.indexOf("Trident\/4.0") > -1)) {
+        var df = document.createDocumentFragment(), sender = (QZFL.userAgent.ie > 8 ? document : df).createElement("script"); sender.charset = this._charset; this._senderDoc = df; this._sender = sender; this.clear = clear = function (o) {
+            clearTimeout(o._timer); if (o._sender) { o._sender.onreadystatechange = null; }
+            df['callback'] = df['_Callback'] = df[cfn] = null; df = o._senderDoc = o._sender = null; o._baseClear();
+        }; df['callback'] = df['_Callback'] = df[cfn] = (function (th) { return (function () { th._waiting = false; th.onSuccess.apply(th, arguments); QZFL.JSONGetter._runFnQueue(th._squeue, arguments, th); clear(th); }); })(this); if (QZFL.userAgent.ie < 9) { sender.onreadystatechange = (function (th) { return (function () { if (th._sender && th._sender.readyState == "loaded") { try { th._onError(); } catch (ignore) { } } }); })(this); } else { sender.onerror = (function (th) { return (function () { try { th._onError(); } catch (ignore) { } }); })(this); }
+        this._waiting = true; df.appendChild(sender); this._sender.src = da;
+    } else {
+        this.clear = clear = function (o) {
+            clearTimeout(o._timer); if (o._sender) { o._sender.src = "about:blank"; o._sender = o._sender.callback = o._sender.errorCallback = null; }
+            if (QZFL.userAgent.safari || QZFL.userAgent.opera) { setTimeout('QZFL.dom.removeElement($("_JSON_frm_' + o._name + '"))', 50); } else { QZFL.dom.removeElement($("_JSON_frm_" + o._name)); }
+            o._baseClear();
+        }; var _cb = (function (th) {
+            return (function () {
+                var args; if (QZFL.userAgent.ie && QZFL.userAgent.ie > 9) { var args = []; for (var i = 0, len = arguments.length; i < len; ++i) { if (typeof arguments[i] == 'object') { args[i] = JSON.parse(JSON.stringify(arguments[i])); } else { args[i] = arguments[i]; } } } else { args = arguments; }
+                th._waiting = false; th.onSuccess.apply(th, args); QZFL.JSONGetter._runFnQueue(th._squeue, args, th); clear(th);
+            });
+        })(this); var _ecb = (function (th) { return (function () { th._waiting = false; var _eo = QZFL.JSONGetter._errCodeMap[999]; th.onError(_eo); QZFL.JSONGetter._runFnQueue(th._equeue, [_eo], th); clear(th); }); })(this); var frm = document.createElement("iframe"); frm.id = "_JSON_frm_" + this._name; if (!QZFL.userAgent.safari) { frm.style.width = frm.style.height = frm.style.borderWidth = "0"; frm.style.position = "absolute"; } else { frm.style.display = "none"; }
+        this._sender = frm; var _dm = (document.domain == location.host) ? '' : 'document.domain="' + document.domain + '";', dout = '<html><head><meta http-equiv="Content-type" content="text/html; charset=' + this._charset + '"/></head><body><script>' + _dm + ';var callback, _Callback;function ' + cfn + '(){frameElement.callback.apply(null, arguments);}callback=_Callback=' + cfn + ';<\/script><script charset="' + this._charset + '" src="' + da + '"><\/script><script>setTimeout(frameElement.errorCallback,50);<\/script></body></html>'; frm.callback = _cb; frm.errorCallback = _ecb; this._waiting = true; if (QZFL.userAgent.chrome || QZFL.userAgent.opera || QZFL.userAgent.firefox < 3) { frm.src = "javascript:'" + encodeURIComponent(QZFL.string.escString(dout)) + "'"; document.body.appendChild(frm); } else if (QZFL.userAgent.ie) { document.body.appendChild(frm); frm.src = "javascript:'" + encodeURIComponent(QZFL.string.escString(dout)) + "'"; } else { document.body.appendChild(frm); frm.contentWindow.document.open('text/html'); frm.contentWindow.document.write(dout); frm.contentWindow.document.close(); }
+    }
+}; QZFL.JSONGetter.prototype._onError = function () { this._waiting = false; var _eo = QZFL.JSONGetter._errCodeMap[999]; this.onError(_eo); QZFL.JSONGetter._runFnQueue(this._equeue, [_eo], this); QZFL.JSONGetter._pluginsRunner("onErrorHandler", this); this.clear(this); }; QZFL.JSONGetter.prototype.destroy = QZFL.emptyFn; var C = C || {}; C.canvas = C.canvas || {}; C.canvas.mokaHaveReceived = false; C.canvas.dialogCallback = function (obj) {
+    if (!obj) { return; }
+    try {
+        if ("gift" == obj.call) { CARD.getFlashObj().updateGiftNum(obj.giftNum); } else {
+            if (obj.exp || obj.gold) {
+                CARD.user.get
+                var data = { cash: obj.gold * 1 || 0, exp: obj.exp * 1 || 0 }
+                CARD.getFlashObj().showMonExp({ mon: obj.gold * 1 || 0, exp: obj.exp * 1 || 0 });
+            } else { C.canvas.mokaHaveReceived = true; }
+        }
+    } catch (e) { window.console && window.console.log("flash API error"); }
+    return;
+}; C.canvas.closeDialog = function () {
+    if (C.canvas.mokaHaveReceived) { CARD.getFlashObj().refresh(); C.canvas.mokaHaveReceived = false; }
+    CARD.closeDialog();
+}
+C.canvas.errMsgMap = { 90004: "您的卡箱已满，请先整理卡箱之后再来领取", 90008: "当前领取的人数过多，请刷新后再试" }/*  |xGv00|614592ff07b3e13eb21c0c0c6f5b48d0 */

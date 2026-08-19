@@ -1,0 +1,608 @@
+@charset "UTF-8";
+body{background:#000 url(https://appimg2.qq.com/card/ac/img/body.jpg?v=5) repeat-x}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,a{margin:0;padding:0;font-size:12px;font-family:SimSun,arial;line-height:1.8}
+table {border-collapse:collapse;border-spacing:0}
+fieldset,img,abbr,acronym{border:none}
+ol,ul {list-style:none}
+caption,th {text-align:left}
+a,button{cursor:pointer}
+input,button{vertical-align:middle;font:12px/1.2em arial,Simsun,Arial Unicode MS,Mingliu,Arial;padding:0}
+.wrapper_primaryContent{border-top:0px solid #000;_border-top:none;position:relative;zoom:1;z-index:0}
+.wrapper_primaryContent .wrapper{zoom:1;margin-top:-57px}
+.wrapper_secondaryContent{border-top:0px solid #000;_border-top:none;position:relative;background:url(https://appimg2.qq.com/card/ac/img/middle.jpg?v=5) repeat-y;zoom:1;overflow:hidden}
+.wrapper_secondaryContent .wrapper{background:url(https://appimg2.qq.com/card/ac/img/header.jpg?v=25) no-repeat 0 0;zoom:1}
+.wrapper_secondaryContent_v2 .wrapper{background:none;margin-top:-57px}
+.wrapper_secondaryContent .container{background:url(https://appimg2.qq.com/card/ac/img/footer.jpg?v=5) no-repeat 0 100%;zoom:1}
+.wrapper_secondaryContent .main{padding-bottom:150px;min-height:450px;_height:450px;zoom:1}
+.header{position:absolute;top:0;left:0;z-index:1;width:980px}
+.header h1 a{position:absolute;top:0;left:20px;display:block;overflow:hidden;width:186px;height:80px;font-size:0;line-height:500px}
+.header h2{display:none}
+.header .useful_life{position:absolute;top:33px;left:783px;color:#A8764A}
+.header .useful_weibo{position:absolute;top:14px;left:885px}
+.header .useful_clinic{position:absolute;top:14px;left:820px}
+.header .useful_vip{position:absolute;top:14px;left:730px;width:85px}
+.header .useful_weibo span,.header .useful_weibo strong,.header .useful_clinic span,.header .useful_clinic strong{vertical-align:middle}
+.header .useful_weibo a,.header .useful_clinic a{color:#A8764A;text-decoration:none}
+.header .useful_life a{color:#A8764A}
+.header .important_tips{position:absolute;top:14px;left:264px;width:335px;height:18px;color:#A8764A}
+.header .important_tips span{margin:0 2px}
+.header .important_tips a{color:#D3B88E;font-family:simsun;cursor:pointer}
+.header .important_tips_page{position:absolute;top:1px;right:-45px;displsy:inline-block;zoom:1;width:60px}
+.header .important_tips_page em{font-style:normal;vertical-align:middle;margin-right:2px}
+.header .important_tips_page .next,.header .important_tips_page .prev{display:inline-block;zoom:1;overflow:hidden;margin:0 2px;font-size:0;width:5px;height:9px;background:url(/card/ac/img/icon.png?v=81) no-repeat -450px 0;vertical-align:middle}
+.header .important_tips_page .prev{background-position:-454px 0}
+#map div{position:relative;width:980px;display:block;height:97px}
+#map ul{position:absolute;top:49px;left:200px;width:480px;height:36px;z-index:3}
+#map li{position:absolute;top:0;height:36px;overflow:hidden;background-image:url(https://appimg2.qq.com/card/ac/img/icon.png?v=81);background-repeat:no-repeat}
+#map li a{display:block;height:36px;line-height:360px}
+#map .map_home,#map .map_home_active{width:73px;left:0;background-position:0 -550px}
+#map .map_home_active{background-position:0 -589px}
+#map .map_museum,#map .map_museum_active{width:97px;left:77px;background-position:-80px -550px}
+#map .map_museum_active{background-position:-80px -589px}
+#map .map_ranking,#map .map_ranking_active{width:74px;left:256px;background-position:-260px -550px}
+#map .map_ranking_active{background-position:-260px -589px}
+#map .map_honor,#map .map_honor_active{width:74px;left:178px;background-position:-180px -550px}
+#map .map_honor_active{background-position:-180px -589px}
+#map .map_vip,#map .map_vip_active{width:115px;left:334px;background-position:-340px -550px}
+#map .map_vip_active{background-position:-340px -589px}
+#map p{position:absolute;top:54px;right:20px;color:#A8764A;z-index:4}
+#map p a{padding:0 3px;color:#A8764A}
+#map p a:hover{color:#D39A00}
+#map p .ico_house_new,#map p .ico_house{margin-top:-5px}
+.footer{padding-bottom:10px;width:980px;color:#88523D;text-align:center;line-height:1.6}
+.footer a{color:#88523D;text-decoration:none}
+.live_header_v3{position:fixed;top:0;left:0;z-index:999;width:100%;height:29px;line-height:29px;background:url(https://imgcache.qq.com/qqshow/v2_1/community/img/bg_header.gif) repeat-x left top;text-align:center;zoom:1}
+.live_header_main_v3{position:relative;margin:auto 30px;text-align:left;color:#3367cd}
+.live_header_v3 .path_link{position:relative;float:left;padding-left:85px;height:29px;font-weight:normal;text-align:right;background:url(https://imgcache.qq.com/qqshow/v2_1/community/img/bg_header_h1.gif) no-repeat left top;z-index:2}
+.live_header_v3 a.application {display:-moz-inline-box;display:inline-block;*display:inline;zoom:1;height:21px;*line-height:22px;text-align:center;text-decoration:none;width:59px;background:transparent url(https://imgcache.qq.com/qqshow_v3/ac/theme_default/theme.png) no-repeat scroll -520px -92px;color:#FFFFFF;text-decoration:none;text-align:center}
+.live_header_v3 .path_link ul{float:left;zoom:1}
+.live_header_v3 .path_link li{float:left;list-style:none;height:29px;line-height:29px}
+.live_header_v3 .path_link .more{width:48px;margin-left:-10px;background:url(https://imgcache.qq.com/qqshow_v3/ac/theme_default/live_nav.png) no-repeat -107px 12px}
+.live_header_v3 .path_link strong{font-weight:normal}
+.live_header_v3 .path_link .more .list{display:none}
+.live_header_v3 .path_link .more_sel .list{display:block}
+.live_header_v3 .path_link .more_sel{width:48px;margin-left:-10px;position:relative;z-index:99}
+.live_header_v3 .path_link .more_sel .list{position:absolute;top:29px;left:0;width:48px;margin-top:-6px;overflow:hidden;zoom:1;background:url(https://imgcache.qq.com/qqshow_v3/ac/theme_default/live_nav.png) no-repeat -48px 100%}
+.live_header_v3 .path_link .more_sel .list ul{padding:10px 0 4px 0;width:100%;background:url(https://imgcache.qq.com/qqshow_v3/ac/theme_default/live_nav.png) no-repeat 0 0}
+.live_header_v3 .path_link .more_sel li{float:none}
+.live_header_v3 .path_link .more_sel li a{margin:0;display:block;text-align:center;height:22px;line-height:22px}
+.live_header_v3 .path_link a{margin-right:1em;height:29px;line-height:29px}
+.live_header_v3 .path_link a:hover{text-decoration:underline}
+.live_header_v3 .btnFaq{margin-left:11px;cursor:pointer;background:url(https://imgcache.qq.com/qqshow/v2_1/community/img/btn-header-faq.gif) no-repeat left top}
+.live_header_v3 .btnFaq span{padding-left:20px;display:inline-block;line-height:18px}
+.live_header_v3 .loginStr strong{padding:0 5px;color:#0981C6}
+.live_header_v3 .loginStr{float:right;padding-top:5px}
+.live_header_v3 .ico_lv_g,.live_header_v2 .ico_lv{margin:0 5px}
+.live_header_v3 .loginStr strong a{color:#0981C6;padding:0 5px;text-decoration:none}
+.live_header_v3 .live_header_main_v2 li {height:29px;line-height:29px;padding-left:5px}
+.live_header_v3 .qqshow {position:absolute;left:0;top:0}
+.live_header_v3 .qqshow a {display:block;font-size:0;line-height:100px;overflow:hidden;width:70px}
+strong.important a,strong.important,strong.strong a,strong.strong{font-weight:normal;color:#C00!important}
+strong.important a,strong.important{font-weight:bold}
+strong.double a,strong.double{padding:0 2px;font-weight:bold;color:#F00!important;font-size:20px!important}
+.ico_lv_g,.ico_lv{display:-moz-inline-box;display:inline-block;text-align:left;color:#fff;overflow:hidden;zoom:1;vertical-align:middle;width:45px;height:13px;background:url(https://imgcache.qq.com/qqshow_v3/ac/theme_default/icon.png?v=55) no-repeat left -2040px}
+.ico_lv_g{background-position:left -2000px;color:#eee}
+.ico_lv span,.ico_lv_g span{display:none}
+.ico_lv .lv,.ico_lv_g .lv{float:left;display:inline;margin-left:35px;line-height:16px;font-size:9px;font-family:tahoma;font-weight:bolder}
+.ico_lv:hover{color:#fff;text-decoration:none}
+.ico_lv_g:hover{color:#eee;text-decoration:none}
+.ico_clinic,.ico_weibo,.ico_new,.ico_strong,.ico_grade,.ico_star,.ico_horn,.ico_note,.ico_gold,.ico_gold2,.ico_magic,.ico_experience,.ico_experience2,.ico_important,.icon_qzone,.ico_locking,.ico_increase,.icon_yinguan,.ico_notice,.ico_gift,.ico_arrow_up,.ico_arrow_down,.ico_arrowup,.ico_arrowdown,.ico_year,.ico_advert,.ico_examine,.ico_vip,.ico_locked,.ico_qqshow,.ico_rating1,.ico_rating2,.ico_flash,.ico_card,.ico_qsmark,.ico_tick,.ico_house,.ico_house_new{display:inline-block;*display:inline;zoom:1;vertical-align:middle;font-size:0;overflow:hidden;line-height:500px;background-image:url(https://appimg2.qq.com/card/ac/img/icon.png?v=81);background-repeat:no-repeat}
+.ico_horn{width:17px;height:17px;background-position:-300px -150px}
+.ico_note{width:13px;height:18px;background-position:-330px -151px}
+.ico_gold{width:16px;height:16px;background-position:-0 -180px}
+.ico_gold2{width:17px;height:18px;background-position:-180px -432px}
+.ico_magic{width:17px;height:21px;background-position:-180px -90px}
+.ico_experience{width:16px;height:16px;background-position:-60px -180px}
+.ico_experience2{width:17px;height:17px;background-position:-210px -432px}
+.ico_card{width:16px;height:16px;background-position:-30px -180px}
+.ico_star{width:19px;height:18px;background-position:-360px 0}
+.ico_important{width:16px;height:16px;background-position:-360px -150px}
+.icon_qzone{width:12px;height:11px;background-position:-390px 0}
+.ico_locking{width:17px;height:19px;background-position:-420px 0}
+.ico_grade{width:14px;height:13px;background-position:-150px -30px}
+.ico_increase{width:13px;height:14px;background-position:-90px 0}
+.icon_yinguan{width:16px;height:16px;background-position:-180px -30px}
+.ico_notice{width:16px;height:16px;background-position:-210px -30px}
+.ico_gift{width:15px;height:15px;background-position:-210px -150px}
+.ico_arrowup{width:9px;height:13px;background-position:-120px -120px}
+.ico_arrowdown{width:9px;height:13px;background-position:-150px -120px}
+.ico_arrow_up{width:9px;height:13px;background-position:0 -90px}
+.ico_arrow_down{width:9px;height:13px;background-position:-30px -90px}
+.ico_year{width:16px;height:16px;background-position:-180px -150px}
+.ico_advert{width:15px;height:15px;background-position:-210px -180px}
+.ico_examine{width:15px;height:15px;background-position:-90px -120px}
+.ico_vip{width:15px;height:15px;background-position:-150px -150px}
+.ico_locked{width:20px;height:25px;background-position:-90px -180px}
+.ico_qqshow{width:17px;height:17px;background-position:-270px -180px}
+.ico_rating1{width:24px;height:27px;background-position:0 -120px}
+.ico_rating2{width:20px;height:21px;background-position:-30px -120px}
+.ico_strong{width:15px;height:15px;background-position:-210px -180px}
+.ico_new{width:25px;height:18px;background-position:-150px -60px}
+.ico_flash{width:28px;height:24px;background-position:-120px -90px}
+.ico_weibo{width:20px;height:17px;background-position:-360px -180px}
+.ico_qsmark{width:17px;height:17px;background-image:url(https://appimg2.qq.com/card/ac/img/icon_v2.png?v=7);background-position:-30px -85px}
+.ico_clinic{width:20px;height:16px;background-position:-270px -360px}
+.ico_tick{width:10px;height:7px;background-position:-183px -462px;margin:-3px  0 0 3px}
+.ico_house{width:19px;height:19px;background-position:-270px -390px}
+.ico_house_new{width:19px;height:19px;background-position:-300px -390px}
+.btn_redvip{display:inline-block;zoom:1;width:84px;height:21px;overflow:hidden;line-height:21px;background:url(/card/ac/img/icon.png?v=81) no-repeat -120px -180px;color:#fff;text-align:center;text-decoration:none;vertical-align:middle}
+.mod_pagenav{padding-top:30px;clear:both;color:#FFCC99;text-align:center}
+.mod_pagenav a{color:#FFCC99}
+.mod_pagenav .mod_pagenav_main,.mod_pagenav .mod_pagenav_option{display:inline-block;*display:inline;zoom:1}
+.mod_pagenav button{border:none;width:22px;height:18px;overflow:hidden;line-height:130px;background:url(https://appimg2.qq.com/card/ac/img/icon.png?v=81) no-repeat -360px -120px;font-size:0}
+.mod_pagenav input{border:1px solid #663C00;width:20px;vertical-align:middle}
+.mod_pagenav_count2{padding:0 10px}
+.popup{background:transparent!important}
+.record_model ol{scrollbar-arrow-color:#B99A66;scrollbar-base-color:#6F3910;scrollbar-darkshadow-color:#6F3910;scrollbar-face-color:#6F3910;scrollbar-highlight-color:#B99A66;scrollbar-shadow-color:#B99A66;scrollbar-track-color:#6F3910}
+.alpha,.synthesis{position:absolute;z-index:2;background-color:rgba(0,0,0,0.7);filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#b2000000',endColorstr='#b2000000');background-color:transparent\9;display:inline-block;*display:inline;zoom:1}
+.synthesis{background-color:rgba(255,221,68,0.7);filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#b2ffdd44',endColorstr='#b2ffdd44');background-color:transparent\9}
+.menu{position:relative;width:929px;font-size:0;_height:0;borderL:1px solid #f00;clear:both;zoom:1;z-index:8}
+.menu ul{margin:0 0 0 76px;zoom:1;padding:15px 0 0 10px;height:36px;background:url(https://appimg2.qq.com/card/ac/img/wrapper_secondaryContent_line.png) repeat-x 0 100%}
+.menu li{margin-left:4px;float:left;*display:inline;position:relative;padding-right:8px;background:url(https://appimg2.qq.com/card/ac/img/icon.png?v=81) no-repeat right -180px}
+.menu ul a{display:inline-block;*display:inline;zoom:1;height:36px;line-height:36px;padding-left:11px;padding-right:4px;color:#DB8426;outline:none;font-size:16px;font-weight:bold;text-decoration:none;background:url(https://appimg2.qq.com/card/ac/img/icon.png?v=81) no-repeat -390px -180px;position:relative;vertical-align:middle}
+.menu ul .active{background:url(https://appimg2.qq.com/card/ac/img/icon.png?v=81) no-repeat right -120px}
+.menu ul .active a{background:url(https://appimg2.qq.com/card/ac/img/icon.png?v=81) no-repeat -390px -120px}
+.menu ul .edition,.menu ul .edition a{background:none;font-size:12px;font-weight:normal;text-decoration:underline}
+.menu ul .mene_link_hastria{padding-right:8px}
+.menu_triangle{border-width:4px;border-style:solid;border-color:#db8426 #3a1904 #3a1904 #3a1904;vertical-align:middle;position:absolute;display:inline-block;right:-2px;top:50%;margin-top:-4px;height:0px;overflow:hidden;-webkit-transition:-webkit-transform .2s ease-in;-moz-transition:-moz-transform .2s ease-in;-o-transition:-o-transform .2s ease-in;transition:transform .2s ease-in}
+.active .menu_triangle{border-color:#db8426 #240e07 #240e07 #240e07}
+.menu .menu_dropmu{position:absolute;width:95px;background-color:red;z-index:11;left:0;top:36px;margin:0;padding:0;height:auto;background:none;background-color:#240e07;filter:alpha(opacity=90);opacity:0.9;overflow:hidden;display:none}
+.menu_dropmu li{float:none;margin-left:0;padding-right:0;background:none}
+.menu_dropmu a,.active .menu_dropmu li a{display:block;width:87px;height:30px;line-height:30px;padding-left:0;padding-right:0;color:#db8426;text-indent:10px;border-top:1px dotted #7e4632;font-weight:normal;background:none;font-size:12px;margin:0 4px;margin-top:-1px}
+.menu_dropmu a:hover,.active .menu_dropmu li a:hover{background-color:#000}
+.menu .menu_tips{position:absolute;top:23px;right:2px;color:#fff}
+.menu_tips a{color:#A8764A}
+.menu ul .hover .menu_dropmu{display:block}
+.menu ul .hover .menu_triangle{-moz-transform:rotate(180deg);-moz-transform-origin:50% 30%;-webkit-transform:rotate(180deg);-webkit-transform-origin:50% 30%;-o-transform:rotate(180deg);-o-transform-origin:50% 30%;transform:rotate(180deg);transform-origin:50% 30%;-webkit-transform-origin-x:50%;-webkit-transform-origin-y:30%}
+.login{width:371px}
+.dialog{position:relative;zoom:1}
+.dialog .box_title{height:25px;margin:0 5px;overflow:hidden;cursor:move;background:url(https://imgcache.qq.com/qqshow_v3/ac/popup/bg_alert_title.png) repeat-x left top;*background-image:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://imgcache.qq.com/qqshow_v3/ac/popup/bg_alert_title.png',sizingMethod='scale')}
+.dialog .box_content{background:#fff url(https://imgcache.qq.com/qqshow_v3/ac/popup/bg_alert.png) repeat-x left bottom;border:1px solid #bdbad2}
+.dialog .box_title h1{font-size:14px;font-weight:bold;color:#fff;line-height:29px;width:auto!important;zoom:1;text-shadow:0 0 3px #7b69cf}
+.dialog .q,.dialog .e{position:absolute;top:0;z-index:1;width:5px;height:25px}
+.dialog .q{background:url(https://imgcache.qq.com/qqshow_v3/ac/popup/bg_alert_title_left.png) no-repeat left top;*background-image:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://imgcache.qq.com/qqshow_v3/ac/popup/bg_alert_title_left.png',sizingMethod='scale');left:0}
+.dialog .e{background:url(https://imgcache.qq.com/qqshow_v3/ac/popup/bg_alert_title_right.png) no-repeat left top;*background-image:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://imgcache.qq.com/qqshow_v3/ac/popup/bg_alert_title_right.png',sizingMethod='scale');right:0;_right:-1px}
+.dialog .box_content .q,.dialog .box_content .e{filter:}
+.dialog .close button{position:absolute;top:3px;right:5px;width:20px;z-index:2;height:20px;border:0;background:url(https://imgcache.qq.com/qqshow_v3/ac/popup/bg_alert_close.png) no-repeat center;overflow:hidden;font-size:0;line-height:45px;content:""}
+.dialog hr{border-top:1px solid #fff;border-bottom:1px solid #e4e2f0;border-left:0;border-right:0;height:2px}
+.wrapper_primaryContent .main{height:auto;background:url(https://appimg2.qq.com/card/ac/img/primaryContent.gif?v=0) no-repeat 0 195px}
+.flash_model{margin:0 0 0 33px;width:915px;height:615px;background:#000;text-align:center;color:#FFF}
+.daily_model{height:130px;position:relative;overflow:hidden}
+.daily_model h3{position:absolute;top:-300px}
+.daily_model ul li{float:left;line-height:14px;_display:inline;zoom:1}
+.daily_model_li1{width:132px;margin-left:51px;margin-top:85px;color:#deeace} 
+.daily_model_li2{width:150px;margin-left:57px;margin-top:15px;color:#fbeaa2}
+.daily_model_li3{width:145px;margin-left:36px;margin-top:75px;color:#b9c0d2}
+.daily_model_li4{width:160px;margin-left:44px;margin-top:15px;color:#fbbd73}
+.daily_model_li5{width:120px;margin-left:52px;margin-top:75px;color:#fae2b5}
+.record_model{margin:8px 0 0 58px;width:800px;height:240px;padding-bottom:80px}
+.record_model .record_model_tab{height:35px}
+.record_model .record_model_tab li{float:left;height:35px;padding-right:8px}
+.record_model .record_model_tab a{display:inline-block;*display:inline;zoom:1;padding-left:10px;padding-right:10px;height:35px;font-size:14px;color:#FFDFA6;font-weight:bold;text-align:center;text-decoration:none;line-height:35px}
+.record_model .record_model_tab li.active{display:inline-block;*display:inline;zoom:1;background:url(https://appimg2.qq.com/card/ac/img/primaryContent.jpg?v=11) no-repeat right -943px}
+.record_model .record_model_tab li.active a{background:url(https://appimg2.qq.com/card/ac/img/primaryContent.jpg?v=11) no-repeat -883px -943px;color:#502011}
+.record_model ol{height:210px;overflow:hidden;overflow-y:auto;position:relative}
+.record_model ol li{position:relative;padding-left:10px;color:#572F1E;height:30px;line-height:30px;background:#B4905A;font-size:0}
+.record_model ol li p{font-size:12px}
+.record_model ol li a{color:#FFDFA6}
+.record_model ol li.active{background:#BFA068}
+.record_model ol li .pic{position:absolute;left:740px;top:2px}
+.page_card_rank .sort_list {position:relative;width:840px;padding:0 0 0 76px;text-align:center}
+.page_card_rank .sort_list .sort_content .page{padding-top:8px;_padding-top:28px}
+.page_card_rank .sort_list .sort_content {position:relative;width:840px;_margin-left:-16px;text-align:left}
+.page_card_rank .sort_list .sort_content ol {width:840px;float:left}
+.page_card_rank .sort_list .sort_content li.zindex1{z-index:10}
+.page_card_rank .sort_list .sort_content li.zindex2{z-index:9}
+.page_card_rank .sort_list .sort_content li.zindex3{z-index:8}
+.page_card_rank .sort_list .sort_content li.zindex4{z-index:7}
+.page_card_rank .sort_list .sort_content li.zindex5{z-index:6}
+.page_card_rank .sort_list .sort_content li.zindex6{z-index:5}
+.page_card_rank .sort_list .sort_content li.zindex7{z-index:4}
+.page_card_rank .sort_list .sort_content li.zindex8{z-index:3}
+.page_card_rank .sort_list .sort_content li.zindex9{z-index:2}
+.page_card_rank .sort_list .sort_content li.zindex10{z-index:1}
+.page_card_rank .sort_list .sort_content li {position:relative;float:left;width:416px;height:189px;color:#90796A;background:url("/card/ac/img/line2.png") repeat-x 0 bottom}
+.page_card_rank .sort_list .sort_content li .rank_cont {position:relative;width:368px;height:117px;padding:18px 18px 19px;_padding:18px 18px 15px;margin:20px 7px;background:url(/card/ac/img/rank_sprite.png) no-repeat 0 -105px}
+.page_card_rank .sort_list .sort_content li.level_c .rank_cont {background-position:0 -265px}
+.page_card_rank .sort_list .sort_content li.level_c .rank_cont .sort_num {font-size:9px}
+.page_card_rank .sort_list .sort_content li.level_d .rank_cont {background-position:0 -265px}
+.page_card_rank .sort_list .sort_content li .item_main {float:left;width:70px;_width:74px;height:113px;_height:117px;overflow:hidden;margin-right:5px;padding:1px;border:1px solid #E7E0D3;background-color:#FAFCF1}
+.page_card_rank .sort_list .sort_content li .item_main img {display:block;width:70px;height:113px}
+.page_card_rank .sort_list .sort_content li .item_main .details{display:none}
+.page_card_rank .sort_list .sort_content li .item_main_sel{position:relative}
+.page_card_rank .sort_list .sort_content li .item_main_sel .details{position:absolute;top:92px;left:6px;display:block;width:61px;overflow:hidden;line-height:50px;height:17px;background:url(/card/ac/img/bg.png?v=3) no-repeat 0 -1431px}
+.page_card_rank .sort_list .sort_content li .card_ico_box_sel a{border:1px solid #FF6600}
+.page_card_rank .sort_list .sort_content li li {width:260px;height:21px;padding:0 0 0 18px;border:0 none;background:url(/card/ac/img/bg.png?v=3) no-repeat 0 0}
+.page_card_rank .sort_list .sort_content li li.nick{position:relative;overflow:hidden}
+.page_card_rank .sort_list .sort_content li li.nick a{float:left;text-decoration:none}
+.page_card_rank .sort_list .sort_content li li.nick .icon_qzone{margin:3px;float:left;*display:inline;width:12px!important}
+.page_card_rank .sort_list .sort_content li li.nick .username{color:#5C3C26;text-decoration:none;text-overflow:ellipsis;-o-text-overflow:ellipsis;width:195px;display:block;overflow:hidden;white-space:nowrap}
+.page_card_rank .sort_list .sort_content li li.nick {width:220px;padding-left:0;font-size:14px;font-weight:bold;color:#5C3C26;background:none}
+.page_card_rank .sort_list .sort_content li li.level {background-position:0 -129px}
+.page_card_rank .sort_list .sort_content li li.point {background-position:0 -227px}
+.page_card_rank .sort_list .sort_content li li.moeny {background-position:0 -179px}
+.page_card_rank .sort_list .sort_content li .other_link {position:absolute;text-align:right;top:20px;right:10px}
+.page_card_rank .sort_list .sort_content li .other_link a {color:#0780C5}
+.page_card_rank .sort_list .sort_content li .card_ico_num {width:278px;padding-left:0;background:none;z-index:2;height:18px}
+.page_card_rank .sort_list .sort_content li .flash_card_text span{padding-left:49px}
+.page_card_rank .sort_list .sort_content li .sort_num {position:absolute;top:-2px;left:-2px;font-weight:bold;color:#FFFFFF;font-size:14px;display:block;width:26px;text-align:center;line-height:24px;height:34px}
+.page_card_rank .sort_list .sort_content li .card_ico_box {position:absolute;bottom:-10px;right:-8px;width:180px;text-align:right}
+.page_card_rank .sort_list .sort_content li .card_ico_box a {float:right;display:block;width:23px;_width:27px;height:23px;_height:27px;overflow:hidden;margin:0 0 0 6px;padding:1px;border:1px solid #C3C3C3;background-color:#FFFFFF}
+.page_card_rank .sort_list .sort_content li .card_ico_box
+.page_card_rank .sort_list .sort_content li .bor{border:1px solid #E1DDD2;background:#FEFCF9}
+.page_card_rank .sort_list .sort_content li .card_ico_box_v2 {position:absolute;top:-39px;right:-24px;padding:5px;width:170px;_width:181px;text-align:left}
+.page_card_rank .sort_list .sort_content li .card_ico_box_v2 a {float:left;display:inline;width:23px;_width:27px;height:23px;_height:27px;overflow:hidden;margin:1px 4px 1px 0;padding:1px;border:1px solid #C3C3C3;background-color:#FFFFFF}
+.page_card_rank .sort_list .sort_content li .card_ico_box_v2 img {display:block;width:23px;height:23px}
+.page_card_rank .sort_list .sort_content li .card_ico_box_v2 .icon_play_up{position:absolute;top:2px;right:2px;z-index:2;margin:0;padding:0;vertical-align:middle;_vertical-align:top;display:-moz-inline-box;display:inline-block;*display:inline;zoom:1;border:none;width:16px;height:15px;line-height:60px;background:url(/card/ac/img/bg.png?v=3) no-repeat -103px -1664px}
+.page_card_rank .sort_list .sort_content li .card_ico_box_v2 .icon_play_dn{position:absolute;top:2px;right:2px;z-index:2;margin:0;padding:0;vertical-align:middle;_vertical-align:top;display:-moz-inline-box;display:inline-block;*display:inline;zoom:1;border:none;width:16px;height:15px;line-height:60px;background:url(/card/ac/img/bg.png?v=3) no-repeat -103px -1649px}
+.page_card_rank .sort_list .sort_content li .most{height:130px;overflow-y:scroll}
+.page_card_rank .sort_list .sort_content li .most .cont{padding-right:15px;zoom:1}
+.page_card_rank .sort_list .sort_content li .most .icon_play_up,.page_card_rank .sort_list .sort_content li .most .icon_play_dn{right:6px;top:4px}
+.page_museum .museum_module{margin:30px 0 0 55px;position:relative;width:895px}
+.page_museum_bg1{background:url(/card/ac/img/museum_page.jpg) no-repeat 0 0}
+.page_museum_bg2{width:705px;overflow:hidden;background:url(/card/ac/img/museum_page.jpg) no-repeat -1410px 100%}
+.museum_tips{position:absolute;top:178px;_top:10px;left:110px;_left:80px;z-index:11;color:#FFF}
+.page_museum .tab li{position:absolute;top:13px;width:82px;height:27px;overflow:hidden}
+.page_museum .item_list p.cont sup.new_icon{position:absolute;top:0;left:0;display:block;width:47px;height:47px;font-size:0;line-height:300px;overflow:hidden;background:url(/card/ac/img/bg_card_set.png?v=3) no-repeat -83px -23px}
+.page_museum .tab a{display:block;width:82px;height:27px;overflow:hidden;line-height:160px;background:url(/card/ac/img/museum_page.jpg) no-repeat -5000px 0}
+.page_museum .tab .active{background-image:url(/card/ac/img/museum_page.jpg)}
+.page_museum .tab .menu1{left:15px;background-position:-2115px -27px}
+.page_museum .tab .menu2{left:98px;background-position:-2115px 0;text-align:left}
+.page_museum .item_list{overflow:hidden;zooom:1;text-align:left;padding-left:20px}
+.page_museum .item_list li{position:relative;width:155px;height:225px;overflow:hidden;margin:5px -10px 5px 0;float:left}
+.page_museum .item_list li .text{color:#695953}
+.page_museum .item_list li .text p{line-height:17px}
+.page_museum .item_list li .cont span{color:#FFF;padding-right:15px;font-weight:bold;float:right}
+.page_museum .item_list li .cont img{cursor:pointer}
+.page_museum .item_list p.cont{position:relative;margin:0 auto;width:120px;height:150px;overflow:hidden}
+.page_museum .item_list p.cont img{margin:3px}
+.page_museum .item_list p.cont strong{font-weight:normal;color:#FFF}
+.page_museum .outofprint{margin:0 0 10px 20px;width:79px;height:21px;clear:both;background:url(/card/ac/img/outofprint.png) repeat-x 0 bottom}
+.page_museum .outofprint span{display:none}
+.page_museum .course_global{position:relative;z-index:12}
+.page_museum .course_global div.title{clear:both;padding-bottom:10px;margin:0 30px 0 20px;line-height:18px;height:18px;background:url(/card/ac/img/line2.png) repeat-x 0 bottom}
+.page_museum .course_global .title h3{float:left;width:82px;height:20px;line-height:22px;font-size:16px;font-family:Microsoft YaHei,arial;color:#7B7776}
+.page_museum .course_global .item_list{padding:10px 0 10px 5px;clear:both}
+.page_museum .course_global .item_list li{height:235px;overflow:hidden;zoom:1}
+.page_museum .course_global .item_list li .card_em_theme_item{margin:13px 13px 0 13px}
+.page_museum .course_global .item_list .watermark{position:absolute;z-index:8;top:78px;right:0;width:104px;height:104px;overflow:hidden;zoom:1}
+.watermark span{display:block;width:104px;height:450px;font-size:0;background:url(/card/ac/img/watermark.png?v=7) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://appimg2.qq.com/card/ac/img/watermark.png?v=7',sizingMethod='scale')}
+.watermark_done strong{display:none}
+.watermark_collection span{margin-top:-104px}
+.watermark_s span{margin-top:-210px}
+.watermark_collection_s span{margin-top:-320px}
+.page_museum .course_global .item_list li .text{text-align:center;padding:16px 10px 0 0}
+.page_museum .course_global .item_list li p span.text{text-align:right;padding:0}
+.page_museum .course_global .item_list li em{color:#F00;font-style:normal}
+.page_museum .rank_rate p{padding:4px 10px 0 10px;color:#FF0000;display:inline;vertical-align:middle}
+.page_museum .rank_rate p a{padding:0 3px;color:#0780C5;font-weight:normal}
+.page_museum .museum_tips{color:#FFFFFF;position:absolute;width:95%;left:10px;top:2px;text-align:right}
+.venue_map{position:relative;width:918px;height:881px}
+.venue_map .venue_tips{position:absolute;top:20px;left:50px;color:#fff;font-size:14px;font-weight:bold}
+.venue_map .venue_list li{position:absolute;width:150px;text-align:center;height:20px}
+.venue_map .venue_list li a{color:#DD8926;text-decoration:none}
+.venue_map .venue_list li strong{display:none}
+.venue_map .venue_1{top:221px;left:147px}
+.venue_map .venue_2{top:146px;left:320px}
+.venue_map .venue_3{top:205px;left:473px}
+.venue_map .venue_4{top:295px;left:639px}
+.venue_map .venue_5{top:391px;left:107px}
+.venue_map .venue_6{top:375px;left:384px}
+.venue_map .venue_7{top:510px;left:656px}
+.venue_map .venue_8{top:616px;left:376px}
+.venue_map .cont{position:absolute;top:0;left:32px;width:918px;height:1009px;z-index:2}
+.venue_map .flash{width:918px;height:1000px;overflow:hidden;color:#FFF}
+.venue_map .venue_map_bg{position:absolute;top:0;left:32px;width:918px;height:1009px;z-index:1}
+.venue_map .venue_map_1{height:250px;background:url(/card/ac/css/img/venue_map_1.jpg)}
+.venue_map .venue_map_2{height:250px;background:url(/card/ac/css/img/venue_map_2.jpg)}
+.venue_map .venue_map_3{height:250px;background:url(/card/ac/css/img/venue_map_3.jpg)}
+.venue_map .venue_map_4{height:250px;background:url(/card/ac/css/img/venue_map_4.jpg)}
+.venue_map .venue_map_5{height:259px;background:url(/card/ac/css/img/venue_map_5.jpg)}
+.venue_map .venue_card_box{position:absolute;width:192px;height:71px;z-index:3}
+.venue_map .venue_card_box .bg{width:100%;height:71px;border:1px solid #FFB430;background:#fff;opacity:0.8;filter:alpha(opacity=80)}
+.venue_map .venue_card_box ul{position:absolute;top:0;left:0;z-index:2;width:100%;height:71px}
+.venue_map .venue_card_box li{float:left;font-size:0;margin:8px 0 0 10px;_display:inline}
+.venue_map .venue_card_box li a{float:left}
+.venue_map .venue_card_box li img{border:1px solid #ddd}
+body.page_card_welcome{background:#180703;text-align:center;overflow:hidden}
+.page_card_welcome_enter{position:relative;margin:auto;width:720px;height:480px;clear:both;background:#000 url(https://appimg2.qq.com/card/ac/img/page_qzone_enter_v2.jpg);font:14px/1.6 verdana}
+.page_card_welcome_enter .tips{position:absolute;top:385px;left:192px;margin:0;padding:0;width:365px;height:40px;color:#FFB040}
+.page_card_welcome_enter .enter{position:absolute;top:404px;left:288px;overflow:hidden;width:145px;height:43px;color:#FFE240;font-size:0;line-height:600px}
+.page_card_welcome_enter h1,.page_card_welcome_enter .tips,.page_card_welcome_enter .user_info h2{display:none}
+.page_card_welcome_enter .user_info{position:absolute;top:30px;left:20px;width:500px;height:150px;text-align:left}
+.page_card_welcome_enter .user_info img{float:left;border:1px solid #FFF}
+.page_card_welcome_enter .user_info ul{padding-top:10px;list-style:none}
+.page_card_welcome_enter .user_info li{font-size:14px;color:#FFF;text-indent:8px}
+.page_card_welcome .page_qzone_enter{float:left}
+.page_card_welcome #copyright *{color:#666666}
+.page_card_welcome #copyright .qqshowlink,.page_card_welcome #copyright .qqshowlink a {color:#0781C4}
+.page_card_welcome .card_member{background:#000 url(https://appimg2.qq.com/card/ac/img/page_qzone_enter.jpg?v=124)}
+.popup_svd{position:relative;width:523px;height:426px;overflow:hidden;background:url(https://appimg2.qq.com/card/ac/img/popup_warp_christmas.png);color:#84173C}
+.popup_svd h1{position:absolute;top:10px;left:20px;z-index:2;color:#F4B800;font-size:14px;font-weight:bold}
+.popup_svd .bg{position:absolute;top:39px;left:5px;width:514px;height:381px;line-height:2000px;overflow:hidden;background:url(https://appimg2.qq.com/card/ac/img/popup_svd.jpg)}
+.popup_svd button{border:none;background:none;font-size:0;line-height:500px;overflow:hidden}
+.popup_svd .info{position:absolute;top:338px;left:140px;z-index:3;width:290px;text-align:left;line-height:1.6}
+.popup_svd a{color:#1A7EC4;text-decoration:underline;zoom:1}
+.popup_svd .user_tips{position:absolute;top:252px;left:0;z-index:3;width:100%;text-align:center;text-indent:44px;font-weight:bold}
+.popup_svd .user_tips strong{color:#EF3468}
+.popup_svd .close{position:absolute;top:8px;right:11px;z-index:15;height:28px;width:28px;background:url(about:_blank)}
+.popup_svd .circumstance{position:absolute;top:282px;left:223px;width:105px;height:37px;z-index:12;background:url(https://appimg2.qq.com/card/ac/img/popup_svd.jpg) no-repeat 0 -381px}
+.popup_svd .circumstance button{position:absolute;top:2px;left:2px;width:101px;height:29px}
+.popup_svd .link{position:absolute;z-index:13;left:0;top:288px;width:100%;text-align:center;text-indent:44px}
+.popup_svd .link a{text-indent:0}
+.popup_newyear{position:relative;width:523px;height:426px;overflow:hidden;background:url(https://appimg2.qq.com/card/ac/img/popup_warp_christmas.png)}
+.popup_newyear h1{position:absolute;top:10px;left:20px;z-index:2;color:#F4B800;font-size:14px;font-weight:bold}
+.popup_newyear .bg{position:absolute;top:30px;left:5px;width:513px;height:391px;line-height:2000px;overflow:hidden;background:url(https://appimg2.qq.com/card/ac/img/popup_newyear.jpg)}
+.popup_newyear button{border:none;background:none;font-size:0;line-height:500px;overflow:hidden}
+.popup_newyear .info{position:absolute;top:178px;left:99px;z-index:3;width:325px;text-align:left;color:#FFF}
+.popup_newyear a{color:#FDD122;text-decoration:underline;zoom:1}
+.popup_newyear .user_tips{position:absolute;bottom:108px;left:150px;z-index:3;width:270px}
+.popup_newyear .tips{width:195px;height:21px;background:url(https://appimg2.qq.com/card/ac/img/popup_newyear.jpg) no-repeat -165px -391px}
+.popup_newyear .tips strong{position:absolute;top:2px;left:135px;font-weight:bold;font-size:19px;color:#FDD122;line-height:1;font-family:arial;width:44px;text-align:center}
+.popup_newyear .text{width:270px;text-align:left;color:#eee}
+.popup_newyear .close{position:absolute;top:8px;right:11px;z-index:15;height:28px;width:28px;background:url(about:_blank)}
+.popup_newyear .circumstance{position:absolute;top:327px;left:173px;width:145px;height:42px;z-index:12;background:url(https://appimg2.qq.com/card/ac/img/popup_newyear.jpg) no-repeat 0 -403px}
+.popup_newyear .circumstance button{position:absolute;top:2px;left:23px;width:115px;height:32px;*height:34px}
+.popup_newyear .link{position:absolute;z-index:13;left:0;top:363px;width:100%;text-align:center;color:#fff}
+.popup_christmas{position:relative;width:599px;height:448px;overflow:hidden;background:url(https://appimg2.qq.com/card/ac/img/popup_christmas.png)}
+.popup_christmas h1{position:absolute;top:10px;left:20px;z-index:2;color:#F4B800;font-size:14px;font-weight:bold}
+.popup_christmas .bg{position:absolute;top:39px;left:5px;width:589px;height:403px;line-height:2000px;overflow:hidden;background:url(https://appimg2.qq.com/card/ac/img/popup_christmas.jpg?v=3)}
+.popup_christmas button{border:none;background:none;font-size:0;line-hieght:200px}
+.popup_christmas .info{position:absolute;top:320px;left:65px;z-index:3;width:480px;text-align:left;color:#C89B86}
+.popup_christmas .info a{color:#fff;margin-left:30px;text-decoration:none;zoom:1}
+.popup_christmas .tips span{font-size:16px;color:#fff;line-height:30px}
+.popup_christmas .tips{position:absolute;top:200px;left:115px;z-index:3;width:400px;height:70px;text-align:center;font-size:16px;color:#fff;font-weight:normal}
+.popup_christmas .tips strong{font-family:arial;font-size:26px;color:#EBC47D;font-weight:normal;padding-right:5px;display:inline-block;*display:inline;zoom:1;margin-left:-4px;margin-top:-12px;*margin-top:-7px;_margin-top:-4px;height:26px;line-height:36px;vertical-align:middle}
+.popup_christmas .close{position:absolute;top:8px;right:11px;height:28px;width:28px}
+.popup_christmas .circumstance{position:absolute;top:240px;left:233px;width:145px;height:42px;z-index:12;background:url(https://appimg2.qq.com/card/ac/img/popup_christmas.jpg?v=3) no-repeat 0 -403px}
+.page_qzone_enter{position:relatvie;width:100%;height:480px;font:14px/1.6 verdana;background:url(https://appimg2.qq.com/card/ac/img/page_qzone_enter.jpg?v=124) no-repeat}
+.page_qzone_enter .tips{position:absolute;top:385px;left:192px;margin:0;padding:0;width:365px;height:40px;color:#FFB040}
+.page_qzone_enter .links{position:absolute;overflow:hidden;font-size:0;line-height:600px;z-index:4;background:url(about:blank)}
+.page_qzone_enter h1,.page_qzone_enter .tips,.page_qzone_enter .user_info h2{display:none}
+.page_qzone_enter .user_info{position:absolute;top:30px;left:20px;width:500px;height:150px}
+.page_qzone_enter .user_info img{float:left;border:1px solid #FFF}
+.page_qzone_enter .user_info ul{padding-top:10px;list-style:none}
+.page_qzone_enter .user_info li{font-size:14px;color:#333;text-indent:8px;font-family:Microsoft YaHei,arial}
+.bg_page_qzone_enter{background:url(https://appimg2.qq.com/card/ac/img/bg_page_qzone_enter.jpg) no-repeat}
+.bg_page_qzone_enter_v6{background:url(https://appimg2.qq.com/card/ac/img/bg_page_qzone_enter_v6.jpg) no-repeat}
+.intro_banner{text-align:center;background:#20120c;zoom:1}
+.intro_banner li{position:relative;height:170px}
+.intro_banner .count{width:240px;height:26px;font-size:14px;color:#eb760e;position:absolute;top:132px;left:170px;_left:150px;text-align:center}
+.intro_banner .count strong{color:#c60202}
+.module_card_museum{background:url(https://appimg2.qq.com/card/ac/img/museum/bg-y.jpg) repeat-y center 47px #20120c;width:890px}
+.module_card_museum .item {position:relative;display:inline-block;*display:inline;zoom:1;width:118px;height:190px;vertical-align:top;padding:46px 11px 0}
+.module_card_museum .item img{width:120px;height:150px}
+.module_card_museum .card_theme_item{margin-top:13px}
+.module_card_museum .card_shadow{background:url(https://appimg2.qq.com/card/ac/css/img/card_shadow.png) no-repeat -3px 46px;_background:none}
+.module_card_museum .watermark{position:absolute;z-index:8;top:51px;right:-10px;width:104px;height:104px;overflow:hidden;zoom:1}
+.module_card_museum ul{text-align:center}
+.list_publish ul{background:url(https://appimg2.qq.com/card/ac/img/museum/bg-t1.jpg) no-repeat center 0;padding:48px 45px 0 20px}
+.list_outofprint {background-position:center 66px}
+.list_outofprint ul{background:url(https://appimg2.qq.com/card/ac/img/museum/bg-t2.jpg) no-repeat center 0;padding:67px 45px 0 20px}
+.module_card_museum_btm{background:url(https://appimg2.qq.com/card/ac/img/museum/bg-b.jpg) no-repeat center 0 #20120c;height:24px}
+.module_card_museum .collect_sum{position:absolute;top:216px;left:9px;width:120px;height:25px;background:url(https://appimg2.qq.com/card/ac/css/img/museum_sprites.png) no-repeat 0 0;text-align:center}
+.module_card_museum .collect_sum p{color:#fff;padding-top:3px}
+.module_card_museum .collect_sum strong{color:#FFD800}
+.museum_mod{position:relative;margin:20px 0 0 51px;width:890px;zoom:1}
+.museum_mod .museum_mod_tips{position:absolute;z-index:10;width:140px;height:80px;background:url(https://appimg2.qq.com/card/ac/css/img/museum_sprites.png) no-repeat 0 -41px}
+.museum_mod .museum_mod_tips_small{height:61px;background:url(https://appimg2.qq.com/card/ac/css/img/museum_sprites.png) no-repeat 0 -158px}
+.museum_mod .museum_mod_tips_2{height:31px!important;background:url(https://appimg2.qq.com/card/ac/css/img/museum_sprites.png) no-repeat 0 -223px;width:120px;top:22px;left:11px}
+.museum_mod .museum_mod_tips_2 p{padding:2px 0 0!important}
+.museum_mod .museum_mod_tips strong{color:#c00;font-weight:normal}
+.museum_mod .museum_mod_tips p{padding:8px 0 0 8px;line-height:1.6}
+.museum_mod .museum_mod_tips p .grade{height:12px;display:inline-block;*display:inline;zoom:1;vertical-align:top;overflow:hidden;line-height:200px;font-size:0;color:rgba(0,0,0,0);background:url(https://appimg2.qq.com/card/ac/css/img/museum_sprites.png) no-repeat 0 -127px}
+.museum_mod .museum_mod_tips p .grade_1{width:13px}
+.museum_mod .museum_mod_tips p .grade_2{width:26px}
+.museum_mod .museum_mod_tips p .grade_3{width:39px}
+.museum_mod .museum_mod_tips p .grade_4{width:52px}
+.museum_mod .museum_mod_tips p .grade_5{width:66px}
+.museum_mod h2{display:none}
+.museum_mod .cont{background:#20120C;_zoom:1}
+.museum_mod .emission .museum_top{width:867px;height:238px;overflow:hidden;padding:45px 24px 0 0;background:url(https://appimg2.qq.com/card/ac/img/museum/bg-t1.jpg) no-repeat center 0}
+.museum_mod .outofprint .museum_top{width:867px;height:237px;overflow:hidden;background:url(https://appimg2.qq.com/card/ac/img/museum/bg-t2.jpg) no-repeat center 0;padding:65px 24px 0 0}
+.museum_mod .shelves .museum_top{width:867px;height:228px;overflow:hidden;background:url(https://appimg2.qq.com/card/ac/img/museum/bg-t3.jpg?v=3) no-repeat center 0}
+.museum_mod .hotcard .museum_top{background:url(https://appimg2.qq.com/card/ac/img/museum/bg-t4.jpg?v=5) no-repeat center -134px;height:362px;height:228px!important;padding-top:0px!important}
+.museum_mod .undercarriage .museum_top{background:url(https://appimg2.qq.com/card/ac/img/museum/bg-t5.jpg?v=3) no-repeat center 0}
+.museum_mod .museum_middle{width:867px;height:236px;overflow:hidden;background:url(https://appimg2.qq.com/card/ac/img/museum/bg-y.jpg) no-repeat center 0}
+.museum_mod .museum_bottom{width:867px;height:24px;overflow:hidden;background:url(https://appimg2.qq.com/card/ac/img/museum/bg-b.jpg) no-repeat center 0;margin-left:12px}
+.museum_mod .museum_list li{text-align:center;vertical-align:top;padding-right:24px}
+.museum_mod .museum_list li li{position:relative;display:inline-block;*display:inline;zoom:1;width:142px;height:185px;vertical-align:top}
+.museum_mod .museum_list li li .card_theme_item{margin-top:13px}
+.museum_mod .museum_list li.card_shadow{background:url(https://appimg2.qq.com/card/ac/css/img/card_shadow.png) no-repeat -3px 50px;_background:none}
+.museum_mod .emission .museum_top li{padding:50px 0 0}
+.museum_mod .emission .museum_middle li{padding:50px 0 0}
+.museum_mod  .museum_list li img{width:120px;height:150px}
+.museum_mod .outofprint .museum_top li{padding:50px 0 0}
+.museum_mod .outofprint .museum_middle li{padding:50px 0 0}
+.museum_mod .museum_title_wrap{background:url(https://appimg2.qq.com/card/ac/img/museum/bg-t4.jpg?v=5) no-repeat center 0;height:90px}
+.museum_mod .hotcard .museum_top li{margin:35px 0 0}
+.museum_mod .shelves .museum_list li li{padding:50px 0 0;position:relative}
+.museum_mod .shelves .museum_list .museum_top li{top:-45px}
+.museum_mod .shelves .museum_list .museum_list_hot li{padding:0;padding-right:24px;top:0px}
+.museum_mod .shelves .museum_list_hot{margin:0 0 0}
+.museum_mod .shelves .museum_list_hot li{width:auto;text-align:left;zoom:1;margin-left:26px;margin-right:26px;width:274px;height:178px;position:relative;background:url(https://appimg2.qq.com/card/ac/css/img/museum_sprites.png) no-repeat 0 -258px}
+.museum_mod .shelves .museum_list_hot{padding-top:40px;height:196px}
+.museum_mod .shelves .museum_list_hot li .card_theme_item{margin-left:12px;margin-top:9px}
+.museum_mod .shelves .museum_list_hot li .card_hotnum{position:absolute;background:url(https://appimg2.qq.com/card/ac/css/img/museum_sprites.png) no-repeat -160px -175px;width:75px;height:33px;overflow:hidden;left:200px;top:3px}
+.museum_mod .shelves .museum_list_hot li .card_hotnum .card_hotnum_no{display:none}
+.museum_mod .shelves .museum_list_hot li .card_hotnum .card_hotnum_nonum{font-size:20px;font-family:Arial;color:#fff;padding-left:54px;display:inline-block;line-height:40px}
+.museum_mod .shelves .museum_list_hot li:after{display:block;content:"";clear:both;height:0;overflow:hidden}
+.museum_mod .shelves .museum_list_hot .card_amass{left:50%;margin-left:-70px;top:172px}
+.museum_mod .shelves .museum_list_hot .card_theme_item{margin-left:2px;float:left}
+.museum_mod .hotcard .card_info{margin-top:30px}
+.museum_mod .hotcard .card_info span,.museum_mod .hotcard .card_info em,.museum_mod .hotcard .card_info strong{margin-top:12px}
+.museum_mod .watermark{position:absolute;z-index:8;top:51px;right:-10px;width:104px;height:104px;overflow:hidden;zoom:1}
+.mod_pagenav a,.mod_pagenav *{color:#88523D}
+.museum_mod .card_amass{position:absolute;top:214px;left:9px;width:120px;height:33px;background:url(https://appimg2.qq.com/card/ac/css/img/museum_sprites.png) no-repeat 0 0}
+.museum_mod .card_amass p{color:#fff;padding-top:3px;text-align:center}
+.museum_mod .card_amass strong{color:#FFD800}
+.museum_mod .card_info{width:120px;height:150px;float:left;margin-top:15px;margin-left:4px;line-height:12px}
+.museum_mod .card_info span{color:#e9b072;display:block;margin-left:18px;margin-top:15px}
+.museum_mod .card_info em span.grade{display:inline-block;margin:-1px 0 0 0;vertical-align:top;height:13px;background:url(https://appimg2.qq.com/card/ac/css/img/museum_sprites.png) no-repeat -160px -156px;line-height:99px;overflow:hidden}
+.museum_mod .card_info .grade_1{width:13px}
+.museum_mod .card_info .grade_2{width:28px}
+.museum_mod .card_info .grade_3{width:42px}
+.museum_mod .card_info .grade_4{width:56px}
+.museum_mod .card_info .grade_5{width:69px}
+.museum_mod .card_info em{font-style:normal;color:#e9b072;display:block;margin-left:18px;margin-top:15px;vertical-align:middle}
+.museum_mod .card_info strong{color:#fee249;display:block;margin-left:18px;margin-top:12px;font-weight:normal}
+.museum_title_1,.museum_title_2,.museum_title_3,.museum_title_4,.museum_title_5{position:absolute;top:38px;left:378px;line-height:200px;font-size:0;overflow:hidden;rgba(0,120,60,0);margin:auto;width:110px;height:40px;background-image:url(https://appimg2.qq.com/card/ac/img/museum/museum_title.png)}
+.museum_title_1{background-position:0 0}
+.museum_title_2{background-position:0 -40px}
+.museum_title_3{background-position:0 -80px}
+.museum_title_4{background-position:0 -120px}
+.museum_title_5{background-position:0 -160px}
+.museum_start_1,.museum_start_2,.museum_start_3,.museum_start_4,.museum_start_5{margin-left:5px;display:inline-block;zoom:1;height:20px;vertical-align:middle;background:url(https://appimg2.qq.com/card/ac/img/museum/museum_title.png) no-repeat 0 -200px}
+.museum_start_1{width:16px}
+.museum_start_2{width:35px}
+.museum_start_3{width:54px}
+.museum_start_4{width:70px}
+.museum_start_5{width:100px}
+.museum_mod_title{padding-left:30px;height:50px;line-height:50px;color:#E79300;font-size:16px;font-family:微软雅黑,arial;display:block!important;background-image:url(https://appimg2.qq.com/card/ac/img/museum/museum_title.jpg)}
+.museum_title_hard{background:url(https://appimg2.qq.com/card/ac/img/museum/museum_hard_title.jpg) no-repeat 0 0;height:30px;position:absolute;top:35px;left:50%;overflow:hidden;font-size:0;line-height:99}
+.museum_title_hard_1{width:152px;margin-left:-82px;background-position:0 -160px}
+.museum_title_hard_2{width:172px;margin-left:-87px;background-position:0 -120px}
+.museum_title_hard_3{width:195px;margin-left:-99px;background-position:0 -80px}
+.museum_title_hard_4{width:211px;margin-left:-100px;background-position:0 -40px}
+.museum_title_hard_5{width:235px;margin-left:-117px;background-position:0 0}
+.museum_mod .hotcard,.museum_mod .emission,.museum_mod .shelves{position:relative;zoom:1}
+.museum_mod .hotcard .museum_mod_title{height:44px;background:url(https://appimg2.qq.com/card/ac/img/museum/bg-t4.jpg?v=5) no-repeat center -90px}
+.wrapper_secondaryContent .container_honor{background-image:url(https://appimg2.qq.com/card/ac/img/footer_honor.jpg)}
+.wrapper_secondaryContent .honor_mod{width:898px;background:url(https://appimg2.qq.com/card/ac/img/bg_honor_rep.jpg) repeat-y;margin:0 0 0 45px;position:relative;zoom:1;padding-bottom:45px}
+.honor_mod:after{display:block;content:"";clear:both;height:0;overflow:hidden}
+.honor_sub{float:left;width:175px;position:relative;padding:25px 0;border:1px solid #cec0be;overflow:visible;background-color:#fffefb;margin-left:41px;display:inline}
+.honor_show{margin:0 auto;border:1px solid #d8d8d8;padding:1px;width:140px}
+.honor_subinf{width:140px;margin:6px auto 0;text-align:center}
+.honor_subinf p{line-height:20px;text-align:left}
+.honor_subinf strong{color:#850f0f;font-size:14px;font-weight:normal;text-align:left}
+.honor_subinf img{display:block;width:100px;margin:10px auto}
+.honor_sub .sub_l,.honor_sub .sub_r,.honor_sub .sub_b,.honor_sub .sub_t{position:absolute;width:13px;height:12px;display:block;background:url(https://appimg2.qq.com/card/ac/img/icon.png?v=81) no-repeat}
+.honor_sub .sub_l{background-position:-151px -447px;bottom:-2px;right:-2px}
+.honor_sub .sub_r{background-position:-163px -447px;bottom:-2px;left:-2px}
+.honor_sub .sub_b{background-position:-151px -460px;top:-2px;right:-2px}
+.honor_sub .sub_t{background-position:-163px -460px;top:-2px;left:-2px}
+.honor_reward{float:left;width:605px;position:relative}
+.honor_r_cont{width:600px;margin-bottom:10px;margin-left:40px;position:relative;border:1px solid #000;-moz-border-radius:5px;border-radius:5px;z-index:2;overflow:hidden;zoom:1}
+.honor_r_cont_wrap{min-height:350px;_height:350px;position:relative}
+.honor_r_cont_wrap .honor_tipinfo{position:absolute;top:5px;right:5px;color:#fff;font-family:'Microsoft Yahei';font-size:14px}
+.honor_r_cont_bac{top:0px;left:0px;background-color:rgba(0,0,0,0.2);filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#33000000',endColorstr='#33000000');background-color:transparent\9;display:block;width:100%;height:99999px;position:absolute;z-index:-1}
+.honor_r_cont h3{margin:20px 0 0 35px;font-size:21px;color:#ffc500;font-family:"Microsoft Yahei";font-weight:bold}
+.honor_r_cont ul{zoom:1;margin-left:20px;padding-bottom:1px;display:flex;flex-wrap:wrap;}
+.honor_r_cont ul:after{display:block;content:"";clear:both;height:0;overflow:hidden}
+.honor_r_cont ul li{text-align:center;color:#fff;float:left;display:inline;margin:24px 6px;width:100px;position:relative}
+.honor_r_cont ul li .alpha{background-color:#000;top:0px;left:0px;filter:alpha(opacity=50);opacity:0.5;display:block;width:100px;height:100px;position:absolute}
+.honor_r_cont ul img{display:block;margin:0 auto 5px;width:100px;cursor:pointer}
+.honor_t,.honor_b{margin:13px 0 0 45px;display:block;background:url(https://appimg2.qq.com/card/ac/img/bg_honor_tb.jpg) no-repeat;width:898px;height:60px;overflow:hidden;position:relative}
+.honor_b{position:absolute;bottom:-1px;left:0px;margin:0;background-position:0 -72px;height:60px;top:auto}
+.honor_t .link_faq{position:absolute;right:20px;top:35px}
+.honor_tips{position:absolute;width:141px;z-index:1000}
+.honor_tips_tt,.honor_tips_tb{display:block;height:5px;width:141px;background:url(https://appimg2.qq.com/card/ac/img/icon_v2.png?v=7) 0 -108px no-repeat;overflow:hidden}
+.honor_tips_tb{background-position:0 -115px;_margin-left:2px}
+.honor_tips_cont{background-color:#fff2c3;border-left:1px solid #cab66f;border-right:1px solid #cab66f;padding:6px}
+.honor_tips h3 {font-weight:normal;color:#c0000c;border-bottom:1px dashed #cab66f;margin-bottom:5px}
+.honor_tips strong,.honor_tips p{color:#4b4b4b;line-height:20px}
+.honor_tips_sj{display:block;width:9px;height:10px;position:absolute;top:14px;left:-7px;background:url(https://appimg2.qq.com/card/ac/img/icon_v2.png?v=7) -10px -89px  no-repeat}
+.tips_right .honor_tips_sj{right:-5px;left:auto;background-position:-17px -89px}
+.vip_wrap{position:relative;width:835px;height:1170px;margin:0 auto}
+.vip_wrap .bg{position:absolute;z-index:0;width:100%}
+.vip_wrap .bg .bg1{height:390px;background:url(https://appimg2.qq.com/card/ac/img/vip/vip_bg1.jpg) no-repeat center 0}
+.vip_wrap .bg .bg2{height:390px;background:url(https://appimg2.qq.com/card/ac/img/vip/vip_bg2.jpg) no-repeat center 0}
+.vip_wrap .bg .bg3{height:390px;background:url(https://appimg2.qq.com/card/ac/img/vip/vip_bg3.jpg) no-repeat center 0}
+.vip_mod{position:relative;z-index:2}
+.vip_mod .franchise{position:absolute;top:0;left:0;z-index:2;width:835px;height:721px;margin:0 auto}
+.vip_mod h2,.vip_mod ul h3,.vip_mod .franchise_01 p,.vip_mod .franchise_02 p,.vip_mod .franchise_06 p{text-indent:-9999em;display:block;height:0}
+.vip_mod .franchise_enter{_height:30px}
+.vip_mod .franchise_enter a{display:block;position:absolute;left:230px;top:5px;text-decoration:underline;width:80px;height:30px}
+.vip_mod .franchise_enter span,.vip_mod .enter span{display:block;width:100%;height:100%;text-indent:-9999em}
+.vip_mod .enter a{display:block;width:161px;height:42px;position:absolute;left:335px;bottom:30px}
+.vip_mod ul{margin:0;padding:0;float:left;width:835px}
+.vip_mod .franchise_01,.vip_mod .franchise_02{width:390px;height:240px;position:relative;float:left}
+.vip_mod .franchise_01{margin:75px 0 0 24px;_margin:23px 0 0 12px}
+.vip_mod .franchise_02{margin:75px 0 0 10px;_margin:23px 0 0 12px}
+.vip_mod .franchise_03,.vip_mod .franchise_04,.vip_mod .franchise_05,.vip_mod .franchise_06{width:190px;height:270px;float:left;position:relative}
+.vip_mod .franchise_03{margin:38px 0 0 24px;_margin:38px 0 0 12px}
+.vip_mod .franchise_04{margin:38px 0 0 10px;_margin:38px 0 0 5px}
+.vip_mod .franchise_05{margin:38px 0 0 10px;_margin:38px 0 0 5px}
+.vip_mod .franchise_06{margin:38px 0 0 10px;_margin:38px 0 0 5px}
+.vip_mod .franchise_03 p{margin:45px 20px 0 30px;_margin:20px 20px 0 30px;color:#6c410c}
+.vip_mod .franchise_04 p{margin:45px 10px 0 14px;_margin:24px 10px 0 14px;color:#6c410c}
+.vip_mod .franchise_05 p{margin:55px 20px 0 14px;_margin:32px 20px 0 14px;color:#6c410c}
+.vip_mod .franchise_04 p{}
+.vip_mod .franchise_05 p{}
+.vip_mod .franchise_01 .more {bottom:24px;left:196px;position:absolute;color:#AA0300;text-decoration:underline}
+.vip_mod .franchise_02 .more {bottom:24px;left:192px;position:absolute;color:#AA0300;text-decoration:underline}
+.vip_mod .franchise_03 .more {bottom:10px;left:105px;position:absolute;color:#AA0300;text-decoration:underline}
+.vip_mod .franchise_04 .more {bottom:10px;left:105px;position:absolute;color:#AA0300;text-decoration:underline}
+.vip_mod .franchise_05 .more {bottom:10px;left:105px;position:absolute;color:#AA0300;text-decoration:underline}
+.vip_mod .other_franchise {color:#CFA66E;position:absolute;top:765px;height:200px}
+.vip_mod .other_franchise .more{top:5px;right:20px;position:absolute;color:#CFA66E;text-decoration:underline}
+.vip_mod .other_franchise .other_franchise_01{position:absolute;bottom:10px;left:40px}
+.vip_mod .other_franchise .other_franchise_02{position:absolute;bottom:10px;left:230px}
+.vip_mod .other_franchise .other_franchise_03{position:absolute;bottom:10px;left:418px}
+.vip_mod .other_franchise .other_franchise_04{position:absolute;bottom:10px;left:606px}
+.vip_mod .mall_franchise {color:#CFA66E;position:absolute;top:1000px;height:160px}
+.vip_mod .mall_franchise .more{top:-2px;right:20px;position:absolute;color:#CFA66E;text-decoration:underline}
+.vip_mod .mall_franchise p{width:98px}
+.vip_mod .mall_franchise .mall_franchise_01{position:absolute;top:50px;left:122px}
+.vip_mod .mall_franchise .mall_franchise_02{position:absolute;top:50px;left:312px}
+.vip_mod .mall_franchise .mall_franchise_03{position:absolute;top:50px;left:500px}
+.vip_mod .mall_franchise .mall_franchise_04{position:absolute;top:50px;left:688px}
+.body_qzone .wrapper_primaryContent{margin-left:-15px;border-top:0 none}
+.body_qzone .wrapper_secondaryContent{margin-left:-15px;border-top:0 none}
+.body_qzone .live_header_v3{display:none}
+.body_qzone .museum_mod .cont{margin-bottom:100px}
+.body_v4 .wrapper_primaryContent{background-position:0 213px}
+.body_v4 #map div{height:95px}
+.body_v4 .flash_model{margin-left:15px;margin-bottom:2px;width:950px;height:600px}
+.style_v3_cssEnd{display:none}
+.header_v2{position:relative;margin-top:87px;padding-left:15px}
+.header_v2 .map{height:40px;overflow:hidden;zoom:1;background:url(https://appimg2.qq.com/card/ac/img/header_v2.png) no-repeat;width:100%;position:relative}
+.header_v2 .map h1{width:84px;height:40px}
+.header_v2 .map h1 a{display:block;height:40px;text-indent:-9999px;zoom:1}
+.header_v2 .map ul{position:absolute;left:97px;bottom:0px;height:31px}
+.header_v2 .map ul li{height:100%;float:left;display:inline;margin-right:1px;width:73px;background:url(https://appimg2.qq.com/card/ac/img/icon.png?v=81) no-repeat}
+.header_v2 .map ul .map_museum,.header_v2 .map ul .map_museum_active{width:103px}
+.header_v2 .map ul .map_vip,.header_v2 .map ul .map_vip_active{width:76px}
+.header_v2 .map ul li a{height:100%;display:block;zoom:1;text-indent:-9999px}
+.header_v2 .map ul .map_home{background-position:0 -480px}
+.header_v2 .map ul .map_museum{background-position:-75px -480px}
+.header_v2 .map ul .map_honor{background-position:-180px -480px}
+.header_v2 .map ul .map_ranking{background-position:-255px -480px}
+.header_v2 .map ul .map_vip{background-position:-330px -480px}
+.header_v2 .map ul .map_home_active{background-position:0 -515px}
+.header_v2 .map ul .map_museum_active{background-position:-75px -515px}
+.header_v2 .map ul .map_honor_active{background-position:-180px -515px}
+.header_v2 .map ul .map_ranking_active{background-position:-255px -515px}
+.header_v2 .map ul .map_vip_active{background-position:-330px -515px}
+.header_v2 .map .important_tips{height:31px;position:absolute;left:512px;color:#d3c192;bottom:0px;overflow:hidden;width:420px}
+.header_v2 .map .important_tips .ico_horn{position:absolute;left:0px;top:8px}
+.header_v2 .map .important_tips .important_tips_txt{width:144px;overflow:hidden;zoom:1;display:block;position:absolute;left:25px;height:21px}
+.header_v2 .map .important_tips .important_tips_txt a{color:#d3c192;text-decoration:none;zoom:1}
+.header_v2 .important_tips_page{position:absolute;left:173px;top:5px}
+.header_v2 .important_tips_page em{font-style:normal;color:#ba843e;position:relative;margin-right:3px}
+.header_v2 .important_tips_page .next,.header_v2 .important_tips_page .prev{display:inline-block;zoom:1;overflow:hidden;margin:0 2px;font-size:0;width:7px;height:15px;background:url(/card/ac/img/icon.png?v=81) no-repeat -337px -390px;vertical-align:middle;position:relative;top:-1px}
+.header_v2 .important_tips_page .prev{background-position:-330px -390px;position:relative}
+.header_v2 .map .important_tips .links{color:#ba843e;position:absolute;left:230px}
+.header_v2 .map .important_tips .links a{color:#ba843e;text-decoration:none;margin:0 2px;display:inline-block}
+.header_v2 .map .important_tips .links a:hover{color:#D39A00}
+.header_v2 .map .important_tips .links .ico_clinic{position:relative;top:-2px}
+.header_v2 .map .important_tips .important_tips_txt,.header_v2 .important_tips_page,.header_v2 .map .important_tips .links{top:5px;z-index:1}
+.header_v2 .important_tips_page{_top:6px}
+.footbar_model{height:35px;width:930px;background:url(https://appimg2.qq.com/card/ac/img/card_ft_bar.png) repeat-x;margin:0 0 20px 15px;padding:13px 0 0 20px}
+.footbar_model li{float:left;display:inline;margin-right:8px}
+.footbar_model li a{background:url(https://appimg2.qq.com/card/ac/img/card_ft_bar_butt.png?v=3) repeat-x;height:28px;width:95px;display:block;overflow:hidden;zoom:1;line-height:999px}
+.footbar_model li .ftbar_vip_kaitong{width:118px}
+.footbar_model li .ftbar_vip_kaitong{background-position:-120px 0}
+.footbar_model li .ftbar_exchange_cdkey{background-position:-120px -40px}
+.footbar_model li .ftbar_feedback{background-position:-120px -80px}
+.footbar_model li .ftbar_weibo{background-position:-120px -120px}
+.footbar_model li .ftbar_survey{background-position:-120px -160px}
+.footbar_model li .ftbar_help_center{background-position:-120px -200px}
+.footbar_model li .ftbar_forum{background-position:-120px -240px}
+.footbar_model li .ftbar_vip_kaitong:hover{background-position:0 0}
+.footbar_model li .ftbar_exchange_cdkey:hover{background-position:0 -40px}
+.footbar_model li .ftbar_feedback:hover{background-position:0 -80px}
+.footbar_model li .ftbar_weibo:hover{background-position:0 -120px}
+.footbar_model li .ftbar_survey:hover{background-position:0 -160px}
+.footbar_model li .ftbar_help_center:hover{background-position:0 -200px}
+.footbar_model li .ftbar_forum:hover{background-position:0 -240px}/*  |xGv00|e2bc0732fa50311748d6d336364ba303 */

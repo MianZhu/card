@@ -1,0 +1,567 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0041)https://appimg2.qq.com/card/index_v3.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="Keywords" content="魔法卡片,免费QQ秀,QQ秀,QQ空间,App,QQ游戏,Qzone,游戏,卡片,魔法,card,magic,腾讯,QQ,Tencent">
+  <meta name="Description" content="魔法卡片是一个集卡游戏。在游戏里面，您是一位万能的魔法师，和您的好友一起交换、炼制卡片，最后集成套卡，留作永久纪念！游戏中，魔法学院还会给您免费发放精美QQ秀，作为集卡的奖励~">
+  
+  <meta http-equiv="Content-Language" content="utf-8">
+  <meta name="robots" content="all">
+  <meta name="author" content="Tencent-ISRD">
+  <meta name="Copyright" content="Tencent">
+  <title>魔法卡片-QQ秀</title>
+  <link rel="stylesheet" rev="stylesheet" href="./魔法卡片-QQ秀_files/style_v3.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="./魔法卡片-QQ秀_files/dialog.css" type="text/css" media="screen">
+  <link rel="Shortcut Icon" href="http://show.qq.com/favicon.ico" type="image/x-icon">
+  <script type="text/javascript">document.domain = "qq.com";var top=window;</script>
+  <script type="text/javascript" src="./魔法卡片-QQ秀_files/core.js.下载" charset="gb2312"></script>
+  <script type="text/javascript" src="./魔法卡片-QQ秀_files/app_sns.js.下载" charset="gb2312"></script>
+  <script type="text/javascript" src="./魔法卡片-QQ秀_files/fusion_loader"></script><script type="text/javascript" src="./魔法卡片-QQ秀_files/frameCheck.js.下载"></script>
+  <script type="text/javascript" src="./魔法卡片-QQ秀_files/api.js.下载"></script>
+  <script type="text/javascript" charset="utf-8" src="./魔法卡片-QQ秀_files/cashier.js.下载"></script>
+
+  <script type="text/javascript">
+    function getCookie(sName){
+        var aCookie = document.cookie.split("; ");
+        for (var i=0; i < aCookie.length; i++)
+        {
+        var aCrumb = aCookie[i].split("=");
+        if (sName == aCrumb[0])
+        return unescape(aCrumb[1]);
+        }
+        return null;
+    }
+
+    function errPay1(data){
+        var fobj = document.getElementById('swf1')||window['swf1'];
+        fobj.errPay(data);
+    }
+    function finishPay1(data){
+        var fobj = document.getElementById('swf1')||window['swf1'];
+        fobj.finishPay(data);
+    }
+    function closePay1(){
+        var fobj = document.getElementById('swf1')||window['swf1'];
+        fobj.closePay();
+    }
+    function midaPay(url,uin,pf,token,data,sandbox){
+        var goodUrl = decodeURI(url);
+        var myUin = uin;
+        var paypf = pf;
+        var skey = getCookie("skey");
+        var accessToken = token;
+        var sand = sandbox;
+       
+        try{
+            window.midas.minipay.buyGoods({
+                methods:{
+                    onSuccess:function(){
+                        //支付成功回调，业务控制后续逻辑
+                        finishPay1(data);
+                    },
+                    onError:function(code){
+                        errPay1(data);
+                    },
+                    onNoResult:function(){
+                      closePay1();
+                    },
+                    onClose:function(){
+                      closePay1();
+                    },
+                }
+            },{
+                appid:'1450019115',     //填写业务申请的appid
+                pf:paypf,       
+                openid:myUin,       //uin       
+                openkey:skey,        //skey
+                session_id:"uin",              
+                session_type:"skey",      
+                sandbox:sand,    //沙箱环境必须传1
+                goodstokenurl:goodUrl,   //后台在米大师后台下单之后返回的url
+                native_wxpay:1
+            });
+        }catch(e){
+            console.log(e);
+        }
+    }
+    function browserAndFlashLogUp()
+	{//上报反馈玩家阅览器情况与falsh版本,作者kubi
+		var browserInfo = getBrowser();
+		var browserType = getBrowserType(browserInfo.type);
+		var flashVer = getFlashVersion();
+		var flashVersion = "";
+		if(flashVer != null)
+		{
+			flashVersion = "" + flashVer;
+		}
+		else
+		{
+			flashVersion = "0";
+		}
+		var uin = getCookie("uin")
+		if(uin.indexOf("o") != -1)
+		{
+			uin = uin.substr(1);
+		}
+		var bodyData = "";
+		bodyData += "attaid=0dc00067281&";
+		bodyData += "token=7862796798&";
+		bodyData += ("BrowserType=" + browserType + "&");
+		bodyData += ("BrowserVersion=" + browserInfo.versions + "&");
+		bodyData += ("FlashVersion=" + flashVersion + "&");
+		bodyData += ("skey=" + getCookie("skey") + "&");
+		bodyData += ("uin=" + uin);
+		console.log("kubi browserAndFlashLogUp : " + bodyData);
+		attaLogUp(bodyData);
+	}
+	function getBrowser()
+	{
+		var UserAgent = navigator.userAgent.toLowerCase();
+		var browserInfo = {};
+		var browserArray = {
+			IE: window.ActiveXObject || "ActiveXObject" in window, // IE
+			Chrome: UserAgent.indexOf('chrome') > -1 && UserAgent.indexOf('safari') > -1, // Chrome浏览器
+			Firefox: UserAgent.indexOf('firefox') > -1, // 火狐浏览器
+			Opera: UserAgent.indexOf('opera') > -1, // Opera浏览器
+			Safari: UserAgent.indexOf('safari') > -1 && UserAgent.indexOf('chrome') == -1, // safari浏览器
+			Edge: UserAgent.indexOf('edge') > -1, // Edge浏览器
+			QQBrowser: /qqbrowser/.test(UserAgent), // qq浏览器
+			WeixinBrowser: /MicroMessenger/i.test(UserAgent) // 微信浏览器
+		};
+		// console.log(browserArray)
+		for (var i in browserArray)
+		{
+			if (browserArray[i])
+			{
+				var versions = '';
+				if (i == 'IE')
+				{
+					versions = UserAgent.match(/(msie\s|trident.*rv:)([\w.]+)/)[2];
+				}
+				else if (i == 'Chrome')
+				{
+					for (var mt in navigator.mimeTypes)
+					{
+						//检测是否是360浏览器(测试只有pc端的360才起作用)
+						if (navigator.mimeTypes[mt]['type'] == 'application/360softmgrplugin')
+						{
+							i = '360';
+						}
+					}
+					versions = UserAgent.match(/chrome\/([\d.]+)/)[1];
+				}
+				else if (i == 'Firefox')
+				{
+					versions = UserAgent.match(/firefox\/([\d.]+)/)[1];
+				}
+				else if (i == 'Opera')
+				{
+					versions = UserAgent.match(/opera\/([\d.]+)/)[1];
+				}
+				else if (i == 'Safari')
+				{
+					versions = UserAgent.match(/version\/([\d.]+)/)[1];
+				}
+				else if (i == 'Edge')
+				{
+					versions = UserAgent.match(/edge\/([\d.]+)/)[1];
+				}
+				else if (i == 'QQBrowser')
+				{
+					versions = UserAgent.match(/qqbrowser\/([\d.]+)/)[1];
+				}
+				browserInfo.type = i;
+				browserInfo.versions = versions;
+			}
+		}
+		return browserInfo;
+	}
+	function getBrowserType(browserName)
+	{
+		if(browserName == "IE")
+		{
+			return 1;
+		}
+		else if(browserName == "Chrome")
+		{
+			return 2;
+		}
+		else if(browserName == "Firefox")
+		{
+			return 3;
+		}
+		else if(browserName == "Opera")
+		{
+			return 4;
+		}
+		else if(browserName == "Safari")
+		{
+			return 5;
+		}
+		else if(browserName == "Edge")
+		{
+			return 6;
+		}
+		else if(browserName == "QQBrowser")
+		{
+			return 7;
+		}
+		else if(browserName == "WeixinBrowser")
+		{
+			return 8;
+		}
+		else if(browserName == "360")
+		{
+			return 9;
+		}
+		return 0;
+	}
+	function getFlashVersion()
+	{
+     var flashVer = null;
+     var ua = navigator.userAgent;
+ 
+     if (window.ActiveXObject)
+	 {
+         var swf = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+ 
+         if(swf)
+		 {
+			console.log("kubi getFlashVersion1 : " + swf.GetVariable('$version'));
+             flashVer = parseFloat(swf.GetVariable('$version').split(' ')[1].replace(/,/g, '.').replace(/^(d+.d+).*$/, "$1"));
+         }
+     }
+	 else
+	 {
+         if (navigator.plugins && navigator.plugins.length > 0)
+		 {
+             var swf = navigator.plugins['Shockwave Flash'];
+ 
+             if (swf)
+			 {
+//				for (const o in swf)
+//				{
+//					console.warn("kubi key: " + o);
+//					console.warn("kubi value: " + swf[o]);
+//				}
+				console.log("kubi getFlashVersion2 : " + swf.description);
+                 var arr = swf.description.split(' ');
+                 for (var i = 0, len = arr.length; i < len; i++)
+				 {
+					if(arr[i].indexOf(".") != -1)
+					{
+						flashVer = parseFloat(arr[i]);
+						break;
+					}
+                 }
+				 
+				 //flashVer = swf.version;
+             }
+         }
+     }
+     return flashVer;
+	}
+	function attaLogUp(bodyData)
+	{
+		//阿塔平台日志上报
+		var url = "https://h.trace.qq.com/kv";
+		
+		var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+		httpRequest.open('POST', url, true); //第二步：打开连接
+		httpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+		httpRequest.send(bodyData);//发送请求 将情头体写在send中
+		/**
+		 * 获取数据后的处理程序
+		 */
+		httpRequest.onreadystatechange = function () {//请求后的回调接口，可将请求成功后要执行的程序写在其中
+			if (httpRequest.readyState == 4 && httpRequest.status == 200)
+			{//验证请求是否发送成功
+				var json = httpRequest.responseText;//获取到服务端返回的数据
+				console.log(json);
+			}
+		};
+	}
+	browserAndFlashLogUp();//上报反馈玩家阅览器情况与falsh版本
+  </script>
+  
+  <script type="text/javascript">
+  //测速系统所用的时间
+  var vTimePoints_2 = [];
+  var iTimePoint_0 = new Date();
+  </script>
+<script type="text/javascript" charset="gb2312" src="./魔法卡片-QQ秀_files/tcss.ping.js.下载"></script></head>
+<body class="body_v4"><div id="blackworks-tooltip"></div><iframe src="./魔法卡片-QQ秀_files/api_v120.html" style="width: 1px; height: 1px; position: absolute; top: -1000px; left: -1000px;"></iframe>
+<script language="javascript">
+var _bQzone = location.hash.indexOf("qz_ver")>-1  ? 1 : 0;
+var _bQplus = false;
+var reg    = /qplus/i;
+_bQplus = reg.test(navigator.userAgent.toLowerCase());
+if( 1 == _bQzone || _bQplus)
+{
+  window.document.body.className = "body_qzone";
+}
+//回流相关的内容》》获取URL里的邀请码
+  var urlstr = window.location.search;
+  console.log("urlstr"+urlstr);
+  var rulArr = urlstr.split("?")
+  var cookiestr = ""
+  QSFL.cookie.set("zhhd_Invitation_code", 0, 0, "appimg2.qq.com");
+  for (var i = 0;i<rulArr.length;i++){
+   if(rulArr[i].split("=")[0]=="Inv_code") cookiestr = rulArr[i].split("=")[1];
+  }
+   console.log(cookiestr);
+  //往cookie里写入邀请码
+  if(cookiestr!='')QSFL.cookie.set("zhhd_Invitation_code", parseInt(cookiestr,32), 0, "appimg2.qq.com");
+var _onFlashMousewheel = function(e)
+  {
+      e = e || event;
+      var fobj = document.getElementById('swf1')||window['swf1'];
+      var dla = (e.wheelDelta == 0)?e.detail:e.wheelDelta;
+      var obj={delta:-(dla/10)};
+      fobj.onMouseWheel(obj);
+      e.preventDefault && e.preventDefault();
+      e.stopPropagation && e.stopPropagation(); 
+      e.cancelBubble = true;
+      return e.returnValue = false;
+  };
+function handleScroll()
+{
+    if(window.addEventListener)
+    {
+        var type = (document.getBoxObjectFor)?'DOMMouseScroll':'mousewheel';
+        window.addEventListener(type, _onFlashMousewheel, false);
+    }
+    else
+    {
+        document.onmousewheel = _onFlashMousewheel;
+    }
+}
+function cancelHandleScroll()
+{
+  if(window.removeEventListener)
+    {
+        var type = (document.getBoxObjectFor)?'DOMMouseScroll':'mousewheel';
+        window.removeEventListener(type, _onFlashMousewheel, false);
+    }
+    else
+    {
+        document.onmousewheel = null;
+    }
+}
+function goV3()
+{
+   iTimePoint_0 = new Date();
+   CARD.flashCalls.goToV3();
+}
+</script>
+<!--登陆条 开始-->
+<div class="live_header_v3">
+  <div class="live_header_main_v3">
+    <ul class="path_link">
+      <li class="qqshow"><a target="_blank" href="http://show.qq.com/">QQ秀首页</a></li>
+      <li>魔法卡片</li>
+    </ul>
+    <!--未登录状态 开始-->
+    <p id="P_LOGIN" class="loginStr" style="">
+      欢迎光临，请先
+      <strong style="" id="STR_NOLOGIN">[<a href="javascript:CARD.showLogin();">登录</a>]</strong>
+      <!--<a style="display: none;" href="#" class="application">开通红钻</a>-->
+    </p>
+
+    <!--未登录状态 结束-->
+    
+    <!--普通用户已登录状态 开始-->
+    <p id="P_UNLOGIN" class="loginStr" style="display: none;">
+      欢迎光临 <span id="SPAN_NICK"></span>
+      <strong style="display: none;" id="STR_LOGIN">[<a href="javascript:CARD.myLogout();" class="exit">退出</a>]</strong>
+      <!--<a style="display: none;" href="#" class="application">开通红钻</a>-->
+    </p>
+
+    <!--普通用户已登录状态 结束-->   
+  </div>
+</div>
+<!--登陆条 结束-->
+
+<div class="wrapper_primaryContent" id="DIV_WRAPPER">
+<div class="wrapper">
+<!--<div class="wrapper"  style="background:url(https://appimg2.qq.com/card/ac/img/header_spring.jpg) no-repeat;">-->
+<div class="container">
+  <div class="header_v2">
+    <div id="sns_toolbar" style="padding-left:15px;background-color:#462a15;"></div>
+    <div class="map">
+      <h1><a href="https://appimg2.qq.com/card/index_v3.html#" title="">魔法卡片</a></h1>
+      <ul>
+        <li class="map_home_active"><a href="https://appimg2.qq.com/card/index_v3.html?t=20120315">魔法屋</a></li>
+        <li class="map_museum"><a href="https://appimg2.qq.com/card/museum_v4.html?t=20120315">卡片博物馆</a></li>
+        <li class="map_honor"><a href="https://appimg2.qq.com/card/honor.html?t=20120315">荣誉薄</a></li>
+        <li class="map_ranking"><a href="https://appimg2.qq.com/card/rank_v3.html?t=20120315">排行榜</a></li>
+        <!--<li class="map_vip"><a href="/card/redvip.html">红钻特权</a></li>-->
+      </ul>
+      <p class="important_tips">
+        <span id="SPAN_NOTE"></span>
+        <span id="SPAN_TIPS" class="important_tips_txt"></span>
+        <span class="important_tips_page" id="SPAN_PAGE" style="display:none">
+        <span id="SPAN_TIPS_NUM"></span>
+        <a href="https://appimg2.qq.com/card/index_v3.html#" class="prev" onclick="CARD.showTips(1);">上一个消息</a><a href="https://appimg2.qq.com/card/index_v3.html#" class="next" onclick="CARD.showTips(2);">下一个消息</a></span>
+        
+        <span class="links"><span id="A_FLASH_V3" style=""><a href="javascript:goV3()"></a></span><span id="A_FLASH_V4" style="display:none;"><a href="javascript:CARD.flashCalls.goToV4();"></a></span><a href="https://nc.gamebbs.qq.com/forum.php" target="_blank">论坛</a>|
+		<a target="_blank" href="https://kf.qq.com/">帮助</a>
+		|<a href="https://appimg2.qq.com/card/clinic.html"><span class="ico_clinic"></span>小诊所</a></span>
+        
+      </p>
+    </div>
+  </div>
+<div class="menu"></div>
+<div class="main">
+<!-- flash模块 开始 -->
+<div class="flash_model" id="ID_CARD_FLASH"><div class="none_flash"><p class="flash_info">flash 版本过低，正在为您升级</p>     <p class="load_gif" style="margin:8px;"><img src="./魔法卡片-QQ秀_files/loading_icon.gif" title="加载中">请稍候</p><p>您也可以选择<a class="em" target="_blank" href="http://get.adobe.com/flashplayer">手动下载更新</a></p><p>安装成功后,请刷新页面</p></div></div>
+<!-- flash模块 结束 -->
+<div class="footbar_model">
+    <ul>
+      <!--<li><a class="ftbar_vip_kaitong" href="https://pay.qq.com/qqshow/index.shtml?aid=show.card.top.link1.0" target="_blank">开通红钻</a></li>-->
+      <li><a class="ftbar_help_center" href="https://appimg.qq.com/MoKaClient/QQMoKaPlus_setup_0.0.1.exe" target="_blank">下载微端</a></li>
+      <li><a class="ftbar_forum" href="https://nc.gamebbs.qq.com/forum.php" target="_blank">玩家论坛</a></li>
+    </ul>
+</div>
+<div class="daily_model">
+   <!-- // <h3>每日必做五件事</h3>
+    // <ul>
+    //     <li class="daily_model_li1">抽：每个魔法师，都可以抽取魔法世界的神秘卡片</li>
+    //     <li class="daily_model_li2">换：魔法需要交流，相互<br>交流，就能换到心仪的卡片</li>
+    //     <li class="daily_model_li3">炼：炼制卡片，可以帮助<br>每个魔法师使用魔法的力量</li>
+    //     <li class="daily_model_li4">偷：偷天换日，魔法师也会恶作剧，悄悄占用好友的炉子</li>
+    //     <li class="daily_model_li5">取：开启魔炉，快去获取亲自淬炼的卡片吧</li>
+    // </ul>-->
+</div>
+<!-- 记录模块 开始 -->
+<div class="record_model">
+  <ul class="record_model_tab" id="ul_feed_id">
+    <li class="active"><a href="javascript:void(0);" id="box_record">卡箱记录</a></li>
+    <li><a href="javascript:void(0);" id="stove_record">卡炉记录</a></li>
+    <li><a href="javascript:void(0);" id="mana_record">魔力记录</a></li>
+  </ul>
+  <ol id="ul_feeds_list">
+  </ol>
+  <ol id="ul_stovefeeds_list" style="display:none">
+  </ol>
+  <ol id="ul_manafeeds_list" style="display:none">
+  </ol>
+</div>
+<!-- 记录模块 结束 -->
+</div>
+
+<script type="text/javascript">
+var _bQzone = location.hash.indexOf("qz_ver")>-1  ? 1 : 0; 
+if( _bQzone == 0)
+{
+  document.write('\<script type="text/javascript" src="https://appimg.qq.com/card/copyright.js" charset="gb2312"\>\</script\>');
+}
+
+</script><script type="text/javascript" src="./魔法卡片-QQ秀_files/copyright.js.下载" charset="gb2312"></script><div class="footer" id="copyright"><p class="qqshowlink">欢迎来到QQ魔法卡片<a target="_blank"> </a></p></div>
+<!-- 页脚 结束 -->
+</div>
+</div>
+</div>
+
+
+<script type="text/javascript" src="./魔法卡片-QQ秀_files/card_comm_v3.js.下载" charset="UTF-8"></script>
+<script type="text/javascript" src="./魔法卡片-QQ秀_files/card_info_v3.js.下载" charset="utf-8"></script>
+<script type="text/javascript" src="./魔法卡片-QQ秀_files/badge_info_v3.js.下载" charset="utf-8"></script>
+<script type="text/javascript">
+vTimePoints_2[1] = new Date();  //index.html加载完
+
+//CARD.flashCalls.statSpeed 调用该函数
+function cardTimeReport(vTimePoints_1){
+  if (!cardTimeReport.__flag){
+      vTimePoints_1[0] = vTimePoints_2[0];
+      vTimePoints_1[1] = vTimePoints_2[1];
+    cardTimeReport.__flag = true;
+    var s = [];
+    var l = vTimePoints_1.length;
+    for(var i=0;i<l;i++){
+        if(!!vTimePoints_1[i]){
+            s.push((i+1)+"="+(vTimePoints_1[i]-iTimePoint_0));
+      }
+    }
+    var url = "https://isdspeed.qq.com/cgi-bin/r.cgi?flag1=5829&flag2=7&flag3=2&flag4=0&flag5=0&"+s.join("&");
+    var imgSendTimePoint = new Image();
+    imgSendTimePoint.src = url;
+  }
+};
+
+(function(){
+  try{
+    if(ua.isIE6() && !CARD.checkLogin()){
+      //CARD.showLogin();
+      window.location.href = "https://xui.ptlogin2.qq.com/cgi-bin/xlogin?appid=1600000084&s_url=https%3A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html";
+    }
+  
+    function loadNS(){
+      var oJs = new QSFL.JsLoader(null, null);
+      oJs.load("https://appimg2.qq.com/card/js/ns.js");
+    }
+    setTimeout( loadNS, 7000 );
+  }catch(e){}
+})();
+
+
+(function init(){
+  if( typeof(CARD) == 'undefined' ){
+    setTimeout(init, 500);
+  }else{
+    CARD.initIndex( g_oCardArg.iPage, g_oCardArg.sCardSrc );
+  }
+})();
+var inQzone = location.hash.indexOf("qz_ver")>-1  ? 1 : 0;
+var haveToolBar = true;
+if(inQzone == 1)
+{
+  SNSAPI.hotbar. draw("sns_toolbar", 365,  "qzone",  function()
+  {
+    haveToolBar=false;
+   CARD.initToolBarDalta(haveToolBar);
+  });
+  $("DIV_WRAPPER").style.width = "965px";
+  window.document.body.style.background = "#ffffff none no-repeat right top";
+}
+setInterval(
+	function()
+	{
+		if (fusion2)
+		{
+		  fusion2.canvas.setHeight( {height : document.body.offsetHeight} ); 
+		}
+	},2000);
+
+//检查flash是否正常运行了,没有的话显示引导页
+var flashIsDown = true;
+var intervalID = setInterval( checkFlashState, 10000 );
+function checkFlashState()
+{//检查flash是否正常运行了
+	if(flashIsDown)
+	{//flash没有正常运行
+		if(!CARD.getFrom()){
+			console.log("XY:flash没有正常运行,显示引导页.");
+			CARD.showYinDaoPage();
+		}else{
+			console.log("XY:flash没有正常运行,但客户端是微端");
+			CARD.hideYinDaoPage();
+			window.clearInterval(intervalID);
+		}
+	}
+	else
+	{//flash正常运行了
+		console.log("XY:flash正常运行了.");
+		CARD.hideYinDaoPage();
+		window.clearInterval(intervalID);
+	}
+}
+function flashIsRuning()
+{//flash调用这个方法,停止循环检查
+	flashIsDown = false;
+	console.log("XY_FunRun" + flashIsDown);
+}
+
+</script>
+
+<script src="./魔法卡片-QQ秀_files/config2.js.下载"></script></body></html>

@@ -1,0 +1,5 @@
+;(function(){var params= {"ignoreCheck":["www.qq.com","res.ncdz.qq.com/index_qzone_fullwindow.html","app1111420916.qqopenapp.com/qqjz/goods","game.108.qq.com/game.html","yxhjapi.gz.1253200025.clb.myqcloud.com/qq/goods"],"forceCheck":[],"zZConfigerUpdateTime":1634093256};
+typeof callback_1883_config2 === "function" && callback_1883_config2(params)
+this.define && define(function (require, exports, module) {
+return params});
+})()
